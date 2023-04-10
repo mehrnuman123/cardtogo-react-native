@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "338371456087",
+    "project_id": "digstore-4afed",
+    "storage_bucket": "digstore-4afed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338371456087:android:27866245195a4fce9c4712",
+        "android_client_info": {
+          "package_name": "com.cardtogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "338371456087-h4s2edou7c43epiqefstnuejpb76darb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cardtogo",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "338371456087-jsdhn68c5qqu3gu2dhq14jv6eao36hqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cardtogo",
+            "certificate_hash": "a95dc71ea2dc809269ac77c0fe9145b349be129d"
+          }
+        },
+        {
+          "client_id": "338371456087-3d69joo96n3ibrj1pdo41vg8vlpn24o1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpB_U75yr5ZL9-USnSbIsrUXh3aa1OZ9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "338371456087-3d69joo96n3ibrj1pdo41vg8vlpn24o1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
