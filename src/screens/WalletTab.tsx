@@ -131,7 +131,7 @@ const WalletTab = (props: any) => {
             <Text style={styles.buttonText}>Tilgodelapp</Text>
           </TouchableOpacity>
         </View>
-        {cards.map((item: any) => {
+        {cards?.map((item: any) => {
           return (
             <TouchableOpacity
               key={item.id}

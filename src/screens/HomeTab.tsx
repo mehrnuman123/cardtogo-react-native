@@ -288,7 +288,7 @@ function HomeTab() {
               display: 'flex',
               width: '100%',
             }}>
-            {allCards.map((item: any) => {
+            {allCards?.map((item: any) => {
               return (
                 <View
                   style={{
