@@ -8,7 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import WOMEN_HAIRCUT from '../assets/images/woman_hair_cut.png';
@@ -29,8 +29,34 @@ import ONLINE from '../assets/icons/online_icon.png';
 import RECTANGLE from '../assets/icons/rectangle_image.png';
 import LOCATION from '../assets/icons/location_icon.png';
 import DISCOUNT from '../assets/icons/discount_icon.png';
+import {useStores} from '../store/Store';
 
 function HomeTab() {
+  const [allCards, setAllCards] = useState([]);
+  const authStore = useStores();
+
+  useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://20.172.135.207/api/api/v1/card/listed/selling',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        console.log('result  ===>', result.data);
+        setAllCards(result.data);
+      })
+      .catch(error => console.log('error', error));
+  }, []);
+
   return (
     <View style={styles.main}>
       <ScrollView horizontal={false}>
@@ -262,105 +288,113 @@ function HomeTab() {
               display: 'flex',
               width: '100%',
             }}>
-            <View
-              style={{
-                width: 360,
-                height: 280,
-                ...styles.horizontalListItem,
-                marginTop: 10,
-              }}>
-              <View
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  height: 10,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  marginTop: 15,
-                }}>
-                <Image source={RECTANGLE} />
-              </View>
-              <View
-                style={{
-                  width: 330,
-                  height: 240,
-                  borderRadius: 34,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginTop: 15,
-                }}>
-                <Image source={ADDIDAS_BIG} />
-              </View>
-              <View
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  height: 30,
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                  paddingLeft: 25,
-                }}>
-                <Text
+            {allCards.map((item: any) => {
+              return (
+                <View
                   style={{
-                    fontFamily: 'Open Sans',
-                    fontSize: 18,
-                    fontWeight: '500',
-                    color: '#3F3D56',
+                    width: 360,
+                    height: 280,
+                    ...styles.horizontalListItem,
+                    marginTop: 10,
                   }}>
-                  Addidas
-                </Text>
-              </View>
-              <View
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  height: 40,
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                  marginTop: 20,
-                }}>
-                <View style={{display: 'flex', flexDirection: 'row'}}>
-                  <Image source={ONLINE} />
-                  <Text
+                  <View
                     style={{
-                      fontFamily: 'Open Sans',
-                      fontSize: 17,
-                      fontWeight: '500',
-                      color: '#3F3D56',
-                      marginLeft: 5,
+                      display: 'flex',
+                      width: '100%',
+                      height: 10,
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      marginTop: 15,
                     }}>
-                    Online
-                  </Text>
-                </View>
-                <View style={{display: 'flex', flexDirection: 'row'}}>
-                  <Image source={LOCATION} style={{width: 20, height: 20}} />
-                  <Text
+                    <Image source={RECTANGLE} />
+                  </View>
+                  <View
                     style={{
-                      fontFamily: 'Open Sans',
-                      fontSize: 17,
-                      fontWeight: '500',
-                      color: '#3F3D56',
-                      marginLeft: 5,
+                      width: 330,
+                      height: 240,
+                      borderRadius: 34,
+                      justifyContent: 'center',
+                      alignSelf: 'center',
+                      marginTop: 15,
                     }}>
-                    I butikk
-                  </Text>
-                </View>
-                <View style={{display: 'flex', flexDirection: 'row'}}>
-                  <Image source={DISCOUNT} />
-                  <Text
+                    <Image source={ADDIDAS_BIG} />
+                  </View>
+                  <View
                     style={{
-                      fontFamily: 'Open Sans',
-                      fontSize: 17,
-                      fontWeight: '500',
-                      color: '#3F3D56',
-                      marginLeft: 5,
+                      display: 'flex',
+                      width: '100%',
+                      height: 30,
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                      paddingLeft: 25,
                     }}>
-                    %40
-                  </Text>
+                    <Text
+                      style={{
+                        fontFamily: 'Open Sans',
+                        fontSize: 18,
+                        fontWeight: '500',
+                        color: '#3F3D56',
+                      }}>
+                      Addidas
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      height: 40,
+                      flexDirection: 'row',
+                      justifyContent: 'space-around',
+                      marginTop: 20,
+                    }}>
+                    <View style={{display: 'flex', flexDirection: 'row'}}>
+                      <Image source={ONLINE} />
+                      <Text
+                        style={{
+                          fontFamily: 'Open Sans',
+                          fontSize: 17,
+                          fontWeight: '500',
+                          color: '#3F3D56',
+                          marginLeft: 5,
+                        }}>
+                        Online
+                      </Text>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row'}}>
+                      <Image
+                        source={LOCATION}
+                        style={{width: 20, height: 20}}
+                      />
+                      <Text
+                        style={{
+                          fontFamily: 'Open Sans',
+                          fontSize: 17,
+                          fontWeight: '500',
+                          color: '#3F3D56',
+                          marginLeft: 5,
+                        }}>
+                        I butikk
+                      </Text>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row'}}>
+                      <Image source={DISCOUNT} />
+                      <Text
+                        style={{
+                          fontFamily: 'Open Sans',
+                          fontSize: 17,
+                          fontWeight: '500',
+                          color: '#3F3D56',
+                          marginLeft: 5,
+                        }}>
+                        %40
+                      </Text>
+                    </View>
+                  </View>
                 </View>
-              </View>
-            </View>
-            <View
+              );
+            })}
+
+            {/* <View
               style={{
                 width: 300,
                 height: 280,
@@ -555,7 +589,7 @@ function HomeTab() {
                   </Text>
                 </View>
               </View>
-            </View>
+            </View> */}
           </ScrollView>
           <View
             style={{

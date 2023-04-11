@@ -36,42 +36,55 @@ const AuthScreen = (props: {
 
   useEffect(() => {
     if (user) {
-      let data = JSON.stringify({
+      var myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+
+      var raw = JSON.stringify({
         name: user.displayName,
         email: user.email,
         role: 'user',
-        profile: user.photoURL,
+        profile: 'www.s3.bucket./cartogo.png',
         uid: user?.providerData.length ? user?.providerData[0]?.uid : '',
-        auth_provider: user?.providerData.length
-          ? user?.providerData[0]?.providerId
-          : '',
+        auth_provider: 'google',
       });
 
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'http://20.172.135.207:3000/api/v1/auth/register/google-user',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: data,
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
       };
 
-      console.log('====================================');
-      console.log('config =>', config);
-      console.log('====================================');
+      console.log('req ===> ', requestOptions);
 
-      axios
-        .request(config)
-        .then(response => {
-          console.log('data ===>', JSON.stringify(response.data));
-          authStore.update('user', response.data.data);
-          authStore.update('authToken', response.data.jwt);
+      fetch(
+        'http://20.172.135.207/api/api/v1/auth/register/google-user',
+        requestOptions,
+      )
+        .then(response => response.json())
+        .then((result: any) => {
+          console.log(typeof result, 'dynamic');
+          console.log('response ===>', JSON.stringify(result));
+          console.log('jwt ===>', result.jwtToken);
+          console.log('data ===>', result.data);
+          authStore.update('user', result.data);
+          authStore.update('authToken', result.jwtToken);
           props.navigation.navigate('HomeScreen');
         })
-        .catch(error => {
-          console.log('error =>', error);
-        });
+        .catch(error => console.log('error', error));
+      // axios
+      //   .request(config)
+      //   .then(response => {
+      //     console.log('response ===>', JSON.stringify(response.data));
+      //     console.log('jwt ===>', response.data.jwt);
+      //     console.log('data ===>', response.data.data);
+      //     authStore.update('user', response.data.data);
+      //     authStore.update('authToken', response.data.jwt);
+      //     props.navigation.navigate('HomeScreen');
+      //   })
+      //   .catch(error => {
+      //     console.log('error =>', error);
+      //   });
     }
   }, [user]);
 

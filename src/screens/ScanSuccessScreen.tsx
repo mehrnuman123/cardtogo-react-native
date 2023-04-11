@@ -4,10 +4,12 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import BACK_BUTTON from '../assets/icons/back_button_white.png';
 import ADDIDAS from '../assets/icons/addidas_logo.png';
 
@@ -19,8 +21,13 @@ import LOCATION from '../assets/icons/location_icon.png';
 import CALENDAR from '../assets/icons/calendar_icon.png';
 import LinearGradient from 'react-native-linear-gradient';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
+import {useStores} from '../store/Store';
 
 const ScanSuccessScreen = (props: any) => {
+  const authStore = useStores();
+  const [price, setPrice] = useState('');
+  const [company, setCompany] = useState('');
+  const [now, setDate] = useState(new Date());
   return (
     <>
       <StatusBar barStyle={'dark-content'} backgroundColor={'#F2F5F8'} />
@@ -40,7 +47,7 @@ const ScanSuccessScreen = (props: any) => {
       </View>
       <View style={styles.main}>
         <Image source={COMPLETED} style={{marginTop: 50}} />
-        <View style={{marginTop: 20}}>
+        <View style={{marginTop: 10}}>
           <Text
             style={{
               fontFamily: 'Open Sans',
@@ -70,7 +77,7 @@ const ScanSuccessScreen = (props: any) => {
             borderRadius: 5,
             borderWidth: 1,
             borderColor: '#D8E1E8',
-            marginTop: 20,
+            marginTop: 10,
             alignItems: 'center',
           }}>
           <LinearGradient
@@ -113,7 +120,7 @@ const ScanSuccessScreen = (props: any) => {
                 color: '#6080A0',
                 marginLeft: 10,
               }}>
-              300 KR
+              {price === '' ? 300 : price} KR
             </Text>
           </View>
           <Text
@@ -133,26 +140,17 @@ const ScanSuccessScreen = (props: any) => {
           <Text
             style={{
               fontFamily: 'Open Sans',
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: 'normal',
               color: '#6080A0',
             }}>
-            
+            {props.route.params?.code ? props.route.params.code : ''}
           </Text>
-          <View style={{display: 'flex', flexDirection: 'row'}}>
+          {/* <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{display: 'flex', flexDirection: 'column'}}>
               <Image source={BINARY} />
             </View>
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginLeft: 10,
-                width: 250
-              }}>
-              <Text>Seriekode: {props.route.params?.code ? props.route.params.code : ''}</Text>
-            </View>
-          </View>
+          </View> */}
           <View
             style={{
               display: 'flex',
@@ -173,7 +171,7 @@ const ScanSuccessScreen = (props: any) => {
               <Text>Pin: 6925</Text>
             </View> */}
           </View>
-          <View
+          {/* <View
             style={{
               display: 'flex',
               width: '100%',
@@ -187,16 +185,125 @@ const ScanSuccessScreen = (props: any) => {
             <View
               style={{
                 display: 'flex',
-                flexDirection: 'column',
+                flexDirection: 'row',
                 marginLeft: 10,
               }}>
-              <Text>Utløpsdato: 17/07-2023</Text>
+              <Text>Utløpsdato:</Text>
+              <Text style={{marginLeft: 10}}>
+                {
+                  new Date(now.getFullYear(), now.getMonth() + 1, 1)
+                    .toISOString()
+                    .split('T')[0]
+                }
+              </Text>
+            </View>
+          </View> */}
+          <View
+            style={{
+              display: 'flex',
+              width: '100%',
+              flexDirection: 'column',
+              marginLeft: 30,
+            }}>
+            <View
+              style={{
+                backgroundColor: '#E6ECF2',
+                width: '80%',
+                height: 30,
+                alignSelf: 'center',
+                borderRadius: 50,
+                marginVertical: 10,
+              }}>
+              <TextInput
+                value={company}
+                placeholder="Selskap"
+                onChangeText={(text: any) => {
+                  console.log('====================================');
+                  console.log('company ==>', text);
+                  console.log('====================================');
+                  setCompany(text);
+                }}
+                placeholderTextColor={'#6080A0'}
+                style={{
+                  fontSize: 10,
+                  fontWeight: 'normal',
+                  fontFamily: 'Open Sans',
+                  textAlign: 'center',
+                  color: '#6080A0',
+                }}
+              />
+            </View>
+            <View
+              style={{
+                backgroundColor: '#E6ECF2',
+                width: '80%',
+                height: 30,
+                alignSelf: 'center',
+                borderRadius: 50,
+              }}>
+              <TextInput
+                value={price}
+                placeholder="Pris"
+                onChangeText={(text: any) => {
+                  console.log('====================================');
+                  console.log('price ==>', text);
+                  console.log('====================================');
+                  setPrice(text);
+                }}
+                placeholderTextColor={'#6080A0'}
+                style={{
+                  fontSize: 10,
+                  fontWeight: 'normal',
+                  fontFamily: 'Open Sans',
+                  textAlign: 'center',
+                  color: '#6080A0',
+                }}
+              />
             </View>
           </View>
         </View>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('WalletTab');
+            var myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+
+            var raw = JSON.stringify({
+              serialNumber: props.route.params.code.substring(2, 8),
+              manufacturar: company,
+              balance: price,
+              type: 'gift-card',
+              category: '',
+              expiry: '',
+              isListed: false,
+              isActive: true,
+            });
+
+            var requestOptions = {
+              method: 'POST',
+              headers: myHeaders,
+              body: raw,
+              redirect: 'follow',
+            };
+
+            fetch(
+              'http://20.172.135.207/api/api/v1/card/add-wallet',
+              requestOptions,
+            )
+              .then(response => response.json())
+              .then(result => {
+                if (result.response.CODE === 200) {
+                  console.log('card add ==>', result);
+                  props.navigation.navigate('WalletTab');
+                } else {
+                  ToastAndroid.show(
+                    result.response.DESCRIPTION,
+                    ToastAndroid.SHORT,
+                  );
+                  props.navigation.navigate('HomeScreen');
+                }
+              })
+              .catch(error => console.log('error', error));
           }}
           style={{
             width: '80%',

@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -11,22 +12,40 @@ import React, {useEffect, useState} from 'react';
 import WALLET_ICON from '../assets/icons/wallet_icon.png';
 import ADDIDAS from '../assets/images/placeholder.png';
 import WALLET_VIEW from '../assets/images/wallet_view_icon.png';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useStores} from '../store/Store';
 
 const WalletTab = (props: any) => {
+  const authStore = useStores();
   const [cards, setCards] = useState([]);
+  const [sumOfAllCards, setSumOfAllCards] = useState();
 
   useEffect(() => {
     getWalletItems();
-  }, []);
+  }, [props]);
   const getWalletItems = async () => {
-    const items = await AsyncStorage.getItem('walletitems');
-    if (items !== null) {
-      var arr = JSON.parse(items);
-      setCards(arr);
-    } else {
-      setCards([]);
-    }
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch('http://20.172.135.207/api/api/v1/card/all', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        if (result.response.CODE === 200) {
+          setCards(result.data);
+          const sum = result.data.reduce(function (a: any, b: any) {
+            return a + b.balance;
+          }, 0);
+          setSumOfAllCards(sum);
+        } else {
+          ToastAndroid.show(result.reponse.DESCRIPTION, ToastAndroid.SHORT);
+        }
+      })
+      .catch(error => console.log('error', error));
   };
 
   return (
@@ -66,7 +85,7 @@ const WalletTab = (props: any) => {
                 fontWeight: '500',
                 color: '#3F3D56',
               }}>
-              200 kr
+              {sumOfAllCards} kr
             </Text>
           </View>
           <View style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}} />
@@ -115,8 +134,11 @@ const WalletTab = (props: any) => {
         {cards.map((item: any) => {
           return (
             <TouchableOpacity
+              key={item.id}
               onPress={() => {
-                props.navigation.navigate('CardDetailScreen');
+                props.navigation.navigate('CardDetailScreen', {
+                  card: item,
+                });
               }}
               style={styles.walletCard}>
               <View
@@ -156,7 +178,7 @@ const WalletTab = (props: any) => {
                     fontWeight: '500',
                     color: '#3F3D56',
                   }}>
-                  300 KR
+                  {item.balance} KR
                 </Text>
               </View>
               <View

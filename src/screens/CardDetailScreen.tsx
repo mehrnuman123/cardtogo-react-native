@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -14,8 +15,10 @@ import ADDIDAS_BIG from '../assets/images/addidas_header.png';
 import CARD_DETAIL_PROFILE from '../assets/images/card_detail_profile.png';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
 import CALENDAR from '../assets/icons/calendar_big.png';
+import {useStores} from '../store/Store';
 
 const CardDetailScreen = (props: any) => {
+  const authStore = useStores();
   return (
     <View
       style={{
@@ -239,7 +242,38 @@ const CardDetailScreen = (props: any) => {
         </View>
       </View>
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => {
+          var myHeaders = new Headers();
+          myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+
+          var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            redirect: 'follow',
+          };
+
+          fetch(
+            `http://20.172.135.207/api/api/v1/card/listing/${props.route.params.card.id}`,
+            requestOptions,
+          )
+            .then(response => response.json())
+            .then(result => {
+              console.log('result =>', result);
+              if (result.response.CODE === 200) {
+                ToastAndroid.show(
+                  result.response.DESCRIPTION,
+                  ToastAndroid.SHORT,
+                );
+              } else {
+                ToastAndroid.show(
+                  result.response.DESCRIPTION,
+                  ToastAndroid.SHORT,
+                );
+              }
+              props.navigation.navigate('HomeTab');
+            })
+            .catch(error => console.log('error', error));
+        }}
         style={{
           width: '80%',
           height: 47,

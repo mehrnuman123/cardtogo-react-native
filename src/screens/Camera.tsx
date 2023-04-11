@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {
@@ -167,6 +168,15 @@ const CameraScreen = (props: any) => {
     });
   }, []);
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
+  //     props.navigation.navigate('ScanSuccessScreen', {
+  //       code: '57118240329734700000000003853208',
+  //     });
+  //   }, 3000);
+  // }, []);
+
   const closeModal = () => {
     setShowModal(false);
   };
@@ -189,20 +199,6 @@ const CameraScreen = (props: any) => {
           if (!barcodeValue) {
             setBarcodeValue(event.data);
             ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
-            var walletitems = await AsyncStorage.getItem('walletitems');
-            if (walletitems !== null) {
-              // We have data!!
-              console.log(JSON.parse(walletitems));
-              var walletitemsArr: any = JSON.parse(walletitems);
-              walletitemsArr.push(event.data);
-              AsyncStorage.setItem(
-                'walletitems',
-                JSON.stringify(walletitemsArr),
-              );
-            } else {
-              const items = [event.data];
-              AsyncStorage.setItem('walletitems', JSON.stringify(items));
-            }
             setTimeout(() => {
               props.navigation.navigate('ScanSuccessScreen', {
                 code: event.data,
