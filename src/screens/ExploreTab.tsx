@@ -78,6 +78,8 @@ const ExploreTab = () => {
         </View>
         <ScrollView
           horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           style={{
             display: 'flex',
             width: '100%',
@@ -226,6 +228,8 @@ const ExploreTab = () => {
         </View>
         <ScrollView
           horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           style={{
             display: 'flex',
             width: '100%',
@@ -419,6 +423,8 @@ const ExploreTab = () => {
         </View>
         <ScrollView
           horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           style={{
             display: 'flex',
             width: '100%',
@@ -612,6 +618,8 @@ const ExploreTab = () => {
         </View>
         <ScrollView
           horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           style={{
             display: 'flex',
             width: '100%',

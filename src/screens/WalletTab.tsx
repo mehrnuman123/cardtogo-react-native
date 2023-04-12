@@ -13,16 +13,18 @@ import WALLET_ICON from '../assets/icons/wallet_icon.png';
 import ADDIDAS from '../assets/images/placeholder.png';
 import WALLET_VIEW from '../assets/images/wallet_view_icon.png';
 import {useStores} from '../store/Store';
+import {useIsFocused} from '@react-navigation/native';
 
 const WalletTab = (props: any) => {
+  const isFocused = useIsFocused();
   const authStore = useStores();
   const [cards, setCards] = useState([]);
   const [sumOfAllCards, setSumOfAllCards] = useState();
 
+  console.log('====================================');
+  console.log(authStore.authToken);
+  console.log('====================================');
   useEffect(() => {
-    getWalletItems();
-  }, [props]);
-  const getWalletItems = async () => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
 
@@ -36,6 +38,9 @@ const WalletTab = (props: any) => {
       .then(response => response.json())
       .then(result => {
         if (result.response.CODE === 200) {
+          console.log('====================================');
+          console.log('data ===>', result.data);
+          console.log('====================================');
           setCards(result.data);
           const sum = result.data.reduce(function (a: any, b: any) {
             return a + b.balance;
@@ -46,7 +51,7 @@ const WalletTab = (props: any) => {
         }
       })
       .catch(error => console.log('error', error));
-  };
+  }, [authStore.authToken, isFocused]);
 
   return (
     <View style={styles.main}>
@@ -136,9 +141,16 @@ const WalletTab = (props: any) => {
             <TouchableOpacity
               key={item.id}
               onPress={() => {
-                props.navigation.navigate('CardDetailScreen', {
-                  card: item,
-                });
+                if (item.isListed) {
+                  ToastAndroid.show(
+                    'Allerede lagt til Market Place',
+                    ToastAndroid.SHORT,
+                  );
+                } else {
+                  props.navigation.navigate('CardDetailScreen', {
+                    card: item,
+                  });
+                }
               }}
               style={styles.walletCard}>
               <View

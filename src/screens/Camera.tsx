@@ -172,7 +172,7 @@ const CameraScreen = (props: any) => {
   //   setTimeout(() => {
   //     ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
   //     props.navigation.navigate('ScanSuccessScreen', {
-  //       code: '57118240329734700000000003853208',
+  //       code: '032973853208485884',
   //     });
   //   }, 3000);
   // }, []);

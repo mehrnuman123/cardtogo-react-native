@@ -30,32 +30,35 @@ import RECTANGLE from '../assets/icons/rectangle_image.png';
 import LOCATION from '../assets/icons/location_icon.png';
 import DISCOUNT from '../assets/icons/discount_icon.png';
 import {useStores} from '../store/Store';
-
+import {useIsFocused} from '@react-navigation/native';
 function HomeTab() {
+  const isFocused = useIsFocused();
   const [allCards, setAllCards] = useState([]);
   const authStore = useStores();
 
   useEffect(() => {
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+    if (isFocused) {
+      var myHeaders = new Headers();
+      myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
 
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      };
 
-    fetch(
-      'http://20.172.135.207/api/api/v1/card/listed/selling',
-      requestOptions,
-    )
-      .then(response => response.json())
-      .then(result => {
-        console.log('result  ===>', result.data);
-        setAllCards(result.data);
-      })
-      .catch(error => console.log('error', error));
-  }, []);
+      fetch(
+        'http://20.172.135.207/api/api/v1/card/listed/selling',
+        requestOptions,
+      )
+        .then(response => response.json())
+        .then(result => {
+          console.log('result  ===>', result.data);
+          setAllCards(result.data);
+        })
+        .catch(error => console.log('error', error));
+    }
+  }, [isFocused, authStore.authToken]);
 
   return (
     <View style={styles.main}>
@@ -81,6 +84,8 @@ function HomeTab() {
         </View>
         <ScrollView
           horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           style={{
             display: 'flex',
             marginTop: 20,
@@ -284,6 +289,8 @@ function HomeTab() {
           }}>
           <ScrollView
             horizontal={true}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
             style={{
               display: 'flex',
               width: '100%',
@@ -335,7 +342,7 @@ function HomeTab() {
                         fontWeight: '500',
                         color: '#3F3D56',
                       }}>
-                      Addidas
+                      {item.manufacturer}
                     </Text>
                   </View>
                   <View
@@ -600,7 +607,7 @@ function HomeTab() {
               backgroundColor: '#DFE6EC',
             }}
           />
-          <View
+          {/* <View
             style={{
               display: 'flex',
               flexDirection: 'row',
@@ -1240,7 +1247,7 @@ function HomeTab() {
                 109 solgt - 30 dager
               </Text>
             </View>
-          </ScrollView>
+          </ScrollView> */}
         </View>
       </ScrollView>
     </View>
