@@ -21,7 +21,7 @@ type User = {
 
 export default class AuthStore {
   authToken!: string | null;
-  user!: User | null;
+  user!: User | {};
   constructor() {
     makeAutoObservable(this);
   }
@@ -33,10 +33,11 @@ export default class AuthStore {
   }
 
   async update(field: string, value: any) {
-    await AsyncStorage.setItem(field, JSON.stringify(value));
     if (field === 'authToken') {
+      await AsyncStorage.setItem(field, value);
       this.authToken = value;
     } else {
+      await AsyncStorage.setItem(field, JSON.stringify(value));
       this.user = value;
     }
   }
@@ -44,7 +45,7 @@ export default class AuthStore {
   async clear() {
     await AsyncStorage.clear();
     this.authToken = null;
-    this.user = null;
+    this.user = {};
   }
 }
 

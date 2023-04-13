@@ -32,6 +32,7 @@ const Splash = (props: any) => {
 
   useEffect(() => {
     initFirebase().then(async () => {
+      await authStore.init();
       const slider =
         JSON.parse((await AsyncStorage.getItem('sliderVisited')) || 'false') ||
         undefined;
@@ -50,10 +51,10 @@ const Splash = (props: any) => {
       if (!slider) {
         navigate = 'IntroScreen';
       }
-      if (user) {
+      if (Object.keys(user).length) {
         navigate = 'HomeScreen';
       }
-      if (slider) {
+      if (slider && !user) {
         navigate = 'AuthScreen';
       }
       SplashScreen.hide();
