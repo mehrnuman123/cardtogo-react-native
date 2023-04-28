@@ -58,7 +58,10 @@ const TopBar = (props: any) => {
         />
       </TouchableOpacity>
       <Image source={HAMBURGER_ICON} />
-      <Image source={PROFILE} />
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('ProfileScreen')}>
+        <Image source={PROFILE} />
+      </TouchableOpacity>
     </View>
   );
 };

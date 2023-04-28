@@ -93,7 +93,7 @@ const WalletTab = (props: any) => {
               {sumOfAllCards} kr
             </Text>
           </View>
-          <View style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}} />
+          {/* <View style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}} />
           <View style={styles.headerColumn}>
             <Text
               style={{
@@ -115,7 +115,7 @@ const WalletTab = (props: any) => {
               }}>
               320 kr
             </Text>
-          </View>
+          </View> */}
         </View>
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button}>
@@ -156,6 +156,7 @@ const WalletTab = (props: any) => {
               <View
                 style={{
                   display: 'flex',
+                  flex: 1,
                   flexDirection: 'column',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -169,8 +170,10 @@ const WalletTab = (props: any) => {
               <View
                 style={{
                   display: 'flex',
+                  flex: 1,
                   flexDirection: 'column',
                   marginTop: 10,
+                  backgroundColor: 'pink',
                 }}>
                 <Text
                   style={{
@@ -193,7 +196,7 @@ const WalletTab = (props: any) => {
                   {item.balance} KR
                 </Text>
               </View>
-              <View
+              {/* <View
                 style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}}
               />
               <View
@@ -222,10 +225,11 @@ const WalletTab = (props: any) => {
                   }}>
                   220
                 </Text>
-              </View>
+              </View> */}
               <View
                 style={{
                   display: 'flex',
+                  flex: 1,
                   flexDirection: 'column',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -444,6 +448,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 20,
     display: 'flex',
+    flex: 3,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingVertical: 20,

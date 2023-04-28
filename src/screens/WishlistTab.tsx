@@ -25,7 +25,18 @@ const WishlistTab = () => {
 
   return (
     <View style={styles.main}>
-      <View style={styles.buttonRow}>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+        }}>
+        <Text>Coming Soon</Text>
+      </View>
+      {/* <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Alle</Text>
         </TouchableOpacity>
@@ -64,7 +75,7 @@ const WishlistTab = () => {
         <TouchableOpacity style={styles.buttonMain}>
           <Text style={styles.buttonMainText}>Send ønskeliste</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

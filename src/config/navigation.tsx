@@ -17,6 +17,8 @@ import HomeScreen from '../screens/HomeScreen';
 import Camera from '../screens/Camera';
 import ScanSuccessScreen from '../screens/ScanSuccessScreen';
 import CardDetailScreen from '../screens/CardDetailScreen';
+import AddCardOptionsScreen from '../screens/AddCardOptionsScreen';
+import ManualAddCardScreen from '../screens/ManualAddCardScreen';
 
 const Stack = createNativeStackNavigator();
 const NavigationContainer = () => {
@@ -87,6 +89,16 @@ const NavigationContainer = () => {
         <Stack.Screen
           name="ProfileScreen"
           component={ProfileScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddCardOptionsScreen"
+          component={AddCardOptionsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ManualAddCardScreen"
+          component={ManualAddCardScreen}
           options={{headerShown: false}}
         />
         <Stack.Screen

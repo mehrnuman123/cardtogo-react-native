@@ -195,15 +195,17 @@ const CameraScreen = (props: any) => {
         }}
         captureAudio={false}
         onBarCodeRead={async (event: any) => {
-          console.log('barcode 1 ---->', event.data);
-          if (!barcodeValue) {
-            setBarcodeValue(event.data);
-            ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
-            setTimeout(() => {
-              props.navigation.navigate('ScanSuccessScreen', {
-                code: event.data,
-              });
-            }, 2000);
+          if (!showModal) {
+            console.log('barcode 1 ---->', event.data);
+            if (!barcodeValue) {
+              setBarcodeValue(event.data);
+              ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
+              setTimeout(() => {
+                props.navigation.navigate('ScanSuccessScreen', {
+                  code: event.data,
+                });
+              }, 2000);
+            }
           }
         }}
         onGoogleVisionBarcodesDetected={({barcodes}) => {

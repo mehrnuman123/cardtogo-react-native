@@ -77,7 +77,7 @@ const HomeScreen = (props: any) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    props.navigation.navigate('CameraScreen');
+                    props.navigation.navigate('AddCardOptionsScreen');
                   }}>
                   <Image
                     source={ADD_BOTTOM_ICON}

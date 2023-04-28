@@ -18,7 +18,18 @@ import DESIGN from '../assets/images/design.png';
 const ExploreTab = () => {
   return (
     <View style={styles.main}>
-      <ScrollView horizontal={false}>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+        }}>
+        <Text>Coming Soon</Text>
+      </View>
+      {/* <ScrollView horizontal={false}>
         <View style={{display: 'flex', flex: 1}}>
           <Text style={styles.mainHeading}>
             Utforsk butikker eller verdikort
@@ -775,7 +786,7 @@ const ExploreTab = () => {
             </Text>
           </View>
         </ScrollView>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
