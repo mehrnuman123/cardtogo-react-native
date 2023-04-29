@@ -118,7 +118,7 @@ const WalletTab = (props: any) => {
           </View> */}
         </View>
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button}>
+          {/* <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Alle</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -134,69 +134,69 @@ const WalletTab = (props: any) => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Tilgodelapp</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
-        {cards?.map((item: any) => {
-          return (
-            <TouchableOpacity
-              key={item.id}
-              onPress={() => {
-                if (item.isListed) {
-                  ToastAndroid.show(
-                    'Allerede lagt til Market Place',
-                    ToastAndroid.SHORT,
-                  );
-                } else {
-                  props.navigation.navigate('CardDetailScreen', {
-                    card: item,
-                  });
-                }
-              }}
-              style={styles.walletCard}>
-              <View
-                style={{
-                  display: 'flex',
-                  flex: 1,
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Image
-                  source={ADDIDAS}
-                  style={{width: 76, height: 76}}
-                  resizeMode={'contain'}
-                />
-              </View>
-              <View
-                style={{
-                  display: 'flex',
-                  flex: 1,
-                  flexDirection: 'column',
-                  marginTop: 10,
-                  backgroundColor: 'pink',
-                }}>
-                <Text
+        {cards.length > 0 ? (
+          cards?.map((item: any) => {
+            return (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => {
+                  if (item.isListed) {
+                    ToastAndroid.show(
+                      'Allerede lagt til Market Place',
+                      ToastAndroid.SHORT,
+                    );
+                  } else {
+                    props.navigation.navigate('CardDetailScreen', {
+                      card: item,
+                    });
+                  }
+                }}
+                style={styles.walletCard}>
+                <View
                   style={{
-                    fontFamily: 'Open Sans',
-                    textAlign: 'center',
-                    fontSize: 16,
-                    fontWeight: 'normal',
-                    color: '#6080A0',
+                    display: 'flex',
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}>
-                  Verdi
-                </Text>
-                <Text
+                  <Image
+                    source={ADDIDAS}
+                    style={{width: 76, height: 76}}
+                    resizeMode={'contain'}
+                  />
+                </View>
+                <View
                   style={{
-                    fontFamily: 'Open Sans',
-                    textAlign: 'center',
-                    fontSize: 18,
-                    fontWeight: '500',
-                    color: '#3F3D56',
+                    display: 'flex',
+                    flex: 1,
+                    flexDirection: 'column',
+                    marginTop: 10,
                   }}>
-                  {item.balance} KR
-                </Text>
-              </View>
-              {/* <View
+                  <Text
+                    style={{
+                      fontFamily: 'Open Sans',
+                      textAlign: 'center',
+                      fontSize: 16,
+                      fontWeight: 'normal',
+                      color: '#6080A0',
+                    }}>
+                    Verdi
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: 'Open Sans',
+                      textAlign: 'center',
+                      fontSize: 18,
+                      fontWeight: '500',
+                      color: '#3F3D56',
+                    }}>
+                    {item.balance} KR
+                  </Text>
+                </View>
+                {/* <View
                 style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}}
               />
               <View
@@ -226,20 +226,23 @@ const WalletTab = (props: any) => {
                   220
                 </Text>
               </View> */}
-              <View
-                style={{
-                  display: 'flex',
-                  flex: 1,
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginLeft: 20,
-                }}>
-                <Image source={WALLET_VIEW} />
-              </View>
-            </TouchableOpacity>
-          );
-        })}
+                <View
+                  style={{
+                    display: 'flex',
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginLeft: 20,
+                  }}>
+                  <Image source={WALLET_VIEW} />
+                </View>
+              </TouchableOpacity>
+            );
+          })
+        ) : (
+          <Text>No Card available in wallet</Text>
+        )}
       </ScrollView>
 
       {/* <View style={styles.walletCard}>

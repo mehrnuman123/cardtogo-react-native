@@ -29,6 +29,9 @@ const AuthScreen = (props: {
 
   // Handle user state changes
   function onAuthStateChanged(userReceived: any) {
+    console.log('====================================');
+    console.log('userReceived ==>', userReceived);
+    console.log('====================================');
     setUser(userReceived);
     if (initializing) {
       setInitializing(false);
@@ -44,7 +47,7 @@ const AuthScreen = (props: {
         name: user.displayName,
         email: user.email,
         role: 'user',
-        profile: 'www.s3.bucket./cartogo.png',
+        profile: user.photoURL,
         uid: user?.providerData.length ? user?.providerData[0]?.uid : '',
         auth_provider: 'google',
       });
@@ -185,6 +188,8 @@ const AuthScreen = (props: {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-evenly',
+              borderColor: '#FFFFFF',
+              borderWidth: 1,
               alignItems: 'center',
               borderRadius: 22,
               marginVertical: 20,

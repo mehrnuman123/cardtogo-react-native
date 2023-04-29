@@ -9,9 +9,13 @@ import CART_ICON from '../assets/icons/cart_icon.png';
 import HAMBURGER_ICON from '../assets/icons/hamburger_icon.png';
 import PROFILE from '../assets/icons/profile.png';
 import BACK from '../assets/icons/back_button_white.png';
+import {useStores} from '../store/Store';
+import LinearGradient from 'react-native-linear-gradient';
 
 const TopBar = (props: any) => {
   const route = useRoute();
+  const authStore = useStores();
+
   return (
     <View
       style={{
@@ -60,7 +64,45 @@ const TopBar = (props: any) => {
       <Image source={HAMBURGER_ICON} />
       <TouchableOpacity
         onPress={() => props.navigation.navigate('ProfileScreen')}>
-        <Image source={PROFILE} />
+        <LinearGradient
+          colors={['#00B4E4', '#30C9AA']}
+          start={{x: 0.0, y: 1.0}}
+          end={{x: 1.0, y: 1.0}}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: 50,
+            height: 50,
+            borderRadius: 27,
+            backgroundColor: '#FFFFFF',
+            padding: 10,
+          }}>
+          <View
+            style={{
+              backgroundColor: '#ffffff',
+              width: 45,
+              height: 45,
+              borderRadius: 22,
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'hidden',
+            }}>
+            <Image
+              source={{
+                uri: authStore.user?.profile,
+              }}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                borderWidth: 1,
+              }}
+              resizeMode="contain"
+            />
+          </View>
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );

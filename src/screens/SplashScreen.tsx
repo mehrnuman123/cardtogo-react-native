@@ -10,57 +10,36 @@ import SPLASH from '../assets/images/splash.png';
 
 import {useStores} from '../store/Store';
 import {observer} from 'mobx-react';
+import {useIsFocused} from '@react-navigation/native';
 
 const Splash = (props: any) => {
+  const isFocused = useIsFocused();
   const authStore = useStores();
-  const initFirebase = async () => {
-    // Initialize Firebase
-    const firebaseConfig = {
-      apiKey: 'AIzaSyDpB_U75yr5ZL9-USnSbIsrUXh3aa1OZ9w',
-      projectId: 'digstore-4afed',
-      databaseURL: '',
-      messagingSenderId: '',
-      storageBucket: 'digstore-4afed.appspot.com',
-      appId: '1:338371456087:android:cd4ff36b3af125ed9c4712',
-    };
-    if (firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    } else {
-      firebase.app(); // if already initialized, use that one
-    }
-  };
 
   useEffect(() => {
-    initFirebase().then(async () => {
+    const init = async () => {
       await authStore.init();
       const slider =
         JSON.parse((await AsyncStorage.getItem('sliderVisited')) || 'false') ||
         undefined;
-      console.log('====================================');
-      console.log('slider --->', slider);
-      console.log('====================================');
       const user = authStore.user;
-      const token = authStore.authToken;
       var navigate = '';
-      console.log('====================================');
-      console.log('user splash --->', user);
-      console.log('====================================');
-      console.log('====================================');
-      console.log('token ----->', token);
-      console.log('====================================');
       if (!slider) {
         navigate = 'IntroScreen';
       }
-      if (Object.keys(user).length) {
+      if (user && Object.keys(user).length) {
         navigate = 'HomeScreen';
       }
-      if (slider && !user) {
+      if (slider || !user) {
         navigate = 'AuthScreen';
       }
       SplashScreen.hide();
       props.navigation.navigate(navigate);
-    });
-  }, []);
+    };
+    if (isFocused) {
+      init();
+    }
+  }, [isFocused]);
 
   return (
     <View
