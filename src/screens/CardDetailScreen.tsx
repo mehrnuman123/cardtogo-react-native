@@ -154,7 +154,7 @@ const CardDetailScreen = (props: any) => {
             style={{marginRight: 15, tintColor: '#6080A0'}}
           />
         </TouchableOpacity>
-        <ScrollView
+        {/* <ScrollView
           showsVerticalScrollIndicator={true}
           style={{
             width: '80%',
@@ -191,7 +191,7 @@ const CardDetailScreen = (props: any) => {
             sterkeste tekstiler og topp moderne design. adidas-produkter er
             laget for å hjelpe deg med å få mest mulig ut av ytelsen din.
           </Text>
-        </ScrollView>
+        </ScrollView> */}
         <View
           style={{
             width: '100%',
@@ -273,7 +273,7 @@ const CardDetailScreen = (props: any) => {
                     ToastAndroid.SHORT,
                   );
                 }
-                props.navigation.navigate('HomeTab');
+                props.navigation.navigate('HomeScreen');
               })
               .catch(error => console.log('error', error));
           }}

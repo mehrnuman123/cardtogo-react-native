@@ -24,7 +24,7 @@ const AddCardOptionsScreen = (props: any) => {
       <View style={styles.column}>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('Camera');
+            props.navigation.navigate('CameraScreen');
           }}
           style={{
             width: '80%',

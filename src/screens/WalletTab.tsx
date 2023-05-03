@@ -43,7 +43,7 @@ const WalletTab = (props: any) => {
           console.log('====================================');
           setCards(result.data);
           const sum = result.data.reduce(function (a: any, b: any) {
-            return a + b.balance;
+            return JSON.parse(a) + JSON.parse(b.balance);
           }, 0);
           setSumOfAllCards(sum);
         } else {
@@ -52,6 +52,10 @@ const WalletTab = (props: any) => {
       })
       .catch(error => console.log('error', error));
   }, [authStore.authToken, isFocused]);
+
+  console.log('=======>>>=========');
+  console.log('cards ===>>>', cards);
+  console.log('=======>>>=========');
 
   return (
     <View style={styles.main}>
@@ -142,16 +146,16 @@ const WalletTab = (props: any) => {
               <TouchableOpacity
                 key={item.id}
                 onPress={() => {
-                  if (item.isListed) {
-                    ToastAndroid.show(
-                      'Allerede lagt til Market Place',
-                      ToastAndroid.SHORT,
-                    );
-                  } else {
-                    props.navigation.navigate('CardDetailScreen', {
-                      card: item,
-                    });
-                  }
+                  // if (item.isListed) {
+                  //   ToastAndroid.show(
+                  //     'Allerede lagt til Market Place',
+                  //     ToastAndroid.SHORT,
+                  //   );
+                  // } else {
+                  //   props.navigation.navigate('CardDetailScreen', {
+                  //     card: item,
+                  //   });
+                  // }
                 }}
                 style={styles.walletCard}>
                 <View

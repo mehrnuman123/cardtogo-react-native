@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {
   Image,
@@ -10,9 +11,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import BACK_BUTTON from '../assets/icons/back_button_white.png';
 import ADD_BUTTON from '../assets/icons/green_add.png';
+import ATTACHEMENT_ICON from '../assets/icons/attachment.png';
 import UPLOAD_ICON from '../assets/icons/upload-image-icon.png';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
 import {useStores} from '../store/Store';
@@ -24,14 +26,19 @@ import CALENDAR from '../assets/icons/calendar_big.png';
 import CARD from '../assets/icons/gift_card.png';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {useHeaderHeight} from '@react-navigation/elements';
+import {Buffer} from 'buffer';
+import * as mime from 'react-native-mime-types';
+import Constants from '../constants/EnviornmentVariables';
+import RNFetchBlob from 'rn-fetch-blob';
 
 const ManualAddCardScreen = (props: any) => {
-  const headerHeight = useHeaderHeight();
+  const URL = Constants.BASE_URL;
   const authStore = useStores();
   const [responseImage, setResponseImage] = useState<any>(null);
   const [serialNo, setSerialNo] = useState('');
   const [pin, setPin] = useState('');
+  const [imageOne, setImageOne] = useState('');
+  const [imageTwo, setImageTwo] = useState('');
   const [company, setCompany] = useState('');
   const [price, setPrice] = useState<any>();
   const [expiry, setExpiry] = useState('');
@@ -47,67 +54,275 @@ const ManualAddCardScreen = (props: any) => {
     {label: 'Hobby', value: 'hobby'},
     {label: 'Sports', value: 'sport'},
   ]);
+
+  useEffect(() => {
+    if (imageOne && imageTwo) {
+      var myHeaders = new Headers();
+      // var data = new FormData();
+      myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+      var raw = JSON.stringify({
+        serialNumber: serialNo,
+        manufacturar: company,
+        balance: price,
+        type: valueCardType,
+        category: valueCardCategory,
+        expiry: expiry,
+        isListed: false,
+        isActive: true,
+        photoUrl: `[${imageOne}, ${imageTwo}]`,
+      });
+
+      console.log('====================================');
+      console.log('raw ===>>>>>>', raw);
+      console.log('====================================');
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      };
+
+      fetch('http://20.172.135.207/api/api/v1/card/add-wallet', requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log('result ==>', result);
+          if (result?.response?.CODE === 200) {
+            console.log('card add ==>', result);
+            props.navigation.navigate('WalletTab');
+          } else {
+            ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
+            props.navigation.navigate('HomeScreen');
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+  }, [imageOne, imageTwo]);
+
+  const getImageBlob = (uri: string, mime: string, fileName: string) => {
+    return {
+      uri: uri,
+      type: mime,
+      name: fileName || 'image.jpg',
+    };
+  };
+
+  const addCard = async () => {
+    if (responseImage.length > 1) {
+      var headers = new Headers();
+      headers.append('Authorization', `Bearer ${authStore.authToken}`);
+      // headers.append('Content-Type', 'multipart/form-data');
+      const formData = new FormData();
+      formData.append(
+        'file',
+        getImageBlob(
+          responseImage[0].uri,
+          responseImage[0].type,
+          responseImage[0].fileName,
+        ),
+      );
+      var options = {
+        method: 'PUT',
+        headers: headers,
+        body: formData,
+        redirect: 'follow',
+      };
+      fetch(
+        `http://20.172.135.207/api/api/v1/upload/card/${authStore.user?.id}`,
+        options,
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log('====================================');
+          console.log('data url ==>>>>', data);
+          console.log('====================================');
+          if (data.response.CODE === 200) {
+            setImageOne(data.data);
+          }
+        })
+        .catch(error => {
+          console.log('====================================');
+          console.log('error 1 ==>', error);
+          console.log('====================================');
+        });
+      const formDataSec = new FormData();
+      formDataSec.append(
+        'file',
+        getImageBlob(
+          responseImage[1].uri,
+          responseImage[1].type,
+          responseImage[1].fileName,
+        ),
+      );
+      var options = {
+        method: 'PUT',
+        headers: headers,
+        body: formData,
+        redirect: 'follow',
+      };
+      fetch(
+        `http://20.172.135.207/api/api/v1/upload/card/${authStore.user?.id}`,
+        options,
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log('====================================');
+          console.log('data url ==>>>>', data);
+          console.log('====================================');
+          if (data.response.CODE === 200) {
+            setImageTwo(data.data);
+          }
+        })
+        .catch(error => {
+          console.log('====================================');
+          console.log('error 2==>', error);
+          console.log('====================================');
+        });
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          position: 'absolute',
-          top: 20,
-          left: 20,
-          zIndex: 1,
-        }}>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('AddCardOptionsScreen');
-          }}>
-          <Image source={BACK_BUTTON} />
-        </TouchableOpacity>
-      </View>
       <KeyboardAvoidingView behavior={'padding'}>
         <ScrollView style={{height: '100%'}}>
           <View style={styles.column}>
-            <View style={styles.whiteCircle}>
-              <View style={styles.innerCircle}>
-                <Image
-                  source={UPLOAD_ICON}
-                  style={{width: 80, height: 80, tintColor: '#6080A0'}}
-                />
-              </View>
+            <View
+              style={{
+                display: 'flex',
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+              }}>
               <TouchableOpacity
-                onPress={async () => {
-                  const result = await launchImageLibrary({
-                    selectionLimit: 2,
-                    mediaType: 'photo',
-                    includeBase64: true,
-                    includeExtra: true,
-                  });
-                  if (result.assets) {
-                    console.log('====================================');
-                    console.log(
-                      'image picker result ===>>>',
-                      result.assets ? result.assets.length : [].length,
-                    );
-                    console.log('====================================');
-                    if (result.didCancel) {
-                      ToastAndroid.show(
-                        'Please pick atleast 2 photos of the card',
-                        ToastAndroid.SHORT,
-                      );
-                      return;
-                    }
-                    if (result.errorMessage) {
-                      ToastAndroid.show(
-                        result.errorMessage,
-                        ToastAndroid.SHORT,
-                      );
-                      return;
-                    }
-                    setResponseImage(result.assets);
-                  }
-                }}
-                style={styles.addButton}>
-                <Image source={ADD_BUTTON} />
+                onPress={() => {
+                  props.navigation.navigate('AddCardOptionsScreen');
+                }}>
+                <Image source={BACK_BUTTON} />
               </TouchableOpacity>
+              {responseImage ? (
+                responseImage.map((item: any, index: number) => {
+                  return item.uri ? (
+                    <View
+                      key={index.toString()}
+                      style={{
+                        ...styles.whiteCircle,
+                        marginLeft: index === 0 ? 30 : 0,
+                      }}>
+                      <View style={styles.innerCircle}>
+                        <Image
+                          source={{uri: item.uri}}
+                          resizeMode="contain"
+                          style={{
+                            width: 65,
+                            height: 65,
+                            borderRadius: 30,
+                          }}
+                        />
+                      </View>
+                    </View>
+                  ) : (
+                    <View
+                      style={{
+                        ...styles.whiteCircle,
+                        marginLeft: index === 0 ? 30 : 0,
+                      }}>
+                      <View style={styles.innerCircle}>
+                        <Image
+                          source={UPLOAD_ICON}
+                          style={{
+                            width: 60,
+                            height: 60,
+                            tintColor: '#6080A0',
+                          }}
+                        />
+                      </View>
+                    </View>
+                  );
+                })
+              ) : (
+                <>
+                  <View
+                    style={{
+                      ...styles.whiteCircle,
+                      marginLeft: 30,
+                    }}>
+                    <View style={styles.innerCircle}>
+                      <Image
+                        source={UPLOAD_ICON}
+                        style={{
+                          width: 60,
+                          height: 60,
+                          tintColor: '#6080A0',
+                        }}
+                      />
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      ...styles.whiteCircle,
+                      marginLeft: 0,
+                    }}>
+                    <View style={styles.innerCircle}>
+                      <Image
+                        source={UPLOAD_ICON}
+                        style={{
+                          width: 60,
+                          height: 60,
+                          tintColor: '#6080A0',
+                        }}
+                      />
+                    </View>
+                  </View>
+                </>
+              )}
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity
+                  onPress={async () => {
+                    const result = await launchImageLibrary({
+                      selectionLimit: 2,
+                      mediaType: 'photo',
+                      includeBase64: true,
+                      includeExtra: true,
+                    });
+                    if (result.assets) {
+                      console.log('====================================');
+                      console.log(
+                        'image picker result ===>>>',
+                        result.assets ? result.assets.length : [].length,
+                      );
+                      console.log('====================================');
+                      if (result.didCancel) {
+                        ToastAndroid.show(
+                          'Please pick atleast 2 photos of the card',
+                          ToastAndroid.SHORT,
+                        );
+                        return;
+                      }
+                      if (result.errorMessage) {
+                        ToastAndroid.show(
+                          result.errorMessage,
+                          ToastAndroid.SHORT,
+                        );
+                        return;
+                      }
+                      setResponseImage(result.assets);
+                    }
+                  }}
+                  style={styles.addButton}>
+                  <Image
+                    source={ATTACHEMENT_ICON}
+                    style={{width: 20, height: 20}}
+                  />
+                </TouchableOpacity>
+                <Text style={{color: 'black', marginRight: 20}}>
+                  Add Images
+                </Text>
+              </View>
             </View>
             <View
               style={{display: 'flex', flex: 1, width: '100%', marginTop: 20}}>
@@ -418,65 +633,7 @@ const ManualAddCardScreen = (props: any) => {
               </View>
               <TouchableOpacity
                 onPress={() => {
-                  var myHeaders = new Headers();
-                  // var data = new FormData();
-                  myHeaders.append('Content-Type', 'application/json');
-                  myHeaders.append(
-                    'Authorization',
-                    `Bearer ${authStore.authToken}`,
-                  );
-                  // responseImage.array.forEach((item: any, i: number) => {
-                  //   data.append('image_files', {
-                  //     uri: item.uri,
-                  //     type: 'image/jpeg',
-                  //     name: item.filename || `filename${i}.jpg`,
-                  //   });
-                  // });
-                  // data.append('serialNumber', serialNo);
-                  // data.append('manufacturer', company);
-                  // data.append('balance', price);
-                  // data.append('type', valueCardType);
-                  // data.append('category', valueCardCategory);
-                  // data.append('expiry', expiry);
-                  // data.append('isListed', false);
-                  // data.append('isActive', true);
-                  var raw = JSON.stringify({
-                    serialNumber: serialNo,
-                    manufacturar: company,
-                    balance: price,
-                    type: valueCardType,
-                    category: valueCardCategory,
-                    expiry: expiry,
-                    isListed: false,
-                    isActive: true,
-                  });
-
-                  var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: 'follow',
-                  };
-
-                  fetch(
-                    'http://20.172.135.207/api/api/v1/card/add-wallet',
-                    requestOptions,
-                  )
-                    .then(response => response.json())
-                    .then(result => {
-                      console.log('result ==>', result);
-                      if (result?.response?.CODE === 200) {
-                        console.log('card add ==>', result);
-                        props.navigation.navigate('WalletTab');
-                      } else {
-                        ToastAndroid.show(
-                          result.response.DESCRIPTION,
-                          ToastAndroid.SHORT,
-                        );
-                        props.navigation.navigate('HomeScreen');
-                      }
-                    })
-                    .catch(error => console.log('error', error));
+                  addCard();
                 }}
                 style={{
                   width: '80%',
@@ -528,26 +685,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   whiteCircle: {
-    width: 128,
-    height: 128,
-    borderRadius: 64,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
     overflow: 'visible',
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 25,
+    marginHorizontal: 25,
   },
   innerCircle: {
-    width: 112,
-    height: 112,
-    borderRadius: 56,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     backgroundColor: '#F2F5F8',
     justifyContent: 'center',
     alignItems: 'center',
   },
   addButton: {
-    position: 'absolute',
-    top: 90,
-    right: -2,
+    backgroundColor: '#FFFFFF',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    marginRight: 20,
+    marginTop: 50,
+    alignItems: 'center',
   },
 });

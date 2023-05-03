@@ -146,7 +146,7 @@ const ScanSuccessScreen = (props: any) => {
             </Text>
             <Image
               source={BARCODE}
-              style={{width: 155, height: 74, marginTop: 20}}
+              style={{width: 155, height: 74, marginTop: 10}}
             />
             <Text
               style={{
@@ -209,7 +209,7 @@ const ScanSuccessScreen = (props: any) => {
                 display: 'flex',
                 width: '100%',
                 flexDirection: 'column',
-                marginLeft: 30,
+                marginHorizontal: 10,
               }}>
               <View
                 style={{

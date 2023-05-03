@@ -169,13 +169,15 @@ const CameraScreen = (props: any) => {
   }, []);
 
   // useEffect(() => {
-  //   setTimeout(() => {
-  //     ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
-  //     props.navigation.navigate('ScanSuccessScreen', {
-  //       code: '032973853208485884',
-  //     });
-  //   }, 3000);
-  // }, []);
+  //   if (!showModal) {
+  //     setTimeout(() => {
+  //       ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
+  //       props.navigation.navigate('ScanSuccessScreen', {
+  //         code: '032973853208485884',
+  //       });
+  //     }, 3000);
+  //   }
+  // }, [showModal]);
 
   const closeModal = () => {
     setShowModal(false);
@@ -218,10 +220,10 @@ const CameraScreen = (props: any) => {
           />
           <TouchableOpacity
             onPress={() => {
-              if (flashMode === RNCamera.Constants.FlashMode.on) {
+              if (flashMode === RNCamera.Constants.FlashMode.torch) {
                 setFlashMode(RNCamera.Constants.FlashMode.off);
               } else {
-                setFlashMode(RNCamera.Constants.FlashMode.on);
+                setFlashMode(RNCamera.Constants.FlashMode.torch);
               }
             }}>
             <Image source={TORCH} />
