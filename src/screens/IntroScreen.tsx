@@ -125,8 +125,8 @@ const IntroScreen = (props: {
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              width: 53,
-              height: 53,
+              width: 60,
+              height: 60,
               borderRadius: 53,
               borderColor: '#6080A0',
               borderWidth: 1,
@@ -144,7 +144,7 @@ const IntroScreen = (props: {
                 fontSize: 15,
                 color: '#6080A0',
               }}>
-              Skip
+              Hopp over
             </Text>
           </TouchableOpacity>
         </View>

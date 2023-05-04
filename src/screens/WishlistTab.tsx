@@ -34,7 +34,7 @@ const WishlistTab = () => {
           width: '100%',
           height: '100%',
         }}>
-        <Text>Coming Soon</Text>
+        <Text style={{color: 'gray'}}>Kommer snart</Text>
       </View>
       {/* <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.button}>

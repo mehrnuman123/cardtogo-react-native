@@ -17,6 +17,7 @@ import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
 import SCANNERICON from '../assets/images/scanner_icon.png';
 import SCAN_AREA from '../assets/icons/camera_scan_area.png';
 import TORCH from '../assets/icons/torch_icon.png';
+import BACK_BUTTON from '../assets/icons/back_button_white.png';
 
 const BottomModal = ({visible, setShowModal, onClose}) => {
   return (
@@ -185,15 +186,29 @@ const CameraScreen = (props: any) => {
 
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          zIndex: 1,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('AddCardOptionsScreen');
+          }}>
+          <Image source={BACK_BUTTON} />
+        </TouchableOpacity>
+      </View>
       <RNCamera
         style={styles.preview}
         type={RNCamera.Constants.Type.back}
         flashMode={flashMode}
         androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
+          title: 'Tillatelse til å bruke kamera',
+          message: 'Vi trenger din tillatelse for å bruke kameraet ditt',
           buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
+          buttonNegative: 'Avbryt',
         }}
         captureAudio={false}
         onBarCodeRead={async (event: any) => {
@@ -201,7 +216,7 @@ const CameraScreen = (props: any) => {
             console.log('barcode 1 ---->', event.data);
             if (!barcodeValue) {
               setBarcodeValue(event.data);
-              ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
+              ToastAndroid.show('Skannet vellykket!', ToastAndroid.SHORT);
               setTimeout(() => {
                 props.navigation.navigate('ScanSuccessScreen', {
                   code: event.data,

@@ -1,19 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
-  Image,
-  ScrollView,
+  // Image,
+  // ScrollView,
   StyleSheet,
   Text,
-  TextInput,
+  // TextInput,
   View,
 } from 'react-native';
 import React from 'react';
-import SEARCH_ICON from '../assets/icons/search_icon.png';
-import FILTER_ICON from '../assets/icons/filters_icon.png';
-import BERGANS_SQUARE from '../assets/images/bergans_square.png';
-import WOMEN_HAIRCUT from '../assets/images/woman_hair_cut.png';
-import MAN_HAIRCUT from '../assets/images/man_hair_cut.png';
-import DESIGN from '../assets/images/design.png';
+// import SEARCH_ICON from '../assets/icons/search_icon.png';
+// import FILTER_ICON from '../assets/icons/filters_icon.png';
+// import BERGANS_SQUARE from '../assets/images/bergans_square.png';
+// import WOMEN_HAIRCUT from '../assets/images/woman_hair_cut.png';
+// import MAN_HAIRCUT from '../assets/images/man_hair_cut.png';
+// import DESIGN from '../assets/images/design.png';
 
 const ExploreTab = () => {
   return (
@@ -27,7 +27,7 @@ const ExploreTab = () => {
           width: '100%',
           height: '100%',
         }}>
-        <Text>Coming Soon</Text>
+        <Text style={{color: 'gray'}}>Kommer snart</Text>
       </View>
       {/* <ScrollView horizontal={false}>
         <View style={{display: 'flex', flex: 1}}>

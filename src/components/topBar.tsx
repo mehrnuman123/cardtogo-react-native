@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Image, TouchableOpacity} from 'react-native';
+import {View, Image, TouchableOpacity, Text, ToastAndroid} from 'react-native';
 import React from 'react';
 import {useRoute} from '@react-navigation/native';
 import LOGO from '../assets/icons/logo.png';
@@ -22,7 +22,7 @@ const TopBar = (props: any) => {
         display: 'flex',
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         alignItems: 'center',
         height: 80,
         marginTop: 20,
@@ -36,15 +36,22 @@ const TopBar = (props: any) => {
       ) : (
         <Image source={LOGO} style={{height: 90, width: 90}} />
       )}
-      <TouchableOpacity>
-        {/* onPress={() => props.navigation.navigate('MapScreen')} */}
+
+      <TouchableOpacity
+        onPress={() => {
+          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+          // props.navigation.navigate('MapScreen')
+        }}>
         <Image
           source={LOCATION_ICON}
           style={{tintColor: route.name === 'MapScreen' ? '#6080A0' : ''}}
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('NotificationScreen')}>
+        onPress={() => {
+          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+          // props.navigation.navigate('NotificationScreen')
+        }}>
         <Image
           source={NOTIFICATION_ICON}
           style={{
@@ -52,8 +59,11 @@ const TopBar = (props: any) => {
           }}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
-        {/* onPress={() => props.navigation.navigate('CartScreen')} */}
+      <TouchableOpacity
+        onPress={() => {
+          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+          // props.navigation.navigate('CartScreen')
+        }}>
         <Image
           source={CART_ICON}
           style={{
@@ -61,7 +71,12 @@ const TopBar = (props: any) => {
           }}
         />
       </TouchableOpacity>
-      <Image source={HAMBURGER_ICON} />
+      <TouchableOpacity
+        onPress={() => {
+          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+        }}>
+        <Image source={HAMBURGER_ICON} />
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => props.navigation.navigate('ProfileScreen')}>
         <LinearGradient
@@ -77,6 +92,7 @@ const TopBar = (props: any) => {
             borderRadius: 27,
             backgroundColor: '#FFFFFF',
             padding: 10,
+            marginRight: 20,
           }}>
           <View
             style={{

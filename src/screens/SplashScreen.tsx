@@ -1,9 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Text, View, ImageBackground} from 'react-native';
-import React, {useContext, useEffect} from 'react';
+import {View, ImageBackground} from 'react-native';
+import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import firebase from '@react-native-firebase/app';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import SPLASH from '../assets/images/splash.png';
@@ -30,7 +29,10 @@ const Splash = (props: any) => {
       if (user && Object.keys(user).length) {
         navigate = 'HomeScreen';
       }
-      if (slider || !user) {
+      if (slider && !user) {
+        navigate = 'AuthScreen';
+      }
+      if (!user) {
         navigate = 'AuthScreen';
       }
       SplashScreen.hide();

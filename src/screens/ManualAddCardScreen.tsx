@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import BACK_BUTTON from '../assets/icons/back_button_white.png';
-import ADD_BUTTON from '../assets/icons/green_add.png';
+
 import ATTACHEMENT_ICON from '../assets/icons/attachment.png';
-import UPLOAD_ICON from '../assets/icons/upload-image-icon.png';
+import PLACEHOLDER from '../assets/images/placeholder.png';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
 import {useStores} from '../store/Store';
 import SERIALNO from '../assets/icons/serial_number_icon.png';
@@ -26,10 +26,7 @@ import CALENDAR from '../assets/icons/calendar_big.png';
 import CARD from '../assets/icons/gift_card.png';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {Buffer} from 'buffer';
-import * as mime from 'react-native-mime-types';
 import Constants from '../constants/EnviornmentVariables';
-import RNFetchBlob from 'rn-fetch-blob';
 
 const ManualAddCardScreen = (props: any) => {
   const URL = Constants.BASE_URL;
@@ -45,8 +42,8 @@ const ManualAddCardScreen = (props: any) => {
   const [openCardType, setOpenCardType] = useState(false);
   const [valueCardType, setValueCardType] = useState(null);
   const [itemsCardType, setItemsCardType] = useState([
-    {label: 'Gift Card', value: 'giftCard'},
-    {label: 'ALLOWANCESLIP', value: 'allowanceslip'},
+    {label: 'Gavekort', value: 'giftCard'},
+    {label: 'Tilgodelapp', value: 'allowanceslip'},
   ]);
   const [openCardCategory, setOpenCardCategory] = useState(false);
   const [valueCardCategory, setValueCardCategory] = useState(null);
@@ -54,51 +51,6 @@ const ManualAddCardScreen = (props: any) => {
     {label: 'Hobby', value: 'hobby'},
     {label: 'Sports', value: 'sport'},
   ]);
-
-  useEffect(() => {
-    if (imageOne && imageTwo) {
-      var myHeaders = new Headers();
-      // var data = new FormData();
-      myHeaders.append('Content-Type', 'application/json');
-      myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
-      var raw = JSON.stringify({
-        serialNumber: serialNo,
-        manufacturar: company,
-        balance: price,
-        type: valueCardType,
-        category: valueCardCategory,
-        expiry: expiry,
-        isListed: false,
-        isActive: true,
-        photoUrl: `[${imageOne}, ${imageTwo}]`,
-      });
-
-      console.log('====================================');
-      console.log('raw ===>>>>>>', raw);
-      console.log('====================================');
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow',
-      };
-
-      fetch('http://20.172.135.207/api/api/v1/card/add-wallet', requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          console.log('result ==>', result);
-          if (result?.response?.CODE === 200) {
-            console.log('card add ==>', result);
-            props.navigation.navigate('WalletTab');
-          } else {
-            ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
-            props.navigation.navigate('HomeScreen');
-          }
-        })
-        .catch(error => console.log('error', error));
-    }
-  }, [imageOne, imageTwo]);
-
   const getImageBlob = (uri: string, mime: string, fileName: string) => {
     return {
       uri: uri,
@@ -108,7 +60,10 @@ const ManualAddCardScreen = (props: any) => {
   };
 
   const addCard = async () => {
-    if (responseImage.length > 1) {
+    console.log('====================================');
+    console.log('responseImage ===>>>', responseImage);
+    console.log('====================================');
+    if (responseImage && responseImage.length > 0) {
       var headers = new Headers();
       headers.append('Authorization', `Bearer ${authStore.authToken}`);
       // headers.append('Content-Type', 'multipart/form-data');
@@ -145,45 +100,105 @@ const ManualAddCardScreen = (props: any) => {
           console.log('error 1 ==>', error);
           console.log('====================================');
         });
-      const formDataSec = new FormData();
-      formDataSec.append(
-        'file',
-        getImageBlob(
-          responseImage[1].uri,
-          responseImage[1].type,
-          responseImage[1].fileName,
-        ),
-      );
-      var options = {
-        method: 'PUT',
-        headers: headers,
-        body: formData,
-        redirect: 'follow',
-      };
-      fetch(
-        `http://20.172.135.207/api/api/v1/upload/card/${authStore.user?.id}`,
-        options,
-      )
-        .then(response => response.json())
-        .then(data => {
+      if (responseImage.length > 1) {
+        const formDataSec = new FormData();
+        formDataSec.append(
+          'file',
+          getImageBlob(
+            responseImage[1].uri,
+            responseImage[1].type,
+            responseImage[1].fileName,
+          ),
+        );
+        var options = {
+          method: 'PUT',
+          headers: headers,
+          body: formData,
+          redirect: 'follow',
+        };
+        fetch(
+          `http://20.172.135.207/api/api/v1/upload/card/${authStore.user?.id}`,
+          options,
+        )
+          .then(response => response.json())
+          .then(data => {
+            console.log('====================================');
+            console.log('data url ==>>>>', data);
+            console.log('====================================');
+            if (data.response.CODE === 200) {
+              setImageTwo(data.data);
+            }
+          })
+          .catch(error => {
+            console.log('====================================');
+            console.log('error 2==>', error);
+            console.log('====================================');
+          });
+      } else {
+        if (serialNo && price) {
+          var myHeaders = new Headers();
+          // var data = new FormData();
+          myHeaders.append('Content-Type', 'application/json');
+          myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+          var raw = JSON.stringify({
+            serialNumber: serialNo,
+            manufacturar: company,
+            balance: price,
+            type: valueCardType,
+            category: valueCardCategory,
+            expiry: expiry,
+            isListed: false,
+            isActive: true,
+            photoUrl: `[${imageOne}, ${imageTwo}]`,
+          });
+
           console.log('====================================');
-          console.log('data url ==>>>>', data);
+          console.log('raw ===>>>>>>', raw);
           console.log('====================================');
-          if (data.response.CODE === 200) {
-            setImageTwo(data.data);
-          }
-        })
-        .catch(error => {
-          console.log('====================================');
-          console.log('error 2==>', error);
-          console.log('====================================');
-        });
+          var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow',
+          };
+
+          fetch(
+            'http://20.172.135.207/api/api/v1/card/add-wallet',
+            requestOptions,
+          )
+            .then(response => response.json())
+            .then(result => {
+              console.log('result ==>', result);
+              if (result?.response?.CODE === 200) {
+                console.log('card add ==>', result);
+                props.navigation.navigate('WalletTab');
+              } else {
+                ToastAndroid.show(
+                  result.response.DESCRIPTION,
+                  ToastAndroid.SHORT,
+                );
+                props.navigation.navigate('HomeScreen');
+              }
+            })
+            .catch(error => {
+              ToastAndroid.show(JSON.stringify(error), ToastAndroid.LONG);
+              console.log('error', error);
+            });
+        } else {
+          ToastAndroid.show(
+            'Serienummer og pris er obligatoriske',
+            ToastAndroid.LONG,
+          );
+        }
+      }
+    } else {
+      ToastAndroid.show('Velg minst ett bilde', ToastAndroid.LONG);
     }
   };
 
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView behavior={'padding'}>
+      <KeyboardAvoidingView behavior={'height'}>
         <ScrollView style={{height: '100%'}}>
           <View style={styles.column}>
             <View
@@ -215,7 +230,6 @@ const ManualAddCardScreen = (props: any) => {
                           style={{
                             width: 65,
                             height: 65,
-                            borderRadius: 30,
                           }}
                         />
                       </View>
@@ -228,7 +242,7 @@ const ManualAddCardScreen = (props: any) => {
                       }}>
                       <View style={styles.innerCircle}>
                         <Image
-                          source={UPLOAD_ICON}
+                          source={PLACEHOLDER}
                           style={{
                             width: 60,
                             height: 60,
@@ -248,11 +262,11 @@ const ManualAddCardScreen = (props: any) => {
                     }}>
                     <View style={styles.innerCircle}>
                       <Image
-                        source={UPLOAD_ICON}
+                        source={PLACEHOLDER}
                         style={{
-                          width: 60,
-                          height: 60,
-                          tintColor: '#6080A0',
+                          width: 70,
+                          height: 70,
+                          // tintColor: '#6080A0',
                         }}
                       />
                     </View>
@@ -264,11 +278,11 @@ const ManualAddCardScreen = (props: any) => {
                     }}>
                     <View style={styles.innerCircle}>
                       <Image
-                        source={UPLOAD_ICON}
+                        source={PLACEHOLDER}
                         style={{
-                          width: 60,
-                          height: 60,
-                          tintColor: '#6080A0',
+                          width: 70,
+                          height: 70,
+                          // tintColor: '#6080A0',
                         }}
                       />
                     </View>
@@ -286,7 +300,7 @@ const ManualAddCardScreen = (props: any) => {
                     const result = await launchImageLibrary({
                       selectionLimit: 2,
                       mediaType: 'photo',
-                      includeBase64: true,
+                      includeBase64: false,
                       includeExtra: true,
                     });
                     if (result.assets) {
@@ -319,9 +333,15 @@ const ManualAddCardScreen = (props: any) => {
                     style={{width: 20, height: 20}}
                   />
                 </TouchableOpacity>
-                <Text style={{color: 'black', marginRight: 20}}>
-                  Add Images
-                </Text>
+                {/* <Text
+                  style={{
+                    color: 'black',
+                    fontSize: 12,
+                    marginTop: 5,
+                    marginRight: 20,
+                  }}>
+                  Legg ved bilder
+                </Text> */}
               </View>
             </View>
             <View
@@ -384,7 +404,11 @@ const ManualAddCardScreen = (props: any) => {
                   value={price?.toString()}
                   placeholder="Skriv inn pris"
                   onChangeText={(text: any) => {
-                    setPrice(JSON.parse(text));
+                    if (text) {
+                      setPrice(JSON.parse(text));
+                    } else {
+                      setPrice(text);
+                    }
                   }}
                   placeholderTextColor={'#6080A0'}
                   style={{
@@ -458,11 +482,8 @@ const ManualAddCardScreen = (props: any) => {
                 />
                 <TextInput
                   value={expiry}
-                  placeholder="Angi utløpsdato"
+                  placeholder="YYYY-MM-DD"
                   onChangeText={(text: any) => {
-                    console.log('====================================');
-                    console.log('expiry ==>', text);
-                    console.log('====================================');
                     setExpiry(text);
                   }}
                   placeholderTextColor={'#6080A0'}
@@ -687,13 +708,13 @@ const styles = StyleSheet.create({
   whiteCircle: {
     width: 90,
     height: 90,
-    borderRadius: 45,
-    overflow: 'visible',
-    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 25,
     marginHorizontal: 25,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
   },
   innerCircle: {
     width: 80,

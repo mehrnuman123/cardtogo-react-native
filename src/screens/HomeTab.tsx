@@ -1,34 +1,34 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
-  Image,
-  ImageBackground,
-  ScrollView,
+  // Image,
+  // ImageBackground,
+  // ScrollView,
   StyleSheet,
   Text,
-  TextInput,
+  // TextInput,
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 
-import WOMEN_HAIRCUT from '../assets/images/woman_hair_cut.png';
-import MAN_HAIRCUT from '../assets/images/man_hair_cut.png';
-import DESIGN from '../assets/images/design.png';
-import SAS_TEXT from '../assets/images/SAS_text.png';
+// import WOMEN_HAIRCUT from '../assets/images/woman_hair_cut.png';
+// import MAN_HAIRCUT from '../assets/images/man_hair_cut.png';
+// import DESIGN from '../assets/images/design.png';
+// import SAS_TEXT from '../assets/images/SAS_text.png';
 
-import PEOPLE from '../assets/images/people_sitting.png';
+// import PEOPLE from '../assets/images/people_sitting.png';
 
-import SEARCH_ICON from '../assets/icons/search_icon.png';
-import FILTER_ICON from '../assets/icons/filters_icon.png';
-import ADDIDAS from '../assets/icons/addidas_logo.png';
-import BERGANS from '../assets/icons/bergans_logo.png';
-import HIFI_KLUBBEN from '../assets/icons/hifi_klubben_logo.png';
-import UNISPORT from '../assets/icons/unisport_logo.png';
-import ADDIDAS_BIG from '../assets/icons/addidas_big.png';
-import ONLINE from '../assets/icons/online_icon.png';
-import RECTANGLE from '../assets/icons/rectangle_image.png';
-import LOCATION from '../assets/icons/location_icon.png';
-import DISCOUNT from '../assets/icons/discount_icon.png';
+// import SEARCH_ICON from '../assets/icons/search_icon.png';
+// import FILTER_ICON from '../assets/icons/filters_icon.png';
+// import ADDIDAS from '../assets/icons/addidas_logo.png';
+// import BERGANS from '../assets/icons/bergans_logo.png';
+// import HIFI_KLUBBEN from '../assets/icons/hifi_klubben_logo.png';
+// import UNISPORT from '../assets/icons/unisport_logo.png';
+// import ADDIDAS_BIG from '../assets/icons/addidas_big.png';
+// import ONLINE from '../assets/icons/online_icon.png';
+// import RECTANGLE from '../assets/icons/rectangle_image.png';
+// import LOCATION from '../assets/icons/location_icon.png';
+// import DISCOUNT from '../assets/icons/discount_icon.png';
 import {useStores} from '../store/Store';
 import {useIsFocused} from '@react-navigation/native';
 import {firebase} from '@react-native-firebase/auth';
@@ -71,6 +71,17 @@ function HomeTab(props: any) {
       <View
         style={{
           display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+        }}>
+        <Text style={{color: 'gray'}}>Kommer snart</Text>
+      </View>
+      {/* <View
+        style={{
+          display: 'flex',
           flex: 1,
           maxHeight: 150,
         }}>
@@ -91,7 +102,7 @@ function HomeTab(props: any) {
           </View>
           <Image source={FILTER_ICON} style={{marginRight: 15}} />
         </View>
-      </View>
+      </View> */}
       {/* <ScrollView
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -287,7 +298,7 @@ function HomeTab(props: any) {
             </Text>
           </View>
         </ScrollView> */}
-      <View
+      {/* <View
         style={{
           display: 'flex',
           flex: 2,
@@ -1064,7 +1075,7 @@ function HomeTab(props: any) {
             </View>
           </ScrollView>
         </ScrollView>
-      </View>
+      </View> */}
     </View>
   );
 }
