@@ -111,9 +111,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    fontFamily: 'Open Sans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    fontWeight: 'normal',
     color: '#6080A0',
   },
   container: {

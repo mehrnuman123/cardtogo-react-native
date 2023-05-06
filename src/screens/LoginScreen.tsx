@@ -56,8 +56,7 @@ const LoginScreen = (props: any) => {
               placeholderTextColor={'#FFFFFF'}
               style={{
                 fontSize: 19,
-                fontWeight: 'normal',
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 textAlign: 'center',
                 color: '#FFFFFF',
               }}
@@ -76,8 +75,7 @@ const LoginScreen = (props: any) => {
               placeholderTextColor={'#FFFFFF'}
               style={{
                 fontSize: 19,
-                fontWeight: 'normal',
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 textAlign: 'center',
                 color: '#FFFFFF',
               }}
@@ -98,7 +96,7 @@ const LoginScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: 'white',
                 textAlign: 'center',
                 marginRight: '30%',
@@ -128,7 +126,7 @@ const LoginScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 18,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: '#30C9AA',
                 textAlign: 'center',
                 textTransform: 'uppercase',
@@ -150,8 +148,7 @@ const LoginScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
-                fontWeight: '100',
+                fontFamily: 'OpenSans-Light',
                 color: '#FFFFFF',
               }}>
               ELLER
@@ -179,7 +176,7 @@ const LoginScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: '#6080A0',
                 textAlign: 'center',
                 marginRight: '15%',

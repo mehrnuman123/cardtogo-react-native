@@ -9,12 +9,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import WALLET_ICON from '../assets/icons/wallet_icon.png';
-import ADDIDAS from '../assets/images/placeholder.png';
+import PLACEHOLDER from '../assets/images/placeholder.png';
 import WALLET_VIEW from '../assets/images/wallet_view_icon.png';
-import {useStores} from '../store/Store';
-import {useIsFocused} from '@react-navigation/native';
+import { useStores } from '../store/Store';
+import { useIsFocused } from '@react-navigation/native';
 
 const WalletTab = (props: any) => {
   const isFocused = useIsFocused();
@@ -38,12 +38,17 @@ const WalletTab = (props: any) => {
 
     fetch('http://20.172.135.207/api/api/v1/card/all', requestOptions)
       .then(response => response.json())
-      .then(result => {
+      .then((result: any) => {
         if (result.response.CODE === 200) {
-          console.log('====================================');
-          console.log('data ===>', result.data);
-          console.log('====================================');
-          setCards(result.data);
+
+          const cards: any = result.data;
+          for (var i = 0; i < cards.length; i++) {
+            if (cards[i].photo !== null && cards[i].photo !== "[, ]") {
+              const photosParsed: string[] = JSON.parse(cards[i].photo);
+              cards[i].photo = photosParsed;
+            }
+          }
+          setCards(cards);
           setLoading(false);
           const sum = result.data.reduce(function (a: any, b: any) {
             return JSON.parse(a) + JSON.parse(b.balance);
@@ -69,33 +74,30 @@ const WalletTab = (props: any) => {
               <Image source={WALLET_ICON} />
               <Text
                 style={{
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Medium',
                   textAlign: 'center',
                   fontSize: 24,
-                  fontWeight: '500',
                   color: '#3F3D56',
                 }}>
                 Wallet
               </Text>
             </View>
-            <View style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}} />
+            <View style={{ width: 1, height: 58, backgroundColor: '#D8E1E8' }} />
             <View style={styles.headerColumn}>
               <Text
                 style={{
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Regular',
                   textAlign: 'center',
                   fontSize: 16,
-                  fontWeight: 'normal',
                   color: '#6080A0',
                 }}>
                 Total verdi
               </Text>
               <Text
                 style={{
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Medium',
                   textAlign: 'center',
                   fontSize: 18,
-                  fontWeight: '500',
                   color: '#3F3D56',
                 }}>
                 {sumOfAllCards} kr
@@ -105,20 +107,18 @@ const WalletTab = (props: any) => {
           <View style={styles.headerColumn}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 textAlign: 'center',
                 fontSize: 16,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Kan tjene
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 textAlign: 'center',
                 fontSize: 18,
-                fontWeight: '500',
                 color: '#3F3D56',
               }}>
               320 kr
@@ -163,7 +163,7 @@ const WalletTab = (props: any) => {
                     // }
                   }}
                   style={styles.walletCard}>
-                  <View
+                  {!item.photo || item.photo === '[, ]' ? <View
                     style={{
                       display: 'flex',
                       flex: 1,
@@ -172,11 +172,24 @@ const WalletTab = (props: any) => {
                       alignItems: 'center',
                     }}>
                     <Image
-                      source={ADDIDAS}
-                      style={{width: 76, height: 76}}
+                      source={PLACEHOLDER}
+                      style={{ width: 76, height: 76 }}
                       resizeMode={'contain'}
                     />
-                  </View>
+                  </View> : <View
+                    style={{
+                      display: 'flex',
+                      flex: 1,
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={{ uri: item.photo[0] }}
+                      style={{ width: 76, height: 76 }}
+                      resizeMode={'contain'}
+                    />
+                  </View>}
                   <View
                     style={{
                       display: 'flex',
@@ -186,20 +199,18 @@ const WalletTab = (props: any) => {
                     }}>
                     <Text
                       style={{
-                        fontFamily: 'Open Sans',
+                        fontFamily: 'OpenSans-Regular',
                         textAlign: 'center',
                         fontSize: 16,
-                        fontWeight: 'normal',
                         color: '#6080A0',
                       }}>
                       Verdi
                     </Text>
                     <Text
                       style={{
-                        fontFamily: 'Open Sans',
+                        fontFamily: 'OpenSans-Medium',
                         textAlign: 'center',
                         fontSize: 18,
-                        fontWeight: '500',
                         color: '#3F3D56',
                       }}>
                       {item.balance} KR
@@ -216,20 +227,18 @@ const WalletTab = (props: any) => {
                 }}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     textAlign: 'center',
                     fontSize: 16,
-                    fontWeight: 'normal',
                     color: '#6080A0',
                   }}>
                   Kan tjene
                 </Text>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Medium',
                     textAlign: 'center',
                     fontSize: 18,
-                    fontWeight: '500',
                     color: '#3F3D56',
                   }}>
                   220
@@ -271,20 +280,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Verdi
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             300 KR
@@ -294,20 +301,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Kan tjene
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             220
@@ -341,20 +346,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Verdi
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             300 KR
@@ -364,20 +367,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Kan tjene
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             220
@@ -457,9 +458,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    fontFamily: 'Open Sans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    fontWeight: 'normal',
     color: '#6080A0',
   },
   walletCard: {

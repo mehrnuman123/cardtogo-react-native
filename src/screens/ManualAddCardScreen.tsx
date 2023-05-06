@@ -11,13 +11,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import BACK_BUTTON from '../assets/icons/back_button_white.png';
 
 import ATTACHEMENT_ICON from '../assets/icons/attachment.png';
 import PLACEHOLDER from '../assets/images/placeholder.png';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
-import {useStores} from '../store/Store';
+import { useStores } from '../store/Store';
 import SERIALNO from '../assets/icons/serial_number_icon.png';
 import LOCK from '../assets/icons/lock.png';
 import TAG from '../assets/icons/discount_icon.png';
@@ -25,7 +25,7 @@ import PRICE from '../assets/icons/dollar_icon.png';
 import CALENDAR from '../assets/icons/calendar_big.png';
 import CARD from '../assets/icons/gift_card.png';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {launchImageLibrary} from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import Constants from '../constants/EnviornmentVariables';
 
 const ManualAddCardScreen = (props: any) => {
@@ -42,14 +42,14 @@ const ManualAddCardScreen = (props: any) => {
   const [openCardType, setOpenCardType] = useState(false);
   const [valueCardType, setValueCardType] = useState(null);
   const [itemsCardType, setItemsCardType] = useState([
-    {label: 'Gavekort', value: 'giftCard'},
-    {label: 'Tilgodelapp', value: 'allowanceslip'},
+    { label: 'Gavekort', value: 'giftCard' },
+    { label: 'Tilgodelapp', value: 'allowanceslip' },
   ]);
   const [openCardCategory, setOpenCardCategory] = useState(false);
   const [valueCardCategory, setValueCardCategory] = useState(null);
   const [itemsCardCategory, setItemsCardCategory] = useState([
-    {label: 'Hobby', value: 'hobby'},
-    {label: 'Sports', value: 'sport'},
+    { label: 'Hobby', value: 'hobby' },
+    { label: 'Sports', value: 'sport' },
   ]);
   const getImageBlob = (uri: string, mime: string, fileName: string) => {
     return {
@@ -58,6 +58,81 @@ const ManualAddCardScreen = (props: any) => {
       name: fileName || 'image.jpg',
     };
   };
+
+  useEffect(()=> {
+    if((responseImage?.length > 1 && imageOne !== "" && imageTwo !== "") || (responseImage?.length === 1 && (imageOne !== "" || imageTwo !== ""))) {
+      if (serialNo && price) {
+        var myHeaders = new Headers();
+        // var data = new FormData();
+        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+        var photos = []
+        if (imageOne !== "") {
+          photos.push(imageOne);
+        }
+        if (imageTwo !== "") {
+          photos.push(imageTwo);
+        }
+        var raw = JSON.stringify({
+          serialNumber: serialNo,
+          manufacturar: company,
+          balance: price,
+          type: valueCardType,
+          category: valueCardCategory,
+          expiry: expiry,
+          isListed: false,
+          isActive: true,
+          photoUrl: JSON.stringify(photos),
+        });
+
+        console.log('====================================');
+        console.log('raw ===>>>>>>', raw);
+        console.log('====================================');
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow',
+        };
+
+        fetch(
+          'http://20.172.135.207/api/api/v1/card/add-wallet',
+          requestOptions,
+        )
+          .then(response => response.json())
+          .then(result => {
+            console.log('result ==>', result);
+            if (result?.response?.CODE === 200 && result?.response?.DESCRIPTION !== "Card is already exist in wallet") {
+              console.log('card add ==>', result);
+              props.navigation.navigate('WalletTab');
+            } else {
+              if(result?.response?.DESCRIPTION !== "Card is already exist in wallet") {
+                ToastAndroid.show(
+                  result.response.DESCRIPTION,
+                  ToastAndroid.SHORT,
+                );
+                props.navigation.navigate('WalletTab');  
+              } else {
+                ToastAndroid.show(
+                  result.response.DESCRIPTION,
+                  ToastAndroid.SHORT,
+                );
+                props.navigation.navigate('HomeScreen');
+              }
+            }
+          })
+          .catch(error => {
+            ToastAndroid.show(JSON.stringify(error), ToastAndroid.LONG);
+            console.log('error', error);
+          });
+      } else {
+        ToastAndroid.show(
+          'Serienummer og pris er obligatoriske',
+          ToastAndroid.LONG,
+        );
+      }
+    }
+  }, [responseImage, imageOne, imageTwo]);
 
   const addCard = async () => {
     console.log('====================================');
@@ -134,62 +209,6 @@ const ManualAddCardScreen = (props: any) => {
             console.log('error 2==>', error);
             console.log('====================================');
           });
-      } else {
-        if (serialNo && price) {
-          var myHeaders = new Headers();
-          // var data = new FormData();
-          myHeaders.append('Content-Type', 'application/json');
-          myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
-          var raw = JSON.stringify({
-            serialNumber: serialNo,
-            manufacturar: company,
-            balance: price,
-            type: valueCardType,
-            category: valueCardCategory,
-            expiry: expiry,
-            isListed: false,
-            isActive: true,
-            photoUrl: `[${imageOne}, ${imageTwo}]`,
-          });
-
-          console.log('====================================');
-          console.log('raw ===>>>>>>', raw);
-          console.log('====================================');
-          var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow',
-          };
-
-          fetch(
-            'http://20.172.135.207/api/api/v1/card/add-wallet',
-            requestOptions,
-          )
-            .then(response => response.json())
-            .then(result => {
-              console.log('result ==>', result);
-              if (result?.response?.CODE === 200) {
-                console.log('card add ==>', result);
-                props.navigation.navigate('WalletTab');
-              } else {
-                ToastAndroid.show(
-                  result.response.DESCRIPTION,
-                  ToastAndroid.SHORT,
-                );
-                props.navigation.navigate('HomeScreen');
-              }
-            })
-            .catch(error => {
-              ToastAndroid.show(JSON.stringify(error), ToastAndroid.LONG);
-              console.log('error', error);
-            });
-        } else {
-          ToastAndroid.show(
-            'Serienummer og pris er obligatoriske',
-            ToastAndroid.LONG,
-          );
-        }
       }
     } else {
       ToastAndroid.show('Velg minst ett bilde', ToastAndroid.LONG);
@@ -199,7 +218,7 @@ const ManualAddCardScreen = (props: any) => {
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView behavior={'height'}>
-        <ScrollView style={{height: '100%'}}>
+        <ScrollView style={{ height: '100%' }}>
           <View style={styles.column}>
             <View
               style={{
@@ -225,7 +244,7 @@ const ManualAddCardScreen = (props: any) => {
                       }}>
                       <View style={styles.innerCircle}>
                         <Image
-                          source={{uri: item.uri}}
+                          source={{ uri: item.uri }}
                           resizeMode="contain"
                           style={{
                             width: 65,
@@ -307,7 +326,7 @@ const ManualAddCardScreen = (props: any) => {
                       console.log('====================================');
                       console.log(
                         'image picker result ===>>>',
-                        result.assets ? result.assets.length : [].length,
+                        result.assets ? result.assets : [],
                       );
                       console.log('====================================');
                       if (result.didCancel) {
@@ -330,7 +349,7 @@ const ManualAddCardScreen = (props: any) => {
                   style={styles.addButton}>
                   <Image
                     source={ATTACHEMENT_ICON}
-                    style={{width: 20, height: 20}}
+                    style={{ width: 20, height: 20 }}
                   />
                 </TouchableOpacity>
                 {/* <Text
@@ -344,8 +363,8 @@ const ManualAddCardScreen = (props: any) => {
                 </Text> */}
               </View>
             </View>
-            <View
-              style={{display: 'flex', flex: 1, width: '100%', marginTop: 20}}>
+            <ScrollView
+              style={{ display: 'flex', flex: 1, width: '100%', marginTop: 20 }}>
               <View
                 style={{
                   backgroundColor: '#E6ECF2',
@@ -360,7 +379,7 @@ const ManualAddCardScreen = (props: any) => {
                 }}>
                 <Image
                   source={SERIALNO}
-                  style={{width: 30, height: 25, marginLeft: 15}}
+                  style={{ width: 30, height: 25, marginLeft: 15 }}
                 />
                 <TextInput
                   value={serialNo}
@@ -371,8 +390,7 @@ const ManualAddCardScreen = (props: any) => {
                   placeholderTextColor={'#6080A0'}
                   style={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 30,
                     textAlign: 'left',
                     color: '#6080A0',
@@ -413,12 +431,12 @@ const ManualAddCardScreen = (props: any) => {
                   placeholderTextColor={'#6080A0'}
                   style={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 30,
                     textAlign: 'left',
                     color: '#6080A0',
                   }}
+                  keyboardType="number-pad"
                 />
               </View>
               <View
@@ -451,8 +469,7 @@ const ManualAddCardScreen = (props: any) => {
                   placeholderTextColor={'#6080A0'}
                   style={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 30,
                     textAlign: 'left',
                     color: '#6080A0',
@@ -489,8 +506,7 @@ const ManualAddCardScreen = (props: any) => {
                   placeholderTextColor={'#6080A0'}
                   style={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 30,
                     textAlign: 'left',
                     color: '#6080A0',
@@ -542,16 +558,14 @@ const ManualAddCardScreen = (props: any) => {
                   }}
                   textStyle={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 20,
                     textAlign: 'left',
                     color: '#6080A0',
                   }}
                   placeholderStyle={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 20,
                     textAlign: 'left',
                     color: '#6080A0',
@@ -603,16 +617,14 @@ const ManualAddCardScreen = (props: any) => {
                   }}
                   textStyle={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 20,
                     textAlign: 'left',
                     color: '#6080A0',
                   }}
                   placeholderStyle={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 20,
                     textAlign: 'left',
                     color: '#6080A0',
@@ -633,7 +645,7 @@ const ManualAddCardScreen = (props: any) => {
                 }}>
                 <Image
                   source={LOCK}
-                  style={{width: 25, height: 30, marginLeft: 15}}
+                  style={{ width: 25, height: 30, marginLeft: 15 }}
                 />
                 <TextInput
                   value={pin}
@@ -644,8 +656,7 @@ const ManualAddCardScreen = (props: any) => {
                   placeholderTextColor={'#6080A0'}
                   style={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 30,
                     textAlign: 'left',
                     color: '#6080A0',
@@ -670,7 +681,7 @@ const ManualAddCardScreen = (props: any) => {
                 <Text
                   style={{
                     fontSize: 19,
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     color: 'white',
                     textAlign: 'center',
                     marginRight: '30%',
@@ -679,10 +690,10 @@ const ManualAddCardScreen = (props: any) => {
                 </Text>
                 <Image
                   source={BUTTONRIGHTARROW}
-                  style={{marginRight: 15, tintColor: 'white'}}
+                  style={{ marginRight: 15, tintColor: 'white' }}
                 />
               </TouchableOpacity>
-            </View>
+            </ScrollView>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

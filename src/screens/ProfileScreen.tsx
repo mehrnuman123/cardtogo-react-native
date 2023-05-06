@@ -78,7 +78,9 @@ const ProfileScreen = (props: any) => {
           onPress={async () => {
             await authStore.clear();
             firebase.auth().signOut();
-            props.navigation.navigate('SplashScreen');
+            setTimeout(() => {
+              props.navigation.navigate('SplashScreen');
+            }, 3000);
           }}
           style={{
             ...styles.row,

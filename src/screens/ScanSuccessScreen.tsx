@@ -60,9 +60,8 @@ const ScanSuccessScreen = (props: any) => {
           <View style={{marginTop: 10}}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 18,
-                fontWeight: '500',
                 color: '#3F3D56',
               }}>
               Takk for handelen!
@@ -71,9 +70,8 @@ const ScanSuccessScreen = (props: any) => {
           <View style={{width: 204}}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 16,
-                fontWeight: 'normal',
                 color: '#6080A0',
                 textAlign: 'center',
               }}>
@@ -125,9 +123,8 @@ const ScanSuccessScreen = (props: any) => {
               />
               <Text
                 style={{
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Bold',
                   fontSize: 23,
-                  fontWeight: 'bold',
                   color: '#6080A0',
                   marginLeft: 10,
                 }}>
@@ -136,9 +133,8 @@ const ScanSuccessScreen = (props: any) => {
             </View>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 16,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               {' '}
@@ -150,9 +146,8 @@ const ScanSuccessScreen = (props: any) => {
             />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               {props.route.params?.code ? props.route.params.code : ''}
@@ -232,8 +227,7 @@ const ScanSuccessScreen = (props: any) => {
                   placeholderTextColor={'#6080A0'}
                   style={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     marginLeft: 30,
                     textAlign: 'left',
                     color: '#6080A0',
@@ -260,8 +254,7 @@ const ScanSuccessScreen = (props: any) => {
                   placeholderTextColor={'#6080A0'}
                   style={{
                     fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     textAlign: 'left',
                     marginLeft: 30,
                     color: '#6080A0',
@@ -329,7 +322,7 @@ const ScanSuccessScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: 'white',
                 textAlign: 'center',
                 marginRight: '30%',

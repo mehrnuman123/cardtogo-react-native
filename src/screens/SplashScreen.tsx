@@ -29,7 +29,7 @@ const Splash = (props: any) => {
       if (user && Object.keys(user).length) {
         navigate = 'HomeScreen';
       }
-      if (slider && !user) {
+      if (slider && !Object.keys(user ? user : {}).length) {
         navigate = 'AuthScreen';
       }
       if (!user) {

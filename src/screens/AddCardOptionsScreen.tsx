@@ -40,7 +40,7 @@ const AddCardOptionsScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: 'white',
               textAlign: 'center',
             }}>
@@ -70,7 +70,7 @@ const AddCardOptionsScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: 'white',
               textAlign: 'center',
             }}>

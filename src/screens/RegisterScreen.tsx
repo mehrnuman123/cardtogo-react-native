@@ -56,9 +56,8 @@ const RegisterScreen = (props: {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 24,
-                fontWeight: 'bold',
                 textAlign: 'center',
                 color: '#6080A0',
               }}>
@@ -76,9 +75,8 @@ const RegisterScreen = (props: {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Light',
                 fontSize: 19,
-                fontWeight: '300',
                 textAlign: 'center',
                 color: '#6080A0',
               }}>
@@ -137,7 +135,7 @@ const RegisterScreen = (props: {
                   placeholder="Bank"
                   placeholderTextColor={'#8CA4BB'}
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     fontSize: 16,
                     color: '#8CA4BB',
                   }}
@@ -238,7 +236,7 @@ const RegisterScreen = (props: {
               <Text
                 style={{
                   fontSize: 19,
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Regular',
                   color: 'white',
                   textAlign: 'center',
                   marginRight: '20%',

@@ -79,9 +79,8 @@ const IntroScreen = (props: {
         <View style={{padding: 30, alignSelf: 'center'}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               fontSize: 20,
-              fontWeight: '500',
               textAlign: 'center',
               color: '#FFFFFF',
             }}>
@@ -101,9 +100,8 @@ const IntroScreen = (props: {
         <View style={{padding: 30, alignSelf: 'center'}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               fontSize: 20,
-              fontWeight: '500',
               textAlign: 'center',
               color: '#6080A0',
             }}>
@@ -140,8 +138,9 @@ const IntroScreen = (props: {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 15,
+                textAlign: 'center',
                 color: '#6080A0',
               }}>
               Hopp over

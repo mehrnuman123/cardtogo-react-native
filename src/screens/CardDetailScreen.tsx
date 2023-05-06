@@ -82,9 +82,8 @@ const CardDetailScreen = (props: any) => {
           }}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               fontSize: 24,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             Info om verdikort
@@ -110,7 +109,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-SemiBold',
               color: '#6080A0',
               textAlign: 'center',
               textTransform: 'uppercase',
@@ -142,7 +141,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: '#6080A0',
               textAlign: 'center',
               textTransform: 'uppercase',
@@ -165,7 +164,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 16,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: '#9BAFC3',
               textAlign: 'justify',
             }}>
@@ -226,7 +225,7 @@ const CardDetailScreen = (props: any) => {
               <Text
                 style={{
                   fontSize: 16,
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Regular',
                   color: '#6080A0',
                   textAlign: 'justify',
                 }}>
@@ -235,7 +234,7 @@ const CardDetailScreen = (props: any) => {
               <Text
                 style={{
                   fontSize: 18,
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Regular',
                   color: '#6080A0',
                   textAlign: 'justify',
                 }}>
@@ -293,7 +292,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: '#FFFFFF',
               textAlign: 'center',
               textTransform: 'uppercase',

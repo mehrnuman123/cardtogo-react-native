@@ -86,6 +86,7 @@ const AuthScreen = (props: {
 
   useEffect(() => {
     GoogleSignin.configure({
+      iosClientId: '338371456087-drs9hasfgqsi414s1s42nm0pokv7fo8j.apps.googleusercontent.com',
       webClientId:
         '338371456087-fm6vj3phhn4ha70e4gfjrk6aemrbumo2.apps.googleusercontent.com',
     });
@@ -130,8 +131,7 @@ const AuthScreen = (props: {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
-                fontWeight: '100',
+                fontFamily: 'OpenSans-Regular',
                 color: '#FFFFFF',
               }}>
               ELLER
@@ -163,7 +163,7 @@ const AuthScreen = (props: {
             <Text
               style={{
                 fontSize: 15,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: '#6080A0',
                 textAlign: 'center',
                 textTransform: 'uppercase',
@@ -206,7 +206,7 @@ const AuthScreen = (props: {
             <Text
               style={{
                 fontSize: 15,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: '#FFFFFF',
                 textAlign: 'center',
                 textTransform: 'uppercase',
@@ -237,7 +237,7 @@ const AuthScreen = (props: {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: 'white',
               textAlign: 'center',
               marginRight: '15%',

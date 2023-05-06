@@ -73,9 +73,8 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 18,
-                fontWeight: '500',
               }}>
               Start skanningen
             </Text>
@@ -90,9 +89,8 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 16,
-                fontWeight: '500',
                 textAlign: 'center',
               }}>
               Skann en kupong, gavekort eller QR-kode for detaljert informasjon
@@ -116,7 +114,7 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: 'white',
                 textAlign: 'center',
                 marginRight: '15%',
