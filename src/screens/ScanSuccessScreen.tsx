@@ -1,6 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Alert,
   Image,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -300,10 +302,11 @@ const ScanSuccessScreen = (props: any) => {
                     console.log('card add ==>', result);
                     props.navigation.navigate('WalletTab');
                   } else {
-                    ToastAndroid.show(
-                      result.response.DESCRIPTION,
-                      ToastAndroid.SHORT,
-                    );
+                    if(Platform.OS === "android") {
+                      ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
+                    } else {
+                      Alert.alert("Info", result.response.DESCRIPTION);
+                    }
                     props.navigation.navigate('HomeScreen');
                   }
                 })

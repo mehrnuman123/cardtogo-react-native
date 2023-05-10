@@ -175,7 +175,7 @@ const AuthScreen = (props: {
               style={{marginRight: 5, tintColor: '#6080A0'}}
             />
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               console.log('====================================');
               console.log('Apple clicked');
@@ -217,7 +217,7 @@ const AuthScreen = (props: {
               source={BUTTONRIGHTARROW}
               style={{marginRight: 5, tintColor: '#FFFFFF'}}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <TouchableOpacity
           style={{

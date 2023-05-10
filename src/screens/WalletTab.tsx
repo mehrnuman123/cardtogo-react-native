@@ -1,7 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
   ActivityIndicator,
+  Alert,
   Image,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -55,7 +57,11 @@ const WalletTab = (props: any) => {
           }, 0);
           setSumOfAllCards(sum);
         } else {
-          ToastAndroid.show(result.reponse.DESCRIPTION, ToastAndroid.SHORT);
+          if(Platform.OS === "android") {
+            ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
+          } else {
+            Alert.alert("Info", result.response.DESCRIPTION);
+          }
         }
       })
       .catch(error => console.log('error', error));
@@ -150,7 +156,14 @@ const WalletTab = (props: any) => {
                 <TouchableOpacity
                   key={item.id}
                   onPress={() => {
-                    ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+                    if(Platform.OS === "android"){
+                      ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+                      // props.navigation.navigate('MapScreen')
+                    } else {
+                      Alert.alert('Info', 'Kommer snart', [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                      ]);
+                    }
                     // if (item.isListed) {
                     //   ToastAndroid.show(
                     //     'Allerede lagt til Market Place',

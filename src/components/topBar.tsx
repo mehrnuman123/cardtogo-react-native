@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Image, TouchableOpacity, Text, ToastAndroid} from 'react-native';
+import {View, Image, TouchableOpacity, Text, Alert, ToastAndroid, Platform} from 'react-native';
 import React from 'react';
 import {useRoute} from '@react-navigation/native';
 import LOGO from '../assets/icons/logo.png';
@@ -11,6 +11,7 @@ import PROFILE from '../assets/icons/profile.png';
 import BACK from '../assets/icons/back_button_white.png';
 import {useStores} from '../store/Store';
 import LinearGradient from 'react-native-linear-gradient';
+import { title } from 'process';
 
 const TopBar = (props: any) => {
   const route = useRoute();
@@ -39,8 +40,14 @@ const TopBar = (props: any) => {
 
       <TouchableOpacity
         onPress={() => {
-          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
-          // props.navigation.navigate('MapScreen')
+          if(Platform.OS === "android"){
+            ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+            // props.navigation.navigate('MapScreen')
+          } else {
+            Alert.alert('Info', 'Kommer snart', [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]);
+          }
         }}>
         <Image
           source={LOCATION_ICON}
@@ -49,8 +56,14 @@ const TopBar = (props: any) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
-          // props.navigation.navigate('NotificationScreen')
+          if(Platform.OS === "android"){
+            ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+            // props.navigation.navigate('MapScreen')
+          } else {
+            Alert.alert('Info', 'Kommer snart', [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]);
+          }
         }}>
         <Image
           source={NOTIFICATION_ICON}
@@ -61,8 +74,14 @@ const TopBar = (props: any) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
-          // props.navigation.navigate('CartScreen')
+          if(Platform.OS === "android"){
+            ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+            // props.navigation.navigate('MapScreen')
+          } else {
+            Alert.alert('Info', 'Kommer snart', [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]);
+          }
         }}>
         <Image
           source={CART_ICON}
@@ -73,7 +92,14 @@ const TopBar = (props: any) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+          if(Platform.OS === "android"){
+            ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+            // props.navigation.navigate('MapScreen')
+          } else {
+            Alert.alert('Info', 'Kommer snart', [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]);
+          }
         }}>
         <Image source={HAMBURGER_ICON} />
       </TouchableOpacity>

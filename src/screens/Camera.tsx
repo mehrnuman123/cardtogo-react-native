@@ -9,6 +9,8 @@ import {
   ToastAndroid,
   Text,
   TouchableOpacity,
+  Platform,
+  Alert,
 } from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -214,7 +216,11 @@ const CameraScreen = (props: any) => {
             console.log('barcode 1 ---->', event.data);
             if (!barcodeValue) {
               setBarcodeValue(event.data);
-              ToastAndroid.show('Skannet vellykket!', ToastAndroid.SHORT);
+              if(Platform.OS === "android") {
+                ToastAndroid.show('Skannet vellykket!', ToastAndroid.SHORT);
+              } else {
+                Alert.alert("Info", "Skannet vellykket!");
+              }
               setTimeout(() => {
                 props.navigation.navigate('ScanSuccessScreen', {
                   code: event.data,

@@ -1,6 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Alert,
   Image,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -261,16 +263,10 @@ const CardDetailScreen = (props: any) => {
               .then(response => response.json())
               .then(result => {
                 console.log('result =>', result);
-                if (result.response.CODE === 200) {
-                  ToastAndroid.show(
-                    result.response.DESCRIPTION,
-                    ToastAndroid.SHORT,
-                  );
+                if(Platform.OS === "android") {
+                  ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
                 } else {
-                  ToastAndroid.show(
-                    result.response.DESCRIPTION,
-                    ToastAndroid.SHORT,
-                  );
+                  Alert.alert("Info", result.response.DESCRIPTION);
                 }
                 props.navigation.navigate('HomeScreen');
               })

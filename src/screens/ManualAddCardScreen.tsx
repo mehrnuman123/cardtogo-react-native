@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {
+  ActivityIndicator,
+  Alert,
   Image,
   KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -40,6 +43,7 @@ const ManualAddCardScreen = (props: any) => {
   const [price, setPrice] = useState<any>();
   const [expiry, setExpiry] = useState('');
   const [openCardType, setOpenCardType] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [valueCardType, setValueCardType] = useState(null);
   const [itemsCardType, setItemsCardType] = useState([
     { label: 'Gavekort', value: 'giftCard' },
@@ -59,8 +63,8 @@ const ManualAddCardScreen = (props: any) => {
     };
   };
 
-  useEffect(()=> {
-    if((responseImage?.length > 1 && imageOne !== "" && imageTwo !== "") || (responseImage?.length === 1 && (imageOne !== "" || imageTwo !== ""))) {
+  useEffect(() => {
+    if ((responseImage?.length > 1 && imageOne !== "" && imageTwo !== "") || (responseImage?.length === 1 && (imageOne !== "" || imageTwo !== ""))) {
       if (serialNo && price) {
         var myHeaders = new Headers();
         // var data = new FormData();
@@ -103,33 +107,51 @@ const ManualAddCardScreen = (props: any) => {
           .then(result => {
             console.log('result ==>', result);
             if (result?.response?.CODE === 200 && result?.response?.DESCRIPTION !== "Card is already exist in wallet") {
-              console.log('card add ==>', result);
+              setSubmitting(false);
               props.navigation.navigate('WalletTab');
             } else {
-              if(result?.response?.DESCRIPTION !== "Card is already exist in wallet") {
-                ToastAndroid.show(
-                  result.response.DESCRIPTION,
-                  ToastAndroid.SHORT,
-                );
-                props.navigation.navigate('WalletTab');  
+              if (result?.response?.DESCRIPTION !== "Card is already exist in wallet") {
+                if(Platform.OS === "android") {
+                  ToastAndroid.show(
+                    result.response.DESCRIPTION,
+                    ToastAndroid.SHORT,
+                  );
+                } else {
+                  Alert.alert("Info", result.response.DESCRIPTION);
+                }
+                setSubmitting(false);
+                props.navigation.navigate('WalletTab');
               } else {
-                ToastAndroid.show(
-                  result.response.DESCRIPTION,
-                  ToastAndroid.SHORT,
-                );
+                if(Platform.OS === "android") {
+                  ToastAndroid.show(
+                    result.response.DESCRIPTION,
+                    ToastAndroid.SHORT,
+                  );
+                } else {
+                  Alert.alert("Info", result.response.DESCRIPTION);
+                }
+                setSubmitting(false);
                 props.navigation.navigate('HomeScreen');
               }
             }
           })
           .catch(error => {
-            ToastAndroid.show(JSON.stringify(error), ToastAndroid.LONG);
+            setSubmitting(false);
+            if(Platform.OS === "android") {
+              ToastAndroid.show(JSON.stringify(error), ToastAndroid.LONG);
+            
+            } else {
+              Alert.alert("Info", JSON.stringify(error));
+            }
             console.log('error', error);
           });
       } else {
-        ToastAndroid.show(
-          'Serienummer og pris er obligatoriske',
-          ToastAndroid.LONG,
-        );
+        setSubmitting(false);
+        if(Platform.OS === "android") {
+          ToastAndroid.show('Serienummer og pris er obligatoriske', ToastAndroid.LONG);
+        } else {
+          Alert.alert("Info", 'Serienummer og pris er obligatoriske');
+        }
       }
     }
   }, [responseImage, imageOne, imageTwo]);
@@ -138,6 +160,7 @@ const ManualAddCardScreen = (props: any) => {
     console.log('====================================');
     console.log('responseImage ===>>>', responseImage);
     console.log('====================================');
+    setSubmitting(true);
     if (responseImage && responseImage.length > 0) {
       var headers = new Headers();
       headers.append('Authorization', `Bearer ${authStore.authToken}`);
@@ -164,7 +187,7 @@ const ManualAddCardScreen = (props: any) => {
         .then(response => response.json())
         .then(data => {
           console.log('====================================');
-          console.log('data url ==>>>>', data);
+          console.log('data url 1 ==>>>>', data);
           console.log('====================================');
           if (data.response.CODE === 200) {
             setImageOne(data.data);
@@ -198,7 +221,7 @@ const ManualAddCardScreen = (props: any) => {
           .then(response => response.json())
           .then(data => {
             console.log('====================================');
-            console.log('data url ==>>>>', data);
+            console.log('data url 2 ==>>>>', data);
             console.log('====================================');
             if (data.response.CODE === 200) {
               setImageTwo(data.data);
@@ -211,7 +234,12 @@ const ManualAddCardScreen = (props: any) => {
           });
       }
     } else {
-      ToastAndroid.show('Velg minst ett bilde', ToastAndroid.LONG);
+      setSubmitting(false);
+      if(Platform.OS === "android") {
+        ToastAndroid.show('Velg minst ett bilde', ToastAndroid.LONG);
+      } else {
+        Alert.alert("Info", 'Velg minst ett bilde');
+      }
     }
   };
 
@@ -323,24 +351,26 @@ const ManualAddCardScreen = (props: any) => {
                       includeExtra: true,
                     });
                     if (result.assets) {
-                      console.log('====================================');
-                      console.log(
-                        'image picker result ===>>>',
-                        result.assets ? result.assets : [],
-                      );
-                      console.log('====================================');
                       if (result.didCancel) {
-                        ToastAndroid.show(
-                          'Please pick atleast 2 photos of the card',
-                          ToastAndroid.SHORT,
-                        );
+                        if(Platform.OS === "android"){
+                          ToastAndroid.show('Velg minst 2 bilder av kortet', ToastAndroid.LONG);
+                          // props.navigation.navigate('MapScreen')
+                        } else {
+                          Alert.alert('Info', 'Velg minst 2 bilder av kortet', [
+                            {text: 'OK', onPress: () => console.log('OK Pressed')},
+                          ]);
+                        }
                         return;
                       }
                       if (result.errorMessage) {
-                        ToastAndroid.show(
-                          result.errorMessage,
-                          ToastAndroid.SHORT,
-                        );
+                        if(Platform.OS === "android"){
+                          ToastAndroid.show('Noe gikk galt', ToastAndroid.LONG);
+                          // props.navigation.navigate('MapScreen')
+                        } else {
+                          Alert.alert('Info', 'Noe gikk galt', [
+                            {text: 'OK', onPress: () => console.log('OK Pressed')},
+                          ]);
+                        }
                         return;
                       }
                       setResponseImage(result.assets);
@@ -664,6 +694,7 @@ const ManualAddCardScreen = (props: any) => {
                 />
               </View>
               <TouchableOpacity
+                disabled={submitting}
                 onPress={() => {
                   addCard();
                 }}
@@ -674,24 +705,27 @@ const ManualAddCardScreen = (props: any) => {
                   display: 'flex',
                   alignSelf: 'center',
                   flexDirection: 'row',
-                  justifyContent: 'flex-end',
+                  justifyContent: submitting ? 'center' : 'flex-end',
                   alignItems: 'center',
                   borderRadius: 22,
                 }}>
-                <Text
-                  style={{
-                    fontSize: 19,
-                    fontFamily: 'OpenSans-Regular',
-                    color: 'white',
-                    textAlign: 'center',
-                    marginRight: '30%',
-                  }}>
-                  DIG-Wallet
-                </Text>
-                <Image
-                  source={BUTTONRIGHTARROW}
-                  style={{ marginRight: 15, tintColor: 'white' }}
-                />
+                {!submitting ?
+                  <>
+                    <Text
+                      style={{
+                        fontSize: 19,
+                        fontFamily: 'OpenSans-Regular',
+                        color: 'white',
+                        textAlign: 'center',
+                        marginRight: '30%',
+                      }}>
+                      DIG-Wallet
+                    </Text>
+                    <Image
+                      source={BUTTONRIGHTARROW}
+                      style={{ marginRight: 15, tintColor: 'white' }}
+                    />
+                  </> : <ActivityIndicator color={'#FFFFFF'} />}
               </TouchableOpacity>
             </ScrollView>
           </View>
