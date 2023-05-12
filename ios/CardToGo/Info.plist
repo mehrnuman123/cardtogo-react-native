@@ -26,10 +26,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>338371456087-drs9hasfgqsi414s1s42nm0pokv7fo8j.apps.googleusercontent.com</string>
+			<string>338371456087-d3km3ke63od69pam1hl490cng5qtutpo.apps.googleusercontent.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.338371456087-drs9hasfgqsi414s1s42nm0pokv7fo8j</string>
+				<string>com.googleusercontent.apps.338371456087-d3km3ke63od69pam1hl490cng5qtutpo</string>
 			</array>
 		</dict>
 	</array>
@@ -48,6 +48,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Need Camera Permission to Scan</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -93,8 +95,6 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Need Camera Permission to Scan</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

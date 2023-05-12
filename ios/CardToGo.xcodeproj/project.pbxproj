@@ -23,10 +23,11 @@
 		5A27049722294AAFB5F6A26E /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 511FA18CB825406781CCC266 /* OpenSans-BoldItalic.ttf */; };
 		637F8A7852FA4E99A37A8930 /* OpenSans_Condensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8190EC5B20AC4E4984692D07 /* OpenSans_Condensed-BoldItalic.ttf */; };
 		6D4C40E4BC13403092847708 /* OpenSans_Condensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71F289EDB2A94B3E936699A6 /* OpenSans_Condensed-LightItalic.ttf */; };
+		70D9971D6CC2799948A97B74 /* libPods-CardToGo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A23F1BC0E489EE476130C38 /* libPods-CardToGo.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		90DB304D26654F25A34C157A /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FFB65E9D63AB43D6BC7F5FA3 /* OpenSans-SemiBold.ttf */; };
-		9697AEB2E8C49C65661B5486 /* libPods-CardToGo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 988B270734922B3A28F9C631 /* libPods-CardToGo.a */; };
 		97CA9CBA68454E25AC639063 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14503CE9A7A943A184AEC300 /* OpenSans-Bold.ttf */; };
+		996E076C0331CB3817719016 /* libPods-CardToGo-CardToGoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E42E7055C298918783CC35F5 /* libPods-CardToGo-CardToGoTests.a */; };
 		9B6362869EF948978CD5972D /* OpenSans_Condensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF1AA83F93054E7D9644DFCF /* OpenSans_Condensed-Light.ttf */; };
 		A4D4461DA4F043BD8C51A0F9 /* OpenSans_SemiCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 020C7A49ADA24AFA9A5F07B8 /* OpenSans_SemiCondensed-SemiBold.ttf */; };
 		A514988504E540798EADDC63 /* OpenSans_Condensed-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42A084141DA146C6848719E0 /* OpenSans_Condensed-ExtraBoldItalic.ttf */; };
@@ -40,7 +41,6 @@
 		BE67644586604383ADD59043 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A139319BA9A943A9B90AC391 /* OpenSans-Regular.ttf */; };
 		C349AD48A93E45D1B990171F /* OpenSans_SemiCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBF668CF05564E39A90D0619 /* OpenSans_SemiCondensed-Regular.ttf */; };
 		C814EB73CDDA40E4A115601E /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7C94F967CA84513A1807542 /* OpenSans-Light.ttf */; };
-		C943F8AD4D7D8BB885D1F039 /* libPods-CardToGo-CardToGoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D463F6A822BE23861419D71C /* libPods-CardToGo-CardToGoTests.a */; };
 		CBA2DD42115C4923B2F5E829 /* OpenSans_SemiCondensed-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0BE3DA99F6E43FB8D4C7860 /* OpenSans_SemiCondensed-SemiBoldItalic.ttf */; };
 		CD90B4B240AC4156A3350487 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65306A602B5B4B1C80C453AF /* OpenSans-LightItalic.ttf */; };
 		D48CA7B8870249D399BE6133 /* OpenSans_Condensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5EA6B5B51FE43119EAAC604 /* OpenSans_Condensed-Regular.ttf */; };
@@ -77,30 +77,30 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CardToGo/main.m; sourceTree = "<group>"; };
 		14503CE9A7A943A184AEC300 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		2EF95BC6985A4EB88B52B395 /* OpenSans_Condensed-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-SemiBold.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-SemiBold.ttf"; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-CardToGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo.debug.xcconfig"; path = "Target Support Files/Pods-CardToGo/Pods-CardToGo.debug.xcconfig"; sourceTree = "<group>"; };
 		42A084141DA146C6848719E0 /* OpenSans_Condensed-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		48017F1404F241538A953D2F /* OpenSans_SemiCondensed-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-Medium.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-Medium.ttf"; sourceTree = "<group>"; };
 		511FA18CB825406781CCC266 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-BoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		518C94ABFC4442E3A90F66D9 /* OpenSans_SemiCondensed-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-LightItalic.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-CardToGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo.release.xcconfig"; path = "Target Support Files/Pods-CardToGo/Pods-CardToGo.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-CardToGo-CardToGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo-CardToGoTests.debug.xcconfig"; path = "Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A23F1BC0E489EE476130C38 /* libPods-CardToGo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CardToGo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65306A602B5B4B1C80C453AF /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		6616CE55CABC45C8B44875D4 /* OpenSans_Condensed-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-Medium.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-Medium.ttf"; sourceTree = "<group>"; };
 		68B3E4E1337F488EAE3D5E5E /* OpenSans_SemiCondensed-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-Italic.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-Italic.ttf"; sourceTree = "<group>"; };
 		6902F474D94C479E95F1BF2B /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../src/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		6E346BF7744ED29CB6C05C16 /* Pods-CardToGo-CardToGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo-CardToGoTests.release.xcconfig"; path = "Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests.release.xcconfig"; sourceTree = "<group>"; };
 		71F289EDB2A94B3E936699A6 /* OpenSans_Condensed-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-LightItalic.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-LightItalic.ttf"; sourceTree = "<group>"; };
 		7410F2B3BBFC47879E39B5BC /* OpenSans_Condensed-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-SemiBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		76D92DB23AC24D41B0411F4C /* OpenSans_SemiCondensed-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-Light.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-Light.ttf"; sourceTree = "<group>"; };
 		78D69C9D98EA4FB8B9D006A4 /* OpenSans_Condensed-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-ExtraBold.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-ExtraBold.ttf"; sourceTree = "<group>"; };
+		7D960A5ABB933964A9129513 /* Pods-CardToGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo.debug.xcconfig"; path = "Target Support Files/Pods-CardToGo/Pods-CardToGo.debug.xcconfig"; sourceTree = "<group>"; };
 		7E41301A2F8E4E9781F3201F /* OpenSans_Condensed-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-Italic.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-Italic.ttf"; sourceTree = "<group>"; };
 		808251FB8CAB49E7B5AA3334 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../src/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		8190EC5B20AC4E4984692D07 /* OpenSans_Condensed-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-BoldItalic.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-BoldItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CardToGo/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		857D6295D08A43CCAE1F6E6B /* OpenSans_SemiCondensed-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-MediumItalic.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-MediumItalic.ttf"; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-CardToGo-CardToGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo-CardToGoTests.release.xcconfig"; path = "Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests.release.xcconfig"; sourceTree = "<group>"; };
 		8CFA4203AF114F2C8A0672CF /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		927071E1025BF7D6350D2D91 /* Pods-CardToGo-CardToGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo-CardToGoTests.debug.xcconfig"; path = "Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		978CDD0925F441CCA29698C5 /* OpenSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-MediumItalic.ttf"; path = "../src/assets/fonts/OpenSans-MediumItalic.ttf"; sourceTree = "<group>"; };
-		988B270734922B3A28F9C631 /* libPods-CardToGo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CardToGo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F77DE1FDBDC67575A5D7AC6 /* Pods-CardToGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo.release.xcconfig"; path = "Target Support Files/Pods-CardToGo/Pods-CardToGo.release.xcconfig"; sourceTree = "<group>"; };
 		A139319BA9A943A9B90AC391 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A7C94F967CA84513A1807542 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		AE6B7BB72A0D441A0047C361 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -110,9 +110,9 @@
 		CAB2F96B66134EB4B5B5673A /* OpenSans_SemiCondensed-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-ExtraBold.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-ExtraBold.ttf"; sourceTree = "<group>"; };
 		CBF668CF05564E39A90D0619 /* OpenSans_SemiCondensed-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-Regular.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		D18D362A0D1C49CB84EE4BA0 /* OpenSans_Condensed-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-MediumItalic.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-MediumItalic.ttf"; sourceTree = "<group>"; };
-		D463F6A822BE23861419D71C /* libPods-CardToGo-CardToGoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CardToGo-CardToGoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EA6B5B51FE43119EAAC604 /* OpenSans_Condensed-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-Regular.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-Regular.ttf"; sourceTree = "<group>"; };
 		E0BE3DA99F6E43FB8D4C7860 /* OpenSans_SemiCondensed-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-SemiBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		E42E7055C298918783CC35F5 /* libPods-CardToGo-CardToGoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CardToGo-CardToGoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA26D450A1BD460C89D30CB0 /* OpenSans_SemiCondensed-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-BoldItalic.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-BoldItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EF1AA83F93054E7D9644DFCF /* OpenSans_Condensed-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_Condensed-Light.ttf"; path = "../src/assets/fonts/OpenSans_Condensed-Light.ttf"; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C943F8AD4D7D8BB885D1F039 /* libPods-CardToGo-CardToGoTests.a in Frameworks */,
+				996E076C0331CB3817719016 /* libPods-CardToGo-CardToGoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9697AEB2E8C49C65661B5486 /* libPods-CardToGo.a in Frameworks */,
+				70D9971D6CC2799948A97B74 /* libPods-CardToGo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,8 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				988B270734922B3A28F9C631 /* libPods-CardToGo.a */,
-				D463F6A822BE23861419D71C /* libPods-CardToGo-CardToGoTests.a */,
+				5A23F1BC0E489EE476130C38 /* libPods-CardToGo.a */,
+				E42E7055C298918783CC35F5 /* libPods-CardToGo-CardToGoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,10 +219,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-CardToGo.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-CardToGo.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-CardToGo-CardToGoTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-CardToGo-CardToGoTests.release.xcconfig */,
+				7D960A5ABB933964A9129513 /* Pods-CardToGo.debug.xcconfig */,
+				9F77DE1FDBDC67575A5D7AC6 /* Pods-CardToGo.release.xcconfig */,
+				927071E1025BF7D6350D2D91 /* Pods-CardToGo-CardToGoTests.debug.xcconfig */,
+				6E346BF7744ED29CB6C05C16 /* Pods-CardToGo-CardToGoTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -277,12 +277,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CardToGoTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				0E79E3E3949522E1654B6E4F /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				302458063FD5861C2BD9C55C /* [CP] Embed Pods Frameworks */,
+				BBED94C63441E8FD58FAF851 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -298,14 +298,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CardToGo" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				B113C3F5159173A6FA1942B9 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				60D2BBEE86A3A0AC36AD914E /* [CP] Embed Pods Frameworks */,
+				7E61E22B0C40F0DF41782A95 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -426,24 +426,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		0E79E3E3949522E1654B6E4F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -465,7 +448,58 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		302458063FD5861C2BD9C55C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60D2BBEE86A3A0AC36AD914E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E61E22B0C40F0DF41782A95 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B113C3F5159173A6FA1942B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -487,41 +521,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardToGo-CardToGoTests/Pods-CardToGo-CardToGoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CardToGo/Pods-CardToGo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+		BBED94C63441E8FD58FAF851 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -590,7 +590,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-CardToGo-CardToGoTests.debug.xcconfig */;
+			baseConfigurationReference = 927071E1025BF7D6350D2D91 /* Pods-CardToGo-CardToGoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -617,7 +617,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-CardToGo-CardToGoTests.release.xcconfig */;
+			baseConfigurationReference = 6E346BF7744ED29CB6C05C16 /* Pods-CardToGo-CardToGoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -641,11 +641,11 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-CardToGo.debug.xcconfig */;
+			baseConfigurationReference = 7D960A5ABB933964A9129513 /* Pods-CardToGo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = M3LB5QDQA9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CardToGo/Info.plist;
@@ -669,11 +669,11 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-CardToGo.release.xcconfig */;
+			baseConfigurationReference = 9F77DE1FDBDC67575A5D7AC6 /* Pods-CardToGo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = M3LB5QDQA9;
 				INFOPLIST_FILE = CardToGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
