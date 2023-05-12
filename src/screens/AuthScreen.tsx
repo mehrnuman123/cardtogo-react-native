@@ -75,7 +75,7 @@ const AuthScreen = (props: {
           await authStore.update('authToken', result.jwtToken);
           props.navigation.navigate('HomeScreen');
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error 1', error));
     }
   }, [user]);
 
@@ -86,7 +86,7 @@ const AuthScreen = (props: {
 
   useEffect(() => {
     GoogleSignin.configure({
-      iosClientId: '338371456087-drs9hasfgqsi414s1s42nm0pokv7fo8j.apps.googleusercontent.com',
+      iosClientId: '338371456087-d3km3ke63od69pam1hl490cng5qtutpo.apps.googleusercontent.com',
       webClientId:
         '338371456087-fm6vj3phhn4ha70e4gfjrk6aemrbumo2.apps.googleusercontent.com',
     });
