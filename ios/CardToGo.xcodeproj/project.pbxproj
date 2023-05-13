@@ -103,6 +103,7 @@
 		9F77DE1FDBDC67575A5D7AC6 /* Pods-CardToGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardToGo.release.xcconfig"; path = "Target Support Files/Pods-CardToGo/Pods-CardToGo.release.xcconfig"; sourceTree = "<group>"; };
 		A139319BA9A943A9B90AC391 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A7C94F967CA84513A1807542 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		AE1BDEE22A100C640011478B /* CardToGoDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CardToGoDebug.entitlements; path = CardToGo/CardToGoDebug.entitlements; sourceTree = "<group>"; };
 		AE6B7BB72A0D441A0047C361 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE90FFD02A06D53F007F7CB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B4EB76F47EAA43829D202526 /* OpenSans_SemiCondensed-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans_SemiCondensed-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans_SemiCondensed-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		13B07FAE1A68108700A75B9A /* CardToGo */ = {
 			isa = PBXGroup;
 			children = (
+				AE1BDEE22A100C640011478B /* CardToGoDebug.entitlements */,
 				AE90FFD02A06D53F007F7CB3 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -645,6 +647,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CardToGo/CardToGoDebug.entitlements;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = M3LB5QDQA9;
 				ENABLE_BITCODE = NO;
