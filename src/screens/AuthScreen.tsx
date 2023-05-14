@@ -113,7 +113,7 @@ const AuthScreen = (props: {
     if (appleAuth.isSupported) {
       const appleAuthRequestResponse = await appleAuth.performRequest({
         requestedOperation: appleAuth.Operation.LOGIN,
-        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+        requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
       });
 
       // get current authentication state for user
@@ -183,7 +183,7 @@ const AuthScreen = (props: {
               style={{marginLeft: 10, marginTop: 15}}
             />
           </View> */}
-          {Platform.OS === "android" ? <TouchableOpacity
+          <TouchableOpacity
             onPress={() => {
               onGoogleButtonPress();
             }}
@@ -216,8 +216,8 @@ const AuthScreen = (props: {
               source={BUTTONRIGHTARROW}
               style={{ marginRight: 5, tintColor: '#6080A0' }}
             />
-          </TouchableOpacity> : null}
-          {Platform.OS === "ios" ?<TouchableOpacity
+          </TouchableOpacity>
+          {/* {Platform.OS === "ios" ?<TouchableOpacity
             onPress={() => {
               appleLogin();
             }}
@@ -257,7 +257,7 @@ const AuthScreen = (props: {
               source={BUTTONRIGHTARROW}
               style={{ marginRight: 5, tintColor: '#FFFFFF' }}
             />
-          </TouchableOpacity> : null}
+          </TouchableOpacity> : null} */}
         </View>
         <TouchableOpacity
           style={{
