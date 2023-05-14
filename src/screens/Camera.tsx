@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Modal,
@@ -9,16 +9,19 @@ import {
   ToastAndroid,
   Text,
   TouchableOpacity,
+  Platform,
+  Alert,
 } from 'react-native';
-import {RNCamera} from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RECTANGLE from '../assets/icons/rectangle_image.png';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
 import SCANNERICON from '../assets/images/scanner_icon.png';
 import SCAN_AREA from '../assets/icons/camera_scan_area.png';
 import TORCH from '../assets/icons/torch_icon.png';
+import BACK_BUTTON from '../assets/icons/back_button_white.png';
 
-const BottomModal = ({visible, setShowModal, onClose}) => {
+const BottomModal = ({ visible, setShowModal, onClose }: any) => {
   return (
     <Modal visible={visible} animationType="slide">
       <View
@@ -59,7 +62,7 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             }}>
             <Image
               source={SCANNERICON}
-              style={{width: 248, height: 239}}
+              style={{ width: 248, height: 239 }}
               resizeMode={'contain'}
             />
           </View>
@@ -72,9 +75,8 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 18,
-                fontWeight: '500',
               }}>
               Start skanningen
             </Text>
@@ -89,9 +91,8 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 16,
-                fontWeight: '500',
                 textAlign: 'center',
               }}>
               Skann en kupong, gavekort eller QR-kode for detaljert informasjon
@@ -115,7 +116,7 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: 'white',
                 textAlign: 'center',
                 marginRight: '15%',
@@ -124,7 +125,7 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             </Text>
             <Image
               source={BUTTONRIGHTARROW}
-              style={{marginRight: 15, tintColor: 'white'}}
+              style={{ marginRight: 15, tintColor: 'white' }}
             />
           </TouchableOpacity>
         </View>
@@ -169,13 +170,15 @@ const CameraScreen = (props: any) => {
   }, []);
 
   // useEffect(() => {
-  //   setTimeout(() => {
-  //     ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
-  //     props.navigation.navigate('ScanSuccessScreen', {
-  //       code: '032973853208485884',
-  //     });
-  //   }, 3000);
-  // }, []);
+  //   if (!showModal) {
+  //     setTimeout(() => {
+  //       ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
+  //       props.navigation.navigate('ScanSuccessScreen', {
+  //         code: '032973853208485884',
+  //       });
+  //     }, 3000);
+  //   }
+  // }, [showModal]);
 
   const closeModal = () => {
     setShowModal(false);
@@ -183,43 +186,63 @@ const CameraScreen = (props: any) => {
 
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          zIndex: 1,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('AddCardOptionsScreen');
+          }}>
+          <Image source={BACK_BUTTON} />
+        </TouchableOpacity>
+      </View>
       <RNCamera
         style={styles.preview}
         type={RNCamera.Constants.Type.back}
         flashMode={flashMode}
         androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
+          title: 'Tillatelse til å bruke kamera',
+          message: 'Vi trenger din tillatelse for å bruke kameraet ditt',
           buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
+          buttonNegative: 'Avbryt',
         }}
         captureAudio={false}
         onBarCodeRead={async (event: any) => {
-          console.log('barcode 1 ---->', event.data);
-          if (!barcodeValue) {
-            setBarcodeValue(event.data);
-            ToastAndroid.show('Scanned Successfully!', ToastAndroid.SHORT);
-            setTimeout(() => {
-              props.navigation.navigate('ScanSuccessScreen', {
-                code: event.data,
-              });
-            }, 2000);
+          if (!showModal) {
+            console.log('barcode 1 ---->', event.data);
+            if (!barcodeValue) {
+              setBarcodeValue(event.data);
+              if (Platform.OS === "android") {
+                ToastAndroid.show('Skannet vellykket!', ToastAndroid.SHORT);
+              } else {
+                Alert.alert("Info", "Skannet vellykket!");
+              }
+              setTimeout(() => {
+                props.navigation.navigate('ScanSuccessScreen', {
+                  code: event.data,
+                });
+              }, 2000);
+            }
           }
         }}
-        onGoogleVisionBarcodesDetected={({barcodes}) => {
+        onGoogleVisionBarcodesDetected={({ barcodes }) => {
           console.log('barcode 1 ---->', barcodes[0]?.data);
         }}>
         <View style={styles.overlayContainer}>
           <Image
             source={SCAN_AREA}
-            style={{marginBottom: 30, backgroundColor: 'transparent'}}
+            style={{ marginBottom: 30, backgroundColor: 'transparent' }}
           />
           <TouchableOpacity
             onPress={() => {
-              if (flashMode === RNCamera.Constants.FlashMode.on) {
+              if (flashMode === RNCamera.Constants.FlashMode.torch) {
                 setFlashMode(RNCamera.Constants.FlashMode.off);
               } else {
-                setFlashMode(RNCamera.Constants.FlashMode.on);
+                setFlashMode(RNCamera.Constants.FlashMode.torch);
               }
             }}>
             <Image source={TORCH} />

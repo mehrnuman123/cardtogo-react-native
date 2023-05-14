@@ -1,6 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  ActivityIndicator,
+  Alert,
   Image,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,18 +11,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import WALLET_ICON from '../assets/icons/wallet_icon.png';
-import ADDIDAS from '../assets/images/placeholder.png';
+import PLACEHOLDER from '../assets/images/placeholder.png';
 import WALLET_VIEW from '../assets/images/wallet_view_icon.png';
-import {useStores} from '../store/Store';
-import {useIsFocused} from '@react-navigation/native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { useStores } from '../store/Store';
+import { useIsFocused } from '@react-navigation/native';
 
 const WalletTab = (props: any) => {
   const isFocused = useIsFocused();
   const authStore = useStores();
   const [cards, setCards] = useState([]);
   const [sumOfAllCards, setSumOfAllCards] = useState();
+  const [loading, setLoading] = useState(true);
 
   console.log('====================================');
   console.log(authStore.authToken);
@@ -36,89 +41,99 @@ const WalletTab = (props: any) => {
 
     fetch('http://20.172.135.207/api/api/v1/card/all', requestOptions)
       .then(response => response.json())
-      .then(result => {
+      .then((result: any) => {
         if (result.response.CODE === 200) {
-          console.log('====================================');
-          console.log('data ===>', result.data);
-          console.log('====================================');
-          setCards(result.data);
+
+          const cards: any = result.data;
+          for (var i = 0; i < cards.length; i++) {
+            if (cards[i].photo !== null && cards[i].photo !== "[, ]") {
+              const photosParsed: string[] = JSON.parse(cards[i].photo);
+              cards[i].photo = photosParsed;
+            }
+          }
+          setCards(cards);
+          setLoading(false);
           const sum = result.data.reduce(function (a: any, b: any) {
-            return a + b.balance;
+            return JSON.parse(a) + JSON.parse(b.balance);
           }, 0);
           setSumOfAllCards(sum);
         } else {
-          ToastAndroid.show(result.reponse.DESCRIPTION, ToastAndroid.SHORT);
+          if (Platform.OS === "android") {
+            ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
+          } else {
+            Alert.alert("Info", result.response.DESCRIPTION);
+          }
         }
       })
       .catch(error => console.log('error', error));
   }, [authStore.authToken, isFocused]);
 
+  console.log('=======>>>=========');
+  console.log('cards ===>>>', cards);
+  console.log('=======>>>=========');
+
   return (
     <View style={styles.main}>
-      <ScrollView>
-        <View style={styles.mainHeader}>
+      {!loading ? (
+        <ScrollView>
+          <View style={styles.mainHeader}>
+            <View style={styles.headerColumn}>
+              <Image source={WALLET_ICON} />
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-Medium',
+                  textAlign: 'center',
+                  fontSize: 24,
+                  color: '#3F3D56',
+                }}>
+                Wallet
+              </Text>
+            </View>
+            <View style={{ width: 1, height: 58, backgroundColor: '#D8E1E8' }} />
+            <View style={styles.headerColumn}>
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-Regular',
+                  textAlign: 'center',
+                  fontSize: 16,
+                  color: '#6080A0',
+                }}>
+                Total verdi
+              </Text>
+              <Text
+                style={{
+                  fontFamily: 'OpenSans-Medium',
+                  textAlign: 'center',
+                  fontSize: 18,
+                  color: '#3F3D56',
+                }}>
+                {sumOfAllCards} kr
+              </Text>
+            </View>
+            {/* <View style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}} />
           <View style={styles.headerColumn}>
-            <Image source={WALLET_ICON} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
-                textAlign: 'center',
-                fontSize: 24,
-                fontWeight: '500',
-                color: '#3F3D56',
-              }}>
-              Wallet
-            </Text>
-          </View>
-          <View style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}} />
-          <View style={styles.headerColumn}>
-            <Text
-              style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 textAlign: 'center',
                 fontSize: 16,
-                fontWeight: 'normal',
-                color: '#6080A0',
-              }}>
-              Total verdi
-            </Text>
-            <Text
-              style={{
-                fontFamily: 'Open Sans',
-                textAlign: 'center',
-                fontSize: 18,
-                fontWeight: '500',
-                color: '#3F3D56',
-              }}>
-              {sumOfAllCards} kr
-            </Text>
-          </View>
-          <View style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}} />
-          <View style={styles.headerColumn}>
-            <Text
-              style={{
-                fontFamily: 'Open Sans',
-                textAlign: 'center',
-                fontSize: 16,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Kan tjene
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 textAlign: 'center',
                 fontSize: 18,
-                fontWeight: '500',
                 color: '#3F3D56',
               }}>
               320 kr
             </Text>
+          </View> */}
           </View>
-        </View>
-        <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button}>
+          <View style={styles.buttonRow}>
+            {/* <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Alle</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -134,66 +149,88 @@ const WalletTab = (props: any) => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Tilgodelapp</Text>
-          </TouchableOpacity>
-        </View>
-        {cards?.map((item: any) => {
-          return (
-            <TouchableOpacity
-              key={item.id}
-              onPress={() => {
-                if (item.isListed) {
-                  ToastAndroid.show(
-                    'Allerede lagt til Market Place',
-                    ToastAndroid.SHORT,
-                  );
-                } else {
-                  props.navigation.navigate('CardDetailScreen', {
-                    card: item,
-                  });
-                }
-              }}
-              style={styles.walletCard}>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Image
-                  source={ADDIDAS}
-                  style={{width: 76, height: 76}}
-                  resizeMode={'contain'}
-                />
-              </View>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  marginTop: 10,
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'Open Sans',
-                    textAlign: 'center',
-                    fontSize: 16,
-                    fontWeight: 'normal',
-                    color: '#6080A0',
-                  }}>
-                  Verdi
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Open Sans',
-                    textAlign: 'center',
-                    fontSize: 18,
-                    fontWeight: '500',
-                    color: '#3F3D56',
-                  }}>
-                  {item.balance} KR
-                </Text>
-              </View>
-              <View
+          </TouchableOpacity> */}
+          </View>
+          {cards.length > 0 ? (
+            cards?.map((item: any) => {
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => {
+                    if (Platform.OS === "android") {
+                      ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
+                      // props.navigation.navigate('MapScreen')
+                    } else {
+                      Alert.alert('Info', 'Kommer snart', [
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                      ]);
+                    }
+                    // if (item.isListed) {
+                    //   ToastAndroid.show(
+                    //     'Allerede lagt til Market Place',
+                    //     ToastAndroid.SHORT,
+                    //   );
+                    // } else {
+                    //   props.navigation.navigate('CardDetailScreen', {
+                    //     card: item,
+                    //   });
+                    // }
+                  }}
+                  style={styles.walletCard}>
+                  {!item.photo || item.photo === '[, ]' ? <View
+                    style={{
+                      display: 'flex',
+                      flex: 1,
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={PLACEHOLDER}
+                      style={{ width: 76, height: 76 }}
+                      resizeMode={'contain'}
+                    />
+                  </View> : <View
+                    style={{
+                      display: 'flex',
+                      flex: 1,
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={{ uri: item.photo[0] }}
+                      style={{ width: 76, height: 76 }}
+                      resizeMode={'contain'}
+                    />
+                  </View>}
+                  <View
+                    style={{
+                      display: 'flex',
+                      flex: 1,
+                      flexDirection: 'column',
+                      marginTop: 10,
+                    }}>
+                    <Text
+                      style={{
+                        fontFamily: 'OpenSans-Regular',
+                        textAlign: 'center',
+                        fontSize: 16,
+                        color: '#6080A0',
+                      }}>
+                      Verdi
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: 'OpenSans-Medium',
+                        textAlign: 'center',
+                        fontSize: 18,
+                        color: '#3F3D56',
+                      }}>
+                      {item.balance} KR
+                    </Text>
+                  </View>
+                  {/* <View
                 style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}}
               />
               <View
@@ -204,41 +241,43 @@ const WalletTab = (props: any) => {
                 }}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Regular',
                     textAlign: 'center',
                     fontSize: 16,
-                    fontWeight: 'normal',
                     color: '#6080A0',
                   }}>
                   Kan tjene
                 </Text>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Medium',
                     textAlign: 'center',
                     fontSize: 18,
-                    fontWeight: '500',
                     color: '#3F3D56',
                   }}>
                   220
                 </Text>
-              </View>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginLeft: 20,
-                }}>
-                <Image source={WALLET_VIEW} />
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-
-      {/* <View style={styles.walletCard}>
+              </View> */}
+                  <View
+                    style={{
+                      display: 'flex',
+                      flex: 1,
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginLeft: 20,
+                    }}>
+                    <Image source={WALLET_VIEW} />
+                  </View>
+                </TouchableOpacity>
+              );
+            })
+          ) : (
+            <Text style={styles.noCardAvailable}>Ingen kort tilgjengelig i lommeboken</Text>
+          )}
+        </ScrollView>
+      ) : (
+        /* <View style={styles.walletCard}>
         <View
           style={{
             display: 'flex',
@@ -255,20 +294,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Verdi
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             300 KR
@@ -278,20 +315,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Kan tjene
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             220
@@ -325,20 +360,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Verdi
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             300 KR
@@ -348,20 +381,18 @@ const WalletTab = (props: any) => {
         <View style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               textAlign: 'center',
               fontSize: 16,
-              fontWeight: 'normal',
               color: '#6080A0',
             }}>
             Kan tjene
           </Text>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               textAlign: 'center',
               fontSize: 18,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             220
@@ -377,7 +408,18 @@ const WalletTab = (props: any) => {
           }}>
           <Image source={WALLET_VIEW} />
         </View>
-      </View> */}
+      </View> */ <View
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <ActivityIndicator color="#30C9AA" />
+        </View>
+      )}
     </View>
   );
 };
@@ -430,9 +472,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    fontFamily: 'Open Sans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    fontWeight: 'normal',
     color: '#6080A0',
   },
   walletCard: {
@@ -444,9 +485,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 20,
     display: 'flex',
+    flex: 3,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingVertical: 20,
     paddingHorizontal: 10,
   },
+  noCardAvailable: {
+    fontSize: hp(2),
+    textAlign: 'center',
+    marginTop: hp(25),
+    fontFamily: 'OpenSans-Regular',
+    color: '#6080A0',
+  }
 });

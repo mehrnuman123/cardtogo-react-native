@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
-import {Image, StatusBar, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect} from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { Image, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeTab from './HomeTab';
 import ExploreTab from './ExploreTab';
 import AddTab from './AddTab';
 import WalletTab from './WalletTab';
 import WishlistTab from './WishlistTab';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import ADD_BOTTOM_ICON from '../assets/icons/add_bottom_icon.png';
 import HEART_ICON from '../assets/icons/heart_icon.png';
 import EXPLORE_ICON from '../assets/icons/explore_icon.png';
@@ -25,15 +26,15 @@ const HomeScreen = (props: any) => {
       <TopBar navigation={props.navigation} />
       <Tab.Navigator
         initialRouteName="CardDetailScreen"
-        screenOptions={({route}) => ({
+        screenOptions={({ route }) => ({
           headerShown: false,
           tabBarHideOnKeyboard: true,
           tabBarStyle: {
-            height: 70,
-            borderTopLeftRadius: 28,
-            borderTopRightRadius: 28,
+            height: hp(9.5),
+            borderTopLeftRadius: hp(3),
+            borderTopRightRadius: hp(3),
           },
-          tabBarLabel: ({focused}) => {
+          tabBarLabel: ({ focused }) => {
             let name = '';
             if (route.name === 'HomeTab') {
               name = 'Home';
@@ -49,40 +50,40 @@ const HomeScreen = (props: any) => {
             return (
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: hp(1.5),
                   color: focused ? '#6080A0' : '#AEBFCF',
                   fontWeight: focused ? 'bold' : 'normal',
-                  marginBottom: 5,
+                  marginTop: hp(3)
                 }}>
                 {name}
               </Text>
             );
           },
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({ focused }) => {
             if (route.name === 'HomeTab') {
               return (
                 <Image
                   source={HOME_ICON}
-                  style={{tintColor: focused ? '#6080A0' : '#AEBFCF'}}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
                 />
               );
             } else if (route.name === 'ExploreTab') {
               return (
                 <Image
                   source={EXPLORE_ICON}
-                  style={{tintColor: focused ? '#6080A0' : '#AEBFCF'}}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
                 />
               );
             } else if (route.name === 'AddTab') {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    props.navigation.navigate('CameraScreen');
+                    props.navigation.navigate('AddCardOptionsScreen');
                   }}>
                   <Image
                     source={ADD_BOTTOM_ICON}
                     style={{
-                      marginTop: 20,
+                      marginTop: hp(4),
                     }}
                   />
                 </TouchableOpacity>
@@ -91,14 +92,14 @@ const HomeScreen = (props: any) => {
               return (
                 <Image
                   source={WALLET_ICON}
-                  style={{tintColor: focused ? '#6080A0' : '#AEBFCF'}}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
                 />
               );
             } else if (route.name === 'WishlistTab') {
               return (
                 <Image
                   source={HEART_ICON}
-                  style={{tintColor: focused ? '#6080A0' : '#AEBFCF'}}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
                 />
               );
             }

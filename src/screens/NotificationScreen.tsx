@@ -37,9 +37,8 @@ const NotificationScreen = (props: any) => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 18,
-                fontWeight: 'bold',
               }}>
               Gå ikke glipp av gode tilbud!
             </Text>
@@ -56,9 +55,8 @@ const NotificationScreen = (props: any) => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 16,
-                fontWeight: '400',
                 textAlign: 'center',
               }}>
               Få varsel på tilbud i nærheten av deg og salg!
@@ -77,9 +75,8 @@ const NotificationScreen = (props: any) => {
             </View>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 18,
-                fontWeight: '400',
                 color: '#6080A0',
                 marginLeft: 15,
               }}>
@@ -102,7 +99,7 @@ const NotificationScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: 'white',
                 textAlign: 'center',
                 marginRight: '30%',
@@ -132,7 +129,7 @@ const NotificationScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 color: '#6080A0',
                 textAlign: 'center',
                 marginRight: '37%',

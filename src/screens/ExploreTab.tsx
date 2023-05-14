@@ -1,24 +1,35 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
-  Image,
-  ScrollView,
+  // Image,
+  // ScrollView,
   StyleSheet,
   Text,
-  TextInput,
+  // TextInput,
   View,
 } from 'react-native';
 import React from 'react';
-import SEARCH_ICON from '../assets/icons/search_icon.png';
-import FILTER_ICON from '../assets/icons/filters_icon.png';
-import BERGANS_SQUARE from '../assets/images/bergans_square.png';
-import WOMEN_HAIRCUT from '../assets/images/woman_hair_cut.png';
-import MAN_HAIRCUT from '../assets/images/man_hair_cut.png';
-import DESIGN from '../assets/images/design.png';
+// import SEARCH_ICON from '../assets/icons/search_icon.png';
+// import FILTER_ICON from '../assets/icons/filters_icon.png';
+// import BERGANS_SQUARE from '../assets/images/bergans_square.png';
+// import WOMEN_HAIRCUT from '../assets/images/woman_hair_cut.png';
+// import MAN_HAIRCUT from '../assets/images/man_hair_cut.png';
+// import DESIGN from '../assets/images/design.png';
 
 const ExploreTab = () => {
   return (
     <View style={styles.main}>
-      <ScrollView horizontal={false}>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+        }}>
+        <Text style={{color: 'gray'}}>Kommer snart</Text>
+      </View>
+      {/* <ScrollView horizontal={false}>
         <View style={{display: 'flex', flex: 1}}>
           <Text style={styles.mainHeading}>
             Utforsk butikker eller verdikort
@@ -51,9 +62,8 @@ const ExploreTab = () => {
           }}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Bold',
               fontSize: 20,
-              fontWeight: 'bold',
             }}>
             Siste søk
           </Text>
@@ -68,9 +78,8 @@ const ExploreTab = () => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 16,
-                fontWeight: '500',
               }}>
               SEE ALL
             </Text>
@@ -100,9 +109,8 @@ const ExploreTab = () => {
               <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Light',
                     fontSize: 18,
-                    fontWeight: '300',
                     color: '#3F3D56',
                   }}>
                   Bergans
@@ -111,9 +119,8 @@ const ExploreTab = () => {
               <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Light',
                     fontSize: 16,
-                    fontWeight: '300',
                     color: '#6080A0',
                   }}>
                   900KR
@@ -134,9 +141,8 @@ const ExploreTab = () => {
               <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Light',
                     fontSize: 18,
-                    fontWeight: '300',
                     color: '#3F3D56',
                   }}>
                   Bergans
@@ -145,9 +151,8 @@ const ExploreTab = () => {
               <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Light',
                     fontSize: 16,
-                    fontWeight: '300',
                     color: '#6080A0',
                   }}>
                   900KR
@@ -168,9 +173,8 @@ const ExploreTab = () => {
               <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Light',
                     fontSize: 18,
-                    fontWeight: '300',
                     color: '#3F3D56',
                   }}>
                   Bergans
@@ -179,9 +183,8 @@ const ExploreTab = () => {
               <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Text
                   style={{
-                    fontFamily: 'Open Sans',
+                    fontFamily: 'OpenSans-Light',
                     fontSize: 16,
-                    fontWeight: '300',
                     color: '#6080A0',
                   }}>
                   900KR
@@ -201,9 +204,8 @@ const ExploreTab = () => {
           }}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Bold',
               fontSize: 20,
-              fontWeight: 'bold',
             }}>
             Sports & Trending
           </Text>
@@ -218,9 +220,8 @@ const ExploreTab = () => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 16,
-                fontWeight: '500',
               }}>
               SEE ALL
             </Text>
@@ -247,27 +248,24 @@ const ExploreTab = () => {
             <Image source={WOMEN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -284,27 +282,24 @@ const ExploreTab = () => {
             <Image source={MAN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -321,27 +316,24 @@ const ExploreTab = () => {
             <Image source={DESIGN} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -358,27 +350,24 @@ const ExploreTab = () => {
             <Image source={WOMEN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -396,9 +385,8 @@ const ExploreTab = () => {
           }}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Bold',
               fontSize: 20,
-              fontWeight: 'bold',
             }}>
             Hobby
           </Text>
@@ -413,9 +401,8 @@ const ExploreTab = () => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 16,
-                fontWeight: '500',
               }}>
               SEE ALL
             </Text>
@@ -442,27 +429,24 @@ const ExploreTab = () => {
             <Image source={WOMEN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -479,27 +463,24 @@ const ExploreTab = () => {
             <Image source={MAN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -516,27 +497,24 @@ const ExploreTab = () => {
             <Image source={DESIGN} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -553,27 +531,24 @@ const ExploreTab = () => {
             <Image source={WOMEN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -591,9 +566,8 @@ const ExploreTab = () => {
           }}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Bold',
               fontSize: 20,
-              fontWeight: 'bold',
             }}>
             Sports & Trending
           </Text>
@@ -608,9 +582,8 @@ const ExploreTab = () => {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Medium',
                 fontSize: 16,
-                fontWeight: '500',
               }}>
               SEE ALL
             </Text>
@@ -637,27 +610,24 @@ const ExploreTab = () => {
             <Image source={WOMEN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -674,27 +644,24 @@ const ExploreTab = () => {
             <Image source={MAN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -711,27 +678,24 @@ const ExploreTab = () => {
             <Image source={DESIGN} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
@@ -748,34 +712,31 @@ const ExploreTab = () => {
             <Image source={WOMEN_HAIRCUT} style={{width: 132, height: 126}} />
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 14,
-                fontWeight: 'normal',
                 color: '#6080A0',
               }}>
               Blivakker.no
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 17,
-                fontWeight: 'bold',
                 color: '#3F3D56',
               }}>
               Opp til 55%
             </Text>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 12,
-                fontWeight: 'normal',
                 color: '#3F3D56',
               }}>
               109 solgt - 30 dager
             </Text>
           </View>
         </ScrollView>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
@@ -793,7 +754,7 @@ const styles = StyleSheet.create({
   },
   mainHeading: {
     width: 170,
-    fontFamily: 'Open Sans',
+    fontFamily: 'OpenSans-Regular',
     fontSize: 24,
     fontWeight: '500',
     textAlign: 'left',

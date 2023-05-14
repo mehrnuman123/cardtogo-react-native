@@ -55,9 +55,8 @@ const ForgotPasswordScreen = (props: {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Bold',
                 fontSize: 24,
-                fontWeight: 'bold',
                 textAlign: 'center',
                 color: '#6080A0',
               }}>
@@ -75,9 +74,8 @@ const ForgotPasswordScreen = (props: {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Light',
                 fontSize: 19,
-                fontWeight: '300',
                 textAlign: 'center',
                 color: '#6080A0',
                 letterSpacing: 0.6,
@@ -128,7 +126,7 @@ const ForgotPasswordScreen = (props: {
               <Text
                 style={{
                   fontSize: 19,
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Regular',
                   color: 'white',
                   textAlign: 'center',
                   marginRight: '20%',

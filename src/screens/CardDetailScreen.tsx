@@ -1,6 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Alert,
   Image,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -82,9 +84,8 @@ const CardDetailScreen = (props: any) => {
           }}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               fontSize: 24,
-              fontWeight: '500',
               color: '#3F3D56',
             }}>
             Info om verdikort
@@ -110,7 +111,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-SemiBold',
               color: '#6080A0',
               textAlign: 'center',
               textTransform: 'uppercase',
@@ -142,7 +143,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: '#6080A0',
               textAlign: 'center',
               textTransform: 'uppercase',
@@ -154,7 +155,7 @@ const CardDetailScreen = (props: any) => {
             style={{marginRight: 15, tintColor: '#6080A0'}}
           />
         </TouchableOpacity>
-        <ScrollView
+        {/* <ScrollView
           showsVerticalScrollIndicator={true}
           style={{
             width: '80%',
@@ -165,7 +166,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 16,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: '#9BAFC3',
               textAlign: 'justify',
             }}>
@@ -191,7 +192,7 @@ const CardDetailScreen = (props: any) => {
             sterkeste tekstiler og topp moderne design. adidas-produkter er
             laget for å hjelpe deg med å få mest mulig ut av ytelsen din.
           </Text>
-        </ScrollView>
+        </ScrollView> */}
         <View
           style={{
             width: '100%',
@@ -226,7 +227,7 @@ const CardDetailScreen = (props: any) => {
               <Text
                 style={{
                   fontSize: 16,
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Regular',
                   color: '#6080A0',
                   textAlign: 'justify',
                 }}>
@@ -235,7 +236,7 @@ const CardDetailScreen = (props: any) => {
               <Text
                 style={{
                   fontSize: 18,
-                  fontFamily: 'Open Sans',
+                  fontFamily: 'OpenSans-Regular',
                   color: '#6080A0',
                   textAlign: 'justify',
                 }}>
@@ -262,18 +263,12 @@ const CardDetailScreen = (props: any) => {
               .then(response => response.json())
               .then(result => {
                 console.log('result =>', result);
-                if (result.response.CODE === 200) {
-                  ToastAndroid.show(
-                    result.response.DESCRIPTION,
-                    ToastAndroid.SHORT,
-                  );
+                if(Platform.OS === "android") {
+                  ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
                 } else {
-                  ToastAndroid.show(
-                    result.response.DESCRIPTION,
-                    ToastAndroid.SHORT,
-                  );
+                  Alert.alert("Info", result.response.DESCRIPTION);
                 }
-                props.navigation.navigate('HomeTab');
+                props.navigation.navigate('HomeScreen');
               })
               .catch(error => console.log('error', error));
           }}
@@ -293,7 +288,7 @@ const CardDetailScreen = (props: any) => {
           <Text
             style={{
               fontSize: 19,
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Regular',
               color: '#FFFFFF',
               textAlign: 'center',
               textTransform: 'uppercase',

@@ -79,9 +79,8 @@ const IntroScreen = (props: {
         <View style={{padding: 30, alignSelf: 'center'}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               fontSize: 20,
-              fontWeight: '500',
               textAlign: 'center',
               color: '#FFFFFF',
             }}>
@@ -101,9 +100,8 @@ const IntroScreen = (props: {
         <View style={{padding: 30, alignSelf: 'center'}}>
           <Text
             style={{
-              fontFamily: 'Open Sans',
+              fontFamily: 'OpenSans-Medium',
               fontSize: 20,
-              fontWeight: '500',
               textAlign: 'center',
               color: '#6080A0',
             }}>
@@ -125,8 +123,8 @@ const IntroScreen = (props: {
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              width: 53,
-              height: 53,
+              width: 60,
+              height: 60,
               borderRadius: 53,
               borderColor: '#6080A0',
               borderWidth: 1,
@@ -140,11 +138,12 @@ const IntroScreen = (props: {
             }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
+                fontFamily: 'OpenSans-Regular',
                 fontSize: 15,
+                textAlign: 'center',
                 color: '#6080A0',
               }}>
-              Skip
+              Hopp over
             </Text>
           </TouchableOpacity>
         </View>

@@ -1,6 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Alert,
   Image,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -10,10 +12,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import BACK_BUTTON from '../assets/icons/back_button_white.png';
 import ADDIDAS from '../assets/icons/addidas_logo.png';
-
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import COMPLETED from '../assets/icons/completed_icon.png';
 import DOLLAR from '../assets/icons/dollar_icon.png';
 import BARCODE from '../assets/images/barcode_sample.png';
@@ -22,21 +24,69 @@ import LOCATION from '../assets/icons/location_icon.png';
 import CALENDAR from '../assets/icons/calendar_icon.png';
 import LinearGradient from 'react-native-linear-gradient';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
-import {useStores} from '../store/Store';
+import { useStores } from '../store/Store';
 
 const ScanSuccessScreen = (props: any) => {
   const authStore = useStores();
   const [price, setPrice] = useState('');
   const [company, setCompany] = useState('');
   const [now, setDate] = useState(new Date());
+
+  const handleDigWallet = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append(
+      'Authorization',
+      `Bearer ${authStore.authToken}`,
+    );
+
+    var raw = JSON.stringify({
+      serialNumber: props.route.params.code.substring(2, 8),
+      manufacturar: company,
+      balance: price,
+      type: 'gift-card',
+      category: '',
+      expiry: '',
+      isListed: false,
+      isActive: true,
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://20.172.135.207/api/api/v1/card/add-wallet',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        if (result.response.CODE === 200) {
+          console.log('card add ==>', result);
+          props.navigation.navigate('WalletTab');
+        } else {
+          if (Platform.OS === "android") {
+            ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
+          } else {
+            Alert.alert("Info", result.response.DESCRIPTION);
+          }
+          props.navigation.navigate('HomeScreen');
+        }
+      })
+      .catch(error => console.log('error', error));
+  }
+
   return (
     <>
       <StatusBar barStyle={'dark-content'} backgroundColor={'#F2F5F8'} />
       <View
         style={{
           position: 'absolute',
-          top: 20,
-          left: 20,
+          top: hp(4),
+          left: hp(1),
           zIndex: 1,
         }}>
         <TouchableOpacity
@@ -48,7 +98,7 @@ const ScanSuccessScreen = (props: any) => {
       </View>
       <View style={styles.main}>
         <ScrollView
-          style={{width: '100%', height: '100%'}}
+          style={{ width: '100%', height: '100%' }}
           contentContainerStyle={{
             display: 'flex',
             flex: 1,
@@ -56,24 +106,22 @@ const ScanSuccessScreen = (props: any) => {
             justifyContent: 'space-around',
             alignItems: 'center',
           }}>
-          <Image source={COMPLETED} style={{marginTop: 50}} />
-          <View style={{marginTop: 10}}>
+          <Image source={COMPLETED} style={{ marginTop: hp(5) }} />
+          <View>
             <Text
               style={{
-                fontFamily: 'Open Sans',
-                fontSize: 18,
-                fontWeight: '500',
+                fontFamily: 'OpenSans-Bold',
+                fontSize: hp(2),
                 color: '#3F3D56',
               }}>
               Takk for handelen!
             </Text>
           </View>
-          <View style={{width: 204}}>
+          <View style={{ width: hp(25) }}>
             <Text
               style={{
-                fontFamily: 'Open Sans',
-                fontSize: 16,
-                fontWeight: 'normal',
+                fontFamily: 'OpenSans-Regular',
+                fontSize: hp(1.9),
                 color: '#6080A0',
                 textAlign: 'center',
               }}>
@@ -83,17 +131,16 @@ const ScanSuccessScreen = (props: any) => {
           <View
             style={{
               width: '80%',
-              height: 416,
+              height: hp(49),
               borderRadius: 5,
               borderWidth: 1,
               borderColor: '#D8E1E8',
-              marginTop: 10,
               alignItems: 'center',
             }}>
             <LinearGradient
               colors={['#00B4E4', '#30C9AA']}
-              start={{x: 0.0, y: 1.0}}
-              end={{x: 1.0, y: 1.0}}
+              start={{ x: 0.0, y: 1.0 }}
+              end={{ x: 1.0, y: 1.0 }}
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -114,31 +161,30 @@ const ScanSuccessScreen = (props: any) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Image source={ADDIDAS} style={{width: 80, height: 80}} />
+                <Image source={ADDIDAS} style={{ width: 80, height: 80 }} />
               </View>
             </LinearGradient>
             <View
-              style={{display: 'flex', flexDirection: 'row', marginTop: 20}}>
+              style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
               <Image
                 source={DOLLAR}
-                style={{width: 27, height: 27, marginTop: 5}}
+                style={{ width: 27, height: 27, marginTop: 5 }}
               />
               <Text
                 style={{
-                  fontFamily: 'Open Sans',
-                  fontSize: 23,
-                  fontWeight: 'bold',
+                  fontFamily: 'OpenSans-Bold',
+                  fontSize: hp(2.7),
+                  lineHeight: hp(4),
                   color: '#6080A0',
                   marginLeft: 10,
                 }}>
-                {price === '' ? 300 : price} KR
+                {price === '' ? '0' : price} KR
               </Text>
             </View>
             <Text
               style={{
-                fontFamily: 'Open Sans',
-                fontSize: 16,
-                fontWeight: 'normal',
+                fontFamily: 'OpenSans-Regular',
+                fontSize: hp(1.9),
                 color: '#6080A0',
               }}>
               {' '}
@@ -146,13 +192,12 @@ const ScanSuccessScreen = (props: any) => {
             </Text>
             <Image
               source={BARCODE}
-              style={{width: 155, height: 74, marginTop: 20}}
+              style={{ width: 155, height: 74, marginTop: 10 }}
             />
             <Text
               style={{
-                fontFamily: 'Open Sans',
-                fontSize: 12,
-                fontWeight: 'normal',
+                fontFamily: 'OpenSans-Regular',
+                fontSize: hp(1.5),
                 color: '#6080A0',
               }}>
               {props.route.params?.code ? props.route.params.code : ''}
@@ -162,7 +207,6 @@ const ScanSuccessScreen = (props: any) => {
                 display: 'flex',
                 width: '100%',
                 flexDirection: 'row',
-                marginTop: 10,
                 marginLeft: 105,
               }}>
               {/* <View style={{display: 'flex', flexDirection: 'column'}}>
@@ -209,7 +253,7 @@ const ScanSuccessScreen = (props: any) => {
                 display: 'flex',
                 width: '100%',
                 flexDirection: 'column',
-                marginLeft: 30,
+                marginHorizontal: 10,
               }}>
               <View
                 style={{
@@ -230,14 +274,7 @@ const ScanSuccessScreen = (props: any) => {
                     setCompany(text);
                   }}
                   placeholderTextColor={'#6080A0'}
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
-                    marginLeft: 30,
-                    textAlign: 'left',
-                    color: '#6080A0',
-                  }}
+                  style={styles.textInput}
                 />
               </View>
               <View
@@ -258,78 +295,28 @@ const ScanSuccessScreen = (props: any) => {
                     setPrice(text);
                   }}
                   placeholderTextColor={'#6080A0'}
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 'normal',
-                    fontFamily: 'Open Sans',
-                    textAlign: 'left',
-                    marginLeft: 30,
-                    color: '#6080A0',
-                  }}
+                  style={styles.textInput}
                 />
               </View>
             </View>
           </View>
           <TouchableOpacity
-            onPress={() => {
-              var myHeaders = new Headers();
-              myHeaders.append('Content-Type', 'application/json');
-              myHeaders.append(
-                'Authorization',
-                `Bearer ${authStore.authToken}`,
-              );
-
-              var raw = JSON.stringify({
-                serialNumber: props.route.params.code.substring(2, 8),
-                manufacturar: company,
-                balance: price,
-                type: 'gift-card',
-                category: '',
-                expiry: '',
-                isListed: false,
-                isActive: true,
-              });
-
-              var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow',
-              };
-
-              fetch(
-                'http://20.172.135.207/api/api/v1/card/add-wallet',
-                requestOptions,
-              )
-                .then(response => response.json())
-                .then(result => {
-                  if (result.response.CODE === 200) {
-                    console.log('card add ==>', result);
-                    props.navigation.navigate('WalletTab');
-                  } else {
-                    ToastAndroid.show(
-                      result.response.DESCRIPTION,
-                      ToastAndroid.SHORT,
-                    );
-                    props.navigation.navigate('HomeScreen');
-                  }
-                })
-                .catch(error => console.log('error', error));
-            }}
+            onPress={() => handleDigWallet()}
             style={{
               width: '80%',
-              height: 47,
+              height: hp(5.2),
               backgroundColor: '#30C9AA',
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-end',
               alignItems: 'center',
               borderRadius: 22,
+              bottom: hp(2)
             }}>
             <Text
               style={{
-                fontSize: 19,
-                fontFamily: 'Open Sans',
+                fontSize: hp(2.3),
+                fontFamily: 'OpenSans-Regular',
                 color: 'white',
                 textAlign: 'center',
                 marginRight: '30%',
@@ -338,7 +325,7 @@ const ScanSuccessScreen = (props: any) => {
             </Text>
             <Image
               source={BUTTONRIGHTARROW}
-              style={{marginRight: 15, tintColor: 'white'}}
+              style={{ marginRight: 15, tintColor: 'white' }}
             />
           </TouchableOpacity>
         </ScrollView>
@@ -359,4 +346,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F8FA',
     alignItems: 'center',
   },
+  textInput: {
+    fontSize: hp(1.8),
+    fontFamily: 'OpenSans-Regular',
+    textAlign: 'left',
+    marginTop: hp(1),
+    marginLeft: hp(3.5),
+    color: '#6080A0',
+  }
 });

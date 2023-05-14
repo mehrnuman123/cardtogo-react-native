@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>338371456087-d3km3ke63od69pam1hl490cng5qtutpo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.338371456087-d3km3ke63od69pam1hl490cng5qtutpo</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>338371456087-0gt06l6487pollk0p6h20vjllovnupts.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAl5z2OXI2C6JNGg4MFFxqlpTS7rm3RGrI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>338371456087</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cardtogo.app</string>
+	<key>PROJECT_ID</key>
+	<string>digstore-4afed</string>
+	<key>STORAGE_BUCKET</key>
+	<string>digstore-4afed.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:338371456087:ios:ef14c32cb73325489c4712</string>
+</dict>
+</plist>
