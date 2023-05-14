@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Modal,
@@ -12,7 +12,7 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import {RNCamera} from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RECTANGLE from '../assets/icons/rectangle_image.png';
 import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
@@ -21,7 +21,7 @@ import SCAN_AREA from '../assets/icons/camera_scan_area.png';
 import TORCH from '../assets/icons/torch_icon.png';
 import BACK_BUTTON from '../assets/icons/back_button_white.png';
 
-const BottomModal = ({visible, setShowModal, onClose}) => {
+const BottomModal = ({ visible, setShowModal, onClose }: any) => {
   return (
     <Modal visible={visible} animationType="slide">
       <View
@@ -62,7 +62,7 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             }}>
             <Image
               source={SCANNERICON}
-              style={{width: 248, height: 239}}
+              style={{ width: 248, height: 239 }}
               resizeMode={'contain'}
             />
           </View>
@@ -125,7 +125,7 @@ const BottomModal = ({visible, setShowModal, onClose}) => {
             </Text>
             <Image
               source={BUTTONRIGHTARROW}
-              style={{marginRight: 15, tintColor: 'white'}}
+              style={{ marginRight: 15, tintColor: 'white' }}
             />
           </TouchableOpacity>
         </View>
@@ -216,7 +216,7 @@ const CameraScreen = (props: any) => {
             console.log('barcode 1 ---->', event.data);
             if (!barcodeValue) {
               setBarcodeValue(event.data);
-              if(Platform.OS === "android") {
+              if (Platform.OS === "android") {
                 ToastAndroid.show('Skannet vellykket!', ToastAndroid.SHORT);
               } else {
                 Alert.alert("Info", "Skannet vellykket!");
@@ -229,13 +229,13 @@ const CameraScreen = (props: any) => {
             }
           }
         }}
-        onGoogleVisionBarcodesDetected={({barcodes}) => {
+        onGoogleVisionBarcodesDetected={({ barcodes }) => {
           console.log('barcode 1 ---->', barcodes[0]?.data);
         }}>
         <View style={styles.overlayContainer}>
           <Image
             source={SCAN_AREA}
-            style={{marginBottom: 30, backgroundColor: 'transparent'}}
+            style={{ marginBottom: 30, backgroundColor: 'transparent' }}
           />
           <TouchableOpacity
             onPress={() => {

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -14,22 +15,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
 import BACK_BUTTON from '../assets/icons/back_button_white.png';
-
-import ATTACHEMENT_ICON from '../assets/icons/attachment.png';
-import PLACEHOLDER from '../assets/images/placeholder.png';
-import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
-import { useStores } from '../store/Store';
-import SERIALNO from '../assets/icons/serial_number_icon.png';
-import LOCK from '../assets/icons/lock.png';
-import TAG from '../assets/icons/discount_icon.png';
-import PRICE from '../assets/icons/dollar_icon.png';
-import CALENDAR from '../assets/icons/calendar_big.png';
-import CARD from '../assets/icons/gift_card.png';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import DatePicker from 'react-native-date-picker'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
+import ATTACHEMENT_ICON from '../assets/icons/attachment.png';
+import BUTTONRIGHTARROW from '../assets/icons/button_right_arrow.png';
+import CALENDAR from '../assets/icons/calendar_big.png';
+import TAG from '../assets/icons/discount_icon.png';
+import PRICE from '../assets/icons/dollar_icon.png';
+import CARD from '../assets/icons/gift_card.png';
+import LOCK from '../assets/icons/lock.png';
+import SERIALNO from '../assets/icons/serial_number_icon.png';
+import PLACEHOLDER from '../assets/images/placeholder.png';
 import Constants from '../constants/EnviornmentVariables';
+import { useStores } from '../store/Store';
 
 const ManualAddCardScreen = (props: any) => {
   const URL = Constants.BASE_URL;
@@ -42,8 +43,11 @@ const ManualAddCardScreen = (props: any) => {
   const [company, setCompany] = useState('');
   const [price, setPrice] = useState<any>();
   const [expiry, setExpiry] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false)
   const [openCardType, setOpenCardType] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
   const [valueCardType, setValueCardType] = useState(null);
   const [itemsCardType, setItemsCardType] = useState([
     { label: 'Gavekort', value: 'giftCard' },
@@ -111,7 +115,7 @@ const ManualAddCardScreen = (props: any) => {
               props.navigation.navigate('WalletTab');
             } else {
               if (result?.response?.DESCRIPTION !== "Card is already exist in wallet") {
-                if(Platform.OS === "android") {
+                if (Platform.OS === "android") {
                   ToastAndroid.show(
                     result.response.DESCRIPTION,
                     ToastAndroid.SHORT,
@@ -122,7 +126,7 @@ const ManualAddCardScreen = (props: any) => {
                 setSubmitting(false);
                 props.navigation.navigate('WalletTab');
               } else {
-                if(Platform.OS === "android") {
+                if (Platform.OS === "android") {
                   ToastAndroid.show(
                     result.response.DESCRIPTION,
                     ToastAndroid.SHORT,
@@ -137,9 +141,9 @@ const ManualAddCardScreen = (props: any) => {
           })
           .catch(error => {
             setSubmitting(false);
-            if(Platform.OS === "android") {
+            if (Platform.OS === "android") {
               ToastAndroid.show(JSON.stringify(error), ToastAndroid.LONG);
-            
+
             } else {
               Alert.alert("Info", JSON.stringify(error));
             }
@@ -147,7 +151,7 @@ const ManualAddCardScreen = (props: any) => {
           });
       } else {
         setSubmitting(false);
-        if(Platform.OS === "android") {
+        if (Platform.OS === "android") {
           ToastAndroid.show('Serienummer og pris er obligatoriske', ToastAndroid.LONG);
         } else {
           Alert.alert("Info", 'Serienummer og pris er obligatoriske');
@@ -235,7 +239,7 @@ const ManualAddCardScreen = (props: any) => {
       }
     } else {
       setSubmitting(false);
-      if(Platform.OS === "android") {
+      if (Platform.OS === "android") {
         ToastAndroid.show('Velg minst ett bilde', ToastAndroid.LONG);
       } else {
         Alert.alert("Info", 'Velg minst ett bilde');
@@ -253,7 +257,8 @@ const ManualAddCardScreen = (props: any) => {
                 display: 'flex',
                 width: '100%',
                 flexDirection: 'row',
-                justifyContent: 'space-evenly',
+                justifyContent: 'space-between',
+                marginTop: hp(5),
               }}>
               <TouchableOpacity
                 onPress={() => {
@@ -268,15 +273,15 @@ const ManualAddCardScreen = (props: any) => {
                       key={index.toString()}
                       style={{
                         ...styles.whiteCircle,
-                        marginLeft: index === 0 ? 30 : 0,
+                        marginLeft: index === 0 ? hp(1) : 0,
                       }}>
                       <View style={styles.innerCircle}>
                         <Image
                           source={{ uri: item.uri }}
                           resizeMode="contain"
                           style={{
-                            width: 65,
-                            height: 65,
+                            width: hp(8),
+                            height: hp(8),
                           }}
                         />
                       </View>
@@ -291,8 +296,8 @@ const ManualAddCardScreen = (props: any) => {
                         <Image
                           source={PLACEHOLDER}
                           style={{
-                            width: 60,
-                            height: 60,
+                            width: hp(6),
+                            height: hp(6),
                             tintColor: '#6080A0',
                           }}
                         />
@@ -327,8 +332,8 @@ const ManualAddCardScreen = (props: any) => {
                       <Image
                         source={PLACEHOLDER}
                         style={{
-                          width: 70,
-                          height: 70,
+                          width: hp(7),
+                          height: hp(7),
                           // tintColor: '#6080A0',
                         }}
                       />
@@ -352,23 +357,23 @@ const ManualAddCardScreen = (props: any) => {
                     });
                     if (result.assets) {
                       if (result.didCancel) {
-                        if(Platform.OS === "android"){
+                        if (Platform.OS === "android") {
                           ToastAndroid.show('Velg minst 2 bilder av kortet', ToastAndroid.LONG);
                           // props.navigation.navigate('MapScreen')
                         } else {
                           Alert.alert('Info', 'Velg minst 2 bilder av kortet', [
-                            {text: 'OK', onPress: () => console.log('OK Pressed')},
+                            { text: 'OK', onPress: () => console.log('OK Pressed') },
                           ]);
                         }
                         return;
                       }
                       if (result.errorMessage) {
-                        if(Platform.OS === "android"){
+                        if (Platform.OS === "android") {
                           ToastAndroid.show('Noe gikk galt', ToastAndroid.LONG);
                           // props.navigation.navigate('MapScreen')
                         } else {
                           Alert.alert('Info', 'Noe gikk galt', [
-                            {text: 'OK', onPress: () => console.log('OK Pressed')},
+                            { text: 'OK', onPress: () => console.log('OK Pressed') },
                           ]);
                         }
                         return;
@@ -393,13 +398,13 @@ const ManualAddCardScreen = (props: any) => {
                 </Text> */}
               </View>
             </View>
-            <ScrollView
+            <View
               style={{ display: 'flex', flex: 1, width: '100%', marginTop: 20 }}>
               <View
                 style={{
                   backgroundColor: '#E6ECF2',
                   width: '80%',
-                  height: 55,
+                  height: hp(7),
                   alignSelf: 'center',
                   display: 'flex',
                   flexDirection: 'row',
@@ -418,27 +423,11 @@ const ManualAddCardScreen = (props: any) => {
                     setSerialNo(text);
                   }}
                   placeholderTextColor={'#6080A0'}
-                  style={{
-                    fontSize: 10,
-                    fontFamily: 'OpenSans-Regular',
-                    marginLeft: 30,
-                    textAlign: 'left',
-                    color: '#6080A0',
-                  }}
+                  style={styles.textInput}
                 />
               </View>
               <View
-                style={{
-                  backgroundColor: '#E6ECF2',
-                  width: '80%',
-                  height: 55,
-                  alignSelf: 'center',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderRadius: 50,
-                  marginVertical: 10,
-                }}>
+                style={styles.textInputView}>
                 <Image
                   source={PRICE}
                   style={{
@@ -452,35 +441,20 @@ const ManualAddCardScreen = (props: any) => {
                   value={price?.toString()}
                   placeholder="Skriv inn pris"
                   onChangeText={(text: any) => {
-                    if (text) {
-                      setPrice(JSON.parse(text));
+                    const price = text.replace(/[^0-9]/g, '')
+                    if (price) {
+                      setPrice(JSON.parse(price));
                     } else {
-                      setPrice(text);
+                      setPrice(price);
                     }
                   }}
                   placeholderTextColor={'#6080A0'}
-                  style={{
-                    fontSize: 10,
-                    fontFamily: 'OpenSans-Regular',
-                    marginLeft: 30,
-                    textAlign: 'left',
-                    color: '#6080A0',
-                  }}
+                  style={styles.textInput}
                   keyboardType="number-pad"
                 />
               </View>
               <View
-                style={{
-                  backgroundColor: '#E6ECF2',
-                  width: '80%',
-                  height: 55,
-                  alignSelf: 'center',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderRadius: 50,
-                  marginVertical: 10,
-                }}>
+                style={styles.textInputView}>
                 <Image
                   source={TAG}
                   style={{
@@ -497,27 +471,12 @@ const ManualAddCardScreen = (props: any) => {
                     setCompany(text);
                   }}
                   placeholderTextColor={'#6080A0'}
-                  style={{
-                    fontSize: 10,
-                    fontFamily: 'OpenSans-Regular',
-                    marginLeft: 30,
-                    textAlign: 'left',
-                    color: '#6080A0',
-                  }}
+                  style={styles.textInput}
                 />
               </View>
-              <View
-                style={{
-                  backgroundColor: '#E6ECF2',
-                  width: '80%',
-                  height: 55,
-                  alignSelf: 'center',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderRadius: 50,
-                  marginVertical: 10,
-                }}>
+              <TouchableOpacity
+                onPress={() => setOpen(!open)}
+                style={styles.textInputView}>
                 <Image
                   source={CALENDAR}
                   style={{
@@ -527,42 +486,33 @@ const ManualAddCardScreen = (props: any) => {
                     tintColor: '#B7C7D7',
                   }}
                 />
-                <TextInput
-                  value={expiry}
-                  placeholder="YYYY-MM-DD"
-                  onChangeText={(text: any) => {
-                    setExpiry(text);
+                <Text style={styles.textInput}>{date.toDateString()}</Text>
+                <DatePicker
+                  modal
+                  mode='date'
+                  locale='fr'
+                  open={open}
+                  date={date}
+                  onConfirm={(date) => {
+                    setDate(date);
+                    const dateObj = new Date(date);
+                    const year = dateObj.getFullYear();
+                    const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+                    const day = ("0" + dateObj.getDate()).slice(-2);
+                    const formattedDateString = `${year}-${month}-${day}`;
+                    setOpen(false)
+                    setExpiry(formattedDateString)
                   }}
-                  placeholderTextColor={'#6080A0'}
-                  style={{
-                    fontSize: 10,
-                    fontFamily: 'OpenSans-Regular',
-                    marginLeft: 30,
-                    textAlign: 'left',
-                    color: '#6080A0',
+                  onCancel={() => {
+                    setOpen(false)
                   }}
                 />
-              </View>
+              </TouchableOpacity>
               <View
-                style={{
-                  backgroundColor: '#E6ECF2',
-                  width: '80%',
-                  height: 55,
-                  alignSelf: 'center',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderRadius: 50,
-                  marginVertical: 10,
-                }}>
+                style={styles.textInputView}>
                 <Image
                   source={CARD}
-                  style={{
-                    width: 30,
-                    height: 30,
-                    marginLeft: 12,
-                    tintColor: '#B7C7D7',
-                  }}
+                  style={styles.cardImage}
                 />
                 <DropDownPicker
                   placeholder="Velg en korttype"
@@ -584,17 +534,19 @@ const ManualAddCardScreen = (props: any) => {
                   style={{
                     backgroundColor: '#E6ECF2',
                     borderWidth: 0,
+                    borderTopRightRadius: hp(2),
+                    borderBottomRightRadius: hp(2),
                     // elevation: 0.5,
                   }}
                   textStyle={{
-                    fontSize: 10,
+                    fontSize: hp(1.6),
                     fontFamily: 'OpenSans-Regular',
                     marginLeft: 20,
                     textAlign: 'left',
                     color: '#6080A0',
                   }}
                   placeholderStyle={{
-                    fontSize: 10,
+                    fontSize: hp(1.6),
                     fontFamily: 'OpenSans-Regular',
                     marginLeft: 20,
                     textAlign: 'left',
@@ -603,25 +555,10 @@ const ManualAddCardScreen = (props: any) => {
                 />
               </View>
               <View
-                style={{
-                  backgroundColor: '#E6ECF2',
-                  width: '80%',
-                  height: 55,
-                  alignSelf: 'center',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderRadius: 50,
-                  marginVertical: 10,
-                }}>
+                style={styles.textInputView}>
                 <Image
                   source={CARD}
-                  style={{
-                    width: 30,
-                    height: 30,
-                    marginLeft: 12,
-                    tintColor: '#B7C7D7',
-                  }}
+                  style={styles.cardImage}
                 />
                 <DropDownPicker
                   placeholder="Velg en kategori"
@@ -643,17 +580,13 @@ const ManualAddCardScreen = (props: any) => {
                   style={{
                     backgroundColor: '#E6ECF2',
                     borderWidth: 0,
+                    borderTopRightRadius: hp(2),
+                    borderBottomRightRadius: hp(2),
                     // elevation: 0.5,
                   }}
-                  textStyle={{
-                    fontSize: 10,
-                    fontFamily: 'OpenSans-Regular',
-                    marginLeft: 20,
-                    textAlign: 'left',
-                    color: '#6080A0',
-                  }}
+                  textStyle={styles.textInput}
                   placeholderStyle={{
-                    fontSize: 10,
+                    fontSize: hp(1.6),
                     fontFamily: 'OpenSans-Regular',
                     marginLeft: 20,
                     textAlign: 'left',
@@ -662,17 +595,7 @@ const ManualAddCardScreen = (props: any) => {
                 />
               </View>
               <View
-                style={{
-                  backgroundColor: '#E6ECF2',
-                  width: '80%',
-                  height: 55,
-                  alignSelf: 'center',
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderRadius: 50,
-                  marginVertical: 10,
-                }}>
+                style={styles.textInputView}>
                 <Image
                   source={LOCK}
                   style={{ width: 25, height: 30, marginLeft: 15 }}
@@ -684,13 +607,7 @@ const ManualAddCardScreen = (props: any) => {
                     setPin(text);
                   }}
                   placeholderTextColor={'#6080A0'}
-                  style={{
-                    fontSize: 10,
-                    fontFamily: 'OpenSans-Regular',
-                    marginLeft: 30,
-                    textAlign: 'left',
-                    color: '#6080A0',
-                  }}
+                  style={styles.textInput}
                 />
               </View>
               <TouchableOpacity
@@ -700,7 +617,7 @@ const ManualAddCardScreen = (props: any) => {
                 }}
                 style={{
                   width: '80%',
-                  height: 47,
+                  height: hp(6),
                   backgroundColor: '#30C9AA',
                   display: 'flex',
                   alignSelf: 'center',
@@ -708,12 +625,13 @@ const ManualAddCardScreen = (props: any) => {
                   justifyContent: submitting ? 'center' : 'flex-end',
                   alignItems: 'center',
                   borderRadius: 22,
+                  marginTop: hp(3)
                 }}>
                 {!submitting ?
                   <>
                     <Text
                       style={{
-                        fontSize: 19,
+                        fontSize: hp(1.6),
                         fontFamily: 'OpenSans-Regular',
                         color: 'white',
                         textAlign: 'center',
@@ -727,7 +645,7 @@ const ManualAddCardScreen = (props: any) => {
                     />
                   </> : <ActivityIndicator color={'#FFFFFF'} />}
               </TouchableOpacity>
-            </ScrollView>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -771,12 +689,37 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: '#FFFFFF',
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: hp(4.5),
+    height: hp(4.5),
+    borderRadius: hp(2),
     justifyContent: 'center',
     marginRight: 20,
-    marginTop: 50,
+    marginTop: hp(6),
     alignItems: 'center',
   },
+  textInputView: {
+    backgroundColor: '#E6ECF2',
+    width: '80%',
+    height: 55,
+    alignSelf: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 50,
+    marginVertical: 10,
+  },
+  textInput: {
+    fontSize: hp(1.6),
+    fontFamily: 'OpenSans-Regular',
+    marginLeft: hp(3.5),
+    width: "80%",
+    textAlign: 'left',
+    color: '#6080A0',
+  },
+  cardImage: {
+    width: hp(4),
+    height: hp(4),
+    marginLeft: 12,
+    tintColor: '#B7C7D7',
+  }
 });

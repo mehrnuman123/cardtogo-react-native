@@ -15,6 +15,7 @@ import React, { useEffect, useState } from 'react';
 import WALLET_ICON from '../assets/icons/wallet_icon.png';
 import PLACEHOLDER from '../assets/images/placeholder.png';
 import WALLET_VIEW from '../assets/images/wallet_view_icon.png';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { useStores } from '../store/Store';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -57,7 +58,7 @@ const WalletTab = (props: any) => {
           }, 0);
           setSumOfAllCards(sum);
         } else {
-          if(Platform.OS === "android") {
+          if (Platform.OS === "android") {
             ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
           } else {
             Alert.alert("Info", result.response.DESCRIPTION);
@@ -156,12 +157,12 @@ const WalletTab = (props: any) => {
                 <TouchableOpacity
                   key={item.id}
                   onPress={() => {
-                    if(Platform.OS === "android"){
+                    if (Platform.OS === "android") {
                       ToastAndroid.show('Kommer snart', ToastAndroid.LONG);
                       // props.navigation.navigate('MapScreen')
                     } else {
                       Alert.alert('Info', 'Kommer snart', [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
                       ]);
                     }
                     // if (item.isListed) {
@@ -272,7 +273,7 @@ const WalletTab = (props: any) => {
               );
             })
           ) : (
-            <Text>Ingen kort tilgjengelig i lommeboken</Text>
+            <Text style={styles.noCardAvailable}>Ingen kort tilgjengelig i lommeboken</Text>
           )}
         </ScrollView>
       ) : (
@@ -490,4 +491,11 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 10,
   },
+  noCardAvailable: {
+    fontSize: hp(2),
+    textAlign: 'center',
+    marginTop: hp(25),
+    fontFamily: 'OpenSans-Regular',
+    color: '#6080A0',
+  }
 });
