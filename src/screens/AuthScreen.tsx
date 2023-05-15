@@ -217,7 +217,7 @@ const AuthScreen = (props: {
               style={{ marginRight: 5, tintColor: '#6080A0' }}
             />
           </TouchableOpacity>
-          {/* {Platform.OS === "ios" ?<TouchableOpacity
+          {Platform.OS === "ios" ? <TouchableOpacity
             onPress={() => {
               appleLogin();
             }}
@@ -257,7 +257,7 @@ const AuthScreen = (props: {
               source={BUTTONRIGHTARROW}
               style={{ marginRight: 5, tintColor: '#FFFFFF' }}
             />
-          </TouchableOpacity> : null} */}
+          </TouchableOpacity> : null}
         </View>
         <TouchableOpacity
           style={{

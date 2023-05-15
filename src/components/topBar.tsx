@@ -27,7 +27,7 @@ const TopBar = (props: any) => {
         justifyContent: 'space-between',
         alignItems: 'center',
         height: hp(10),
-        marginTop: 20,
+        marginTop: hp(2.5),
         // backgroundColor: 'black',
       }}>
       {props.backEnable ? (
@@ -36,7 +36,7 @@ const TopBar = (props: any) => {
           <Image source={BACK} style={{ width: 70, height: 70 }} />
         </TouchableOpacity>
       ) : (
-        <Image source={LOGO} style={{ height: hp(12), width: hp(12) }} />
+        <Image source={LOGO} style={{ height: hp(13), width: hp(13), marginTop: hp(2) }} />
       )}
 
       <TouchableOpacity
@@ -52,7 +52,7 @@ const TopBar = (props: any) => {
         }}>
         <Image
           source={LOCATION_ICON}
-          style={{ tintColor: route.name === 'MapScreen' ? '#6080A0' : '' }}
+          style={{ tintColor: route.name === 'MapScreen' ? '#6080A0' : '', marginTop: hp(2) }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -70,6 +70,7 @@ const TopBar = (props: any) => {
           source={NOTIFICATION_ICON}
           style={{
             tintColor: route.name === 'NotificationScreen' ? '#6080A0' : '',
+            marginTop: hp(2)
           }}
         />
       </TouchableOpacity>
@@ -88,6 +89,7 @@ const TopBar = (props: any) => {
           source={CART_ICON}
           style={{
             tintColor: route.name === 'CartScreen' ? '#6080A0' : '',
+            marginTop: hp(2)
           }}
         />
       </TouchableOpacity>
@@ -102,7 +104,7 @@ const TopBar = (props: any) => {
             ]);
           }
         }}>
-        <Image source={HAMBURGER_ICON} />
+        <Image source={HAMBURGER_ICON} style={{ marginTop: hp(2) }} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => props.navigation.navigate('ProfileScreen')}>
@@ -124,8 +126,8 @@ const TopBar = (props: any) => {
           <View
             style={{
               backgroundColor: '#ffffff',
-              width: 45,
-              height: 45,
+              width: hp(5),
+              height: hp(5),
               borderRadius: 22,
               borderWidth: 1,
               justifyContent: 'center',
@@ -137,8 +139,8 @@ const TopBar = (props: any) => {
                 uri: authStore.user?.profile,
               }}
               style={{
-                width: 40,
-                height: 40,
+                width: hp(4.2),
+                height: hp(4.2),
                 borderRadius: 20,
                 borderWidth: 1,
               }}
