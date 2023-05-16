@@ -31,10 +31,14 @@ const WalletTab = (props: any) => {
   const [cards, setCards] = useState([]);
   const [sumOfAllCards, setSumOfAllCards] = useState();
   const [loading, setLoading] = useState(true);
+  const [refetch, setRefetch] = useState(false)
 
-  console.log('====================================');
-  console.log(authStore.authToken);
-  console.log('====================================');
+
+
+  const handleRefetch = () => {
+    setRefetch(!refetch)
+  }
+
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
@@ -72,7 +76,7 @@ const WalletTab = (props: any) => {
         }
       })
       .catch(error => console.log('error', error));
-  }, [authStore.authToken, isFocused]);
+  }, [authStore.authToken, isFocused, refetch]);
 
   console.log('=======>>>=========');
   console.log('cards ===>>>', cards);
@@ -162,7 +166,7 @@ const WalletTab = (props: any) => {
             data={cards}
             keyExtractor={(item: any) => item.id}
             renderItem={({ item }) => (
-              <WalletCard item={item} />
+              <WalletCard item={item} key={item.id} refetch={handleRefetch} />
             )}
           />
         </ScrollView>

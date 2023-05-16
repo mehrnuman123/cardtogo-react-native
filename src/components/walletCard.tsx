@@ -12,16 +12,55 @@ import {
 import React from 'react';
 import WALLET_VIEW from '../assets/images/wallet_view_icon.png';
 import PLACEHOLDER from '../assets/icons/id-card.png';
+import { useStores } from '../store/Store';
 
 
-const WalletCard = ({ item }: any) => {
+
+
+const WalletCard = ({ item, refetch }: any) => {
+  const authStore = useStores();
+  const handleDeleteCard = () => {
+    console.log("Yes")
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${authStore.authToken}`);
+
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    console.log("Yes1")
+
+    fetch(`http://20.172.135.207/api/api/v1/card/${item.id}`, requestOptions)
+      .then(response =>
+        response.json()
+      )
+      .then((result: any) => {
+        if (result.response.CODE === 200) {
+          refetch();
+          if (Platform.OS === "android") {
+            ToastAndroid.show('Kortet ble slettet', ToastAndroid.SHORT);
+          } else {
+            Alert.alert("Info", 'Kortet ble slettet');
+          }
+
+        } else {
+          if (Platform.OS === "android") {
+            ToastAndroid.show(result.response.DESCRIPTION, ToastAndroid.SHORT);
+          } else {
+            Alert.alert("Info", result.response.DESCRIPTION);
+          }
+        }
+      })
+      .catch(error => console.log('error', error));
+  }
 
   const handleLongPress = () => {
     Alert.alert('Slette', 'Er du sikker på at du vil slette dette kortet?', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Slette', onPress: () => {
-          //  onDelete(item.id)
+          handleDeleteCard()
         }
       },
     ]);
@@ -74,9 +113,9 @@ const WalletCard = ({ item }: any) => {
           alignItems: 'center',
         }}>
         <Image
-          source={{ uri: item.photo[0] }}
+          source={{ uri: item?.photo[0] }}
           style={{ width: 76, height: 76 }}
-          resizeMode={'contain'}
+          resizeMode='cover'
         />
       </View>}
       <View

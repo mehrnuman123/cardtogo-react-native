@@ -30,9 +30,9 @@ const HomeScreen = (props: any) => {
           headerShown: false,
           tabBarHideOnKeyboard: true,
           tabBarStyle: {
-            height: hp(9.5),
-            borderTopLeftRadius: hp(3),
-            borderTopRightRadius: hp(3),
+            height: hp(11.5),
+            borderTopLeftRadius: hp(4),
+            borderTopRightRadius: hp(4),
           },
           tabBarLabel: ({ focused }) => {
             let name = '';
@@ -83,7 +83,7 @@ const HomeScreen = (props: any) => {
                   <Image
                     source={ADD_BOTTOM_ICON}
                     style={{
-                      marginTop: hp(4),
+                      marginTop: hp(6),
                     }}
                   />
                 </TouchableOpacity>

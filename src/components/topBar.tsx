@@ -21,14 +21,11 @@ const TopBar = (props: any) => {
   return (
     <View
       style={{
-        display: 'flex',
-        width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        height: hp(10),
+        height: hp(13),
         marginTop: hp(2.5),
-        // backgroundColor: 'black',
       }}>
       {props.backEnable ? (
         <TouchableOpacity
@@ -36,7 +33,7 @@ const TopBar = (props: any) => {
           <Image source={BACK} style={{ width: 70, height: 70 }} />
         </TouchableOpacity>
       ) : (
-        <Image source={LOGO} style={{ height: hp(13), width: hp(13), marginTop: hp(2) }} />
+        <Image source={LOGO} resizeMode='stretch' style={{ height: hp(13), width: hp(13), marginTop: hp(3) }} />
       )}
 
       <TouchableOpacity
@@ -52,7 +49,7 @@ const TopBar = (props: any) => {
         }}>
         <Image
           source={LOCATION_ICON}
-          style={{ tintColor: route.name === 'MapScreen' ? '#6080A0' : '', marginTop: hp(2) }}
+          style={{ tintColor: route.name === 'MapScreen' ? '#6080A0' : '', marginTop: hp(3) }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -70,7 +67,7 @@ const TopBar = (props: any) => {
           source={NOTIFICATION_ICON}
           style={{
             tintColor: route.name === 'NotificationScreen' ? '#6080A0' : '',
-            marginTop: hp(2)
+            marginTop: hp(3)
           }}
         />
       </TouchableOpacity>
@@ -89,7 +86,7 @@ const TopBar = (props: any) => {
           source={CART_ICON}
           style={{
             tintColor: route.name === 'CartScreen' ? '#6080A0' : '',
-            marginTop: hp(2)
+            marginTop: hp(3)
           }}
         />
       </TouchableOpacity>
@@ -104,7 +101,7 @@ const TopBar = (props: any) => {
             ]);
           }
         }}>
-        <Image source={HAMBURGER_ICON} style={{ marginTop: hp(2) }} />
+        <Image source={HAMBURGER_ICON} style={{ marginTop: hp(3) }} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => props.navigation.navigate('ProfileScreen')}>
@@ -116,12 +113,13 @@ const TopBar = (props: any) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            width: 50,
-            height: 50,
+            width: hp(6),
+            height: hp(6),
             borderRadius: 27,
             backgroundColor: '#FFFFFF',
             padding: 10,
             marginRight: 20,
+            marginTop: hp(3)
           }}>
           <View
             style={{
