@@ -1,18 +1,22 @@
 import {
   Alert,
-  Image,
   Platform,
   StyleSheet,
   Text,
   ToastAndroid,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native';
-
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import React from 'react';
 import WALLET_VIEW from '../assets/images/wallet_view_icon.png';
 import PLACEHOLDER from '../assets/icons/id-card.png';
+import FastImage from 'react-native-fast-image';
+import { createImageProgress } from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
 import { useStores } from '../store/Store';
+const FImage = createImageProgress(FastImage);
 
 
 
@@ -104,26 +108,30 @@ const WalletCard = ({ item, refetch }: any) => {
           style={{ width: 76, height: 76 }}
           resizeMode={'contain'}
         />
-      </View> : <View
-        style={{
-          display: 'flex',
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Image
-          source={{ uri: item?.photo[0] }}
-          style={{ width: 76, height: 76 }}
-          resizeMode='cover'
-        />
-      </View>}
+      </View> :
+        <View style={styles.circle}>
+          <FImage
+            source={{ uri: item?.photo[0] }}
+            style={styles.image}
+            resizeMode='cover'
+            indicator={Progress.CircleSnail}
+          />
+          <View style={styles.fixCircleClipping} />
+        </View>
+        // <View style={{ borderRadius: hp(2) }}>
+        //   <FImage
+        //     source={{ uri: item?.photo[0] }}
+        //     style={styles.image}
+        //     resizeMode='cover'
+        //     indicator={Progress.CircleSnail}
+        //   />
+        // </View>
+      }
       <View
         style={{
           display: 'flex',
-          flex: 1,
           flexDirection: 'column',
-          marginTop: 10,
+          marginLeft: hp(2),
         }}>
         <Text
           style={{
@@ -139,11 +147,14 @@ const WalletCard = ({ item, refetch }: any) => {
             fontFamily: 'OpenSans-Medium',
             textAlign: 'center',
             fontSize: 18,
+            fontWeight: "700",
             color: '#3F3D56',
           }}>
           {item.balance} KR
         </Text>
       </View>
+      <View style={{ width: 1, height: 58, backgroundColor: '#D8E1E8', marginLeft: hp(2) }} />
+
       {/* <View
                 style={{width: 1, height: 58, backgroundColor: '#D8E1E8'}}
               />
@@ -181,7 +192,7 @@ const WalletCard = ({ item, refetch }: any) => {
           alignItems: 'center',
           marginLeft: 20,
         }}>
-        <Image source={WALLET_VIEW} />
+        <Image source={WALLET_VIEW} style={{ width: hp(4), height: hp(4), alignSelf: 'flex-end' }} />
       </View>
     </TouchableOpacity>
   )
@@ -189,19 +200,31 @@ const WalletCard = ({ item, refetch }: any) => {
 const styles = StyleSheet.create({
   walletCard: {
     width: '90%',
-    height: 105,
-    borderRadius: 16,
+    height: hp(15),
+    borderRadius: hp(2),
     borderWidth: 1,
     borderColor: '#D8E1E8',
-    marginTop: 20,
-    marginHorizontal: 20,
+    marginTop: hp(3),
+    marginHorizontal: hp(3),
     display: 'flex',
     flex: 3,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    paddingVertical: 20,
+    paddingVertical: hp(3),
     paddingHorizontal: 10,
   },
+  image: {
+    width: hp(12.6),
+    height: hp(12.6),
+    border: 1,
+  },
+  circle: {
+    width: hp(12.6), height: hp(12.6),
+    marginTop: hp(-2),
+    borderRadius: hp(2), zIndex: 1,
+    overflow: "hidden"
+  },
+  fixCircleClipping: { position: 'absolute', top: -hp(1), bottom: -hp(1), right: -hp(1), left: -hp(1), borderRadius: hp(2), borderWidth: hp(1), borderBottomLeftRadius: hp(2) },
 
 });
 

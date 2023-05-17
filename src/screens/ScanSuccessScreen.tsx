@@ -101,18 +101,18 @@ const ScanSuccessScreen = (props: any) => {
           style={{ width: '100%', height: '100%' }}
           contentContainerStyle={{
             display: 'flex',
-            flex: 1,
             flexDirection: 'column',
             justifyContent: 'space-around',
             alignItems: 'center',
           }}>
-          <Image source={COMPLETED} style={{ marginTop: hp(5) }} />
+          <Image source={COMPLETED} style={{ marginTop: hp(7), height: hp(9), width: hp(9) }} />
           <View>
             <Text
               style={{
                 fontFamily: 'OpenSans-Bold',
                 fontSize: hp(2),
                 color: '#3F3D56',
+                marginTop: hp(3)
               }}>
               Takk for handelen!
             </Text>
@@ -124,6 +124,7 @@ const ScanSuccessScreen = (props: any) => {
                 fontSize: hp(1.9),
                 color: '#6080A0',
                 textAlign: 'center',
+                marginTop: hp(2),
               }}>
               “DIG” å gjør en god handel! for mer info sjekk DIG-Wallet
             </Text>
@@ -131,11 +132,12 @@ const ScanSuccessScreen = (props: any) => {
           <View
             style={{
               width: '80%',
-              height: hp(49),
+              height: hp(55),
               borderRadius: 5,
               borderWidth: 1,
               borderColor: '#D8E1E8',
               alignItems: 'center',
+              marginTop: hp(3),
             }}>
             <LinearGradient
               colors={['#00B4E4', '#30C9AA']}
@@ -145,23 +147,23 @@ const ScanSuccessScreen = (props: any) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 90,
-                height: 90,
-                borderRadius: 45,
+                width: hp(13),
+                height: hp(13),
+                borderRadius: hp(7),
                 backgroundColor: '#FFFFFF',
-                padding: 10,
-                marginTop: 20,
+                padding: hp(1),
+                marginTop: hp(1),
               }}>
               <View
                 style={{
                   backgroundColor: '#ffffff',
-                  width: 86,
-                  height: 86,
-                  borderRadius: 44,
+                  width: hp(8),
+                  height: hp(8),
+                  borderRadius: hp(4),
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Image source={ADDIDAS} style={{ width: 80, height: 80 }} />
+                <Image source={ADDIDAS} style={{ width: hp(12), height: hp(12), borderRadius: hp(10) }} />
               </View>
             </LinearGradient>
             <View
@@ -192,7 +194,7 @@ const ScanSuccessScreen = (props: any) => {
             </Text>
             <Image
               source={BARCODE}
-              style={{ width: 155, height: 74, marginTop: 10 }}
+              style={{ width: hp(17), height: 74, marginTop: 10 }}
             />
             <Text
               style={{
@@ -247,7 +249,7 @@ const ScanSuccessScreen = (props: any) => {
                 }
               </Text>
             </View>
-          </View> */}
+            </View> */}
             <View
               style={{
                 display: 'flex',
@@ -259,7 +261,7 @@ const ScanSuccessScreen = (props: any) => {
                 style={{
                   backgroundColor: '#E6ECF2',
                   width: '80%',
-                  height: 40,
+                  height: hp(6),
                   alignSelf: 'center',
                   borderRadius: 50,
                   marginVertical: 10,
@@ -281,7 +283,7 @@ const ScanSuccessScreen = (props: any) => {
                 style={{
                   backgroundColor: '#E6ECF2',
                   width: '80%',
-                  height: 40,
+                  height: hp(6),
                   alignSelf: 'center',
                   borderRadius: 50,
                 }}>
@@ -306,12 +308,11 @@ const ScanSuccessScreen = (props: any) => {
               width: '80%',
               height: hp(5.2),
               backgroundColor: '#30C9AA',
-              display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-end',
               alignItems: 'center',
               borderRadius: 22,
-              bottom: hp(2)
+              marginTop: hp(2)
             }}>
             <Text
               style={{
@@ -353,5 +354,6 @@ const styles = StyleSheet.create({
     marginTop: hp(1),
     marginLeft: hp(3.5),
     color: '#6080A0',
+    lineHeight: hp(3)
   }
 });

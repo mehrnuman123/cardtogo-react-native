@@ -30,7 +30,7 @@ const HomeScreen = (props: any) => {
           headerShown: false,
           tabBarHideOnKeyboard: true,
           tabBarStyle: {
-            height: hp(11.5),
+            height: hp(10),
             borderTopLeftRadius: hp(4),
             borderTopRightRadius: hp(4),
           },
@@ -53,7 +53,7 @@ const HomeScreen = (props: any) => {
                   fontSize: hp(1.5),
                   color: focused ? '#6080A0' : '#AEBFCF',
                   fontWeight: focused ? 'bold' : 'normal',
-                  marginTop: hp(3)
+                  marginTop: hp(2.5)
                 }}>
                 {name}
               </Text>
@@ -64,14 +64,16 @@ const HomeScreen = (props: any) => {
               return (
                 <Image
                   source={HOME_ICON}
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
+                  resizeMode='contain'
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
                 />
               );
             } else if (route.name === 'ExploreTab') {
               return (
                 <Image
+                  resizeMode='contain'
                   source={EXPLORE_ICON}
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
                 />
               );
             } else if (route.name === 'AddTab') {
@@ -84,6 +86,8 @@ const HomeScreen = (props: any) => {
                     source={ADD_BOTTOM_ICON}
                     style={{
                       marginTop: hp(6),
+                      width: hp(6.5),
+                      height: hp(6.5)
                     }}
                   />
                 </TouchableOpacity>
@@ -91,15 +95,17 @@ const HomeScreen = (props: any) => {
             } else if (route.name === 'WalletTab') {
               return (
                 <Image
+                  resizeMode='contain'
                   source={WALLET_ICON}
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
                 />
               );
             } else if (route.name === 'WishlistTab') {
               return (
                 <Image
+                  resizeMode='contain'
                   source={HEART_ICON}
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(4), }}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
                 />
               );
             }

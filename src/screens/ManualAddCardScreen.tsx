@@ -346,8 +346,10 @@ const ManualAddCardScreen = (props: any) => {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
+                  marginRight: hp(2)
                 }}>
                 <TouchableOpacity
+
                   onPress={async () => {
                     const result = await launchImageLibrary({
                       selectionLimit: 2,
@@ -384,7 +386,7 @@ const ManualAddCardScreen = (props: any) => {
                   style={styles.addButton}>
                   <Image
                     source={ATTACHEMENT_ICON}
-                    style={{ width: 20, height: 20 }}
+                    style={{ width: hp(3), height: hp(3) }}
                   />
                 </TouchableOpacity>
                 {/* <Text
@@ -625,7 +627,8 @@ const ManualAddCardScreen = (props: any) => {
                   justifyContent: submitting ? 'center' : 'flex-end',
                   alignItems: 'center',
                   borderRadius: 22,
-                  marginTop: hp(3)
+                  marginTop: hp(3),
+                  marginBottom: hp(7),
                 }}>
                 {!submitting ?
                   <>
@@ -693,9 +696,10 @@ const styles = StyleSheet.create({
     height: hp(4.5),
     borderRadius: hp(2),
     justifyContent: 'center',
-    marginRight: 20,
+    marginRight: hp(3),
     marginTop: hp(6),
     alignItems: 'center',
+
   },
   textInputView: {
     backgroundColor: '#E6ECF2',

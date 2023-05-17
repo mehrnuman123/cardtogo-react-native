@@ -33,7 +33,7 @@ const TopBar = (props: any) => {
           <Image source={BACK} style={{ width: 70, height: 70 }} />
         </TouchableOpacity>
       ) : (
-        <Image source={LOGO} resizeMode='stretch' style={{ height: hp(13), width: hp(13), marginTop: hp(3) }} />
+        <Image source={LOGO} resizeMode='cover' style={{ height: hp(20), width: hp(20), marginTop: hp(2) }} />
       )}
 
       <TouchableOpacity

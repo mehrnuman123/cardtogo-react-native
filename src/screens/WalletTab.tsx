@@ -89,12 +89,12 @@ const WalletTab = (props: any) => {
         <ScrollView>
           <View style={styles.mainHeader}>
             <View style={styles.headerColumn}>
-              <Image source={WALLET_ICON} />
+              <Image source={WALLET_ICON} style={{ height: hp(7), marginTop: hp(2) }} resizeMode='contain' />
               <Text
                 style={{
                   fontFamily: 'OpenSans-Medium',
                   textAlign: 'center',
-                  fontSize: 24,
+                  fontSize: hp(2.5),
                   color: '#3F3D56',
                 }}>
                 Wallet
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
   },
   mainHeader: {
     width: '90%',
-    height: 105,
+    height: hp(14),
     borderRadius: 16,
     borderWidth: 1,
     borderColor: '#D8E1E8',

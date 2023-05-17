@@ -63,8 +63,6 @@ const AuthScreen = (props: {
         redirect: 'follow',
       };
 
-      console.log('req ===> ', requestOptions);
-
       fetch(
         'http://20.172.135.207/api/api/v1/auth/register/google-user',
         requestOptions,
@@ -72,9 +70,6 @@ const AuthScreen = (props: {
         .then(response => response.json())
         .then(async (result: any) => {
           console.log(typeof result, 'dynamic');
-          console.log('response ===>', JSON.stringify(result));
-          console.log('jwt ===>', result.jwtToken);
-          console.log('data ===>', result.data);
           await authStore.update('user', result.data);
           await authStore.update('authToken', result.jwtToken);
           props.navigation.navigate('HomeScreen');
