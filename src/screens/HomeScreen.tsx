@@ -9,7 +9,7 @@ import ExploreTab from './ExploreTab';
 import AddTab from './AddTab';
 import WalletTab from './WalletTab';
 import WishlistTab from './WishlistTab';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import ADD_BOTTOM_ICON from '../assets/icons/add_bottom_icon.png';
 import HEART_ICON from '../assets/icons/heart_icon.png';
 import EXPLORE_ICON from '../assets/icons/explore_icon.png';
@@ -53,7 +53,6 @@ const HomeScreen = (props: any) => {
                   fontSize: hp(1.5),
                   color: focused ? '#6080A0' : '#AEBFCF',
                   fontWeight: focused ? 'bold' : 'normal',
-                  marginTop: hp(2.5)
                 }}>
                 {name}
               </Text>
@@ -65,7 +64,7 @@ const HomeScreen = (props: any) => {
                 <Image
                   source={HOME_ICON}
                   resizeMode='contain'
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', width: hp(4), height: hp(4) }}
                 />
               );
             } else if (route.name === 'ExploreTab') {
@@ -73,19 +72,19 @@ const HomeScreen = (props: any) => {
                 <Image
                   resizeMode='contain'
                   source={EXPLORE_ICON}
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', width: hp(4), height: hp(4) }}
                 />
               );
             } else if (route.name === 'AddTab') {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    props.navigation.navigate('AddCardOptionsScreen');
+                    props.navigation.navigate('ManualAddCardScreen');
                   }}>
                   <Image
                     source={ADD_BOTTOM_ICON}
                     style={{
-                      marginTop: hp(6),
+                      marginTop: hp(3),
                       width: hp(6.5),
                       height: hp(6.5)
                     }}
@@ -97,7 +96,7 @@ const HomeScreen = (props: any) => {
                 <Image
                   resizeMode='contain'
                   source={WALLET_ICON}
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', width: hp(4), height: hp(4) }}
                 />
               );
             } else if (route.name === 'WishlistTab') {
@@ -105,7 +104,7 @@ const HomeScreen = (props: any) => {
                 <Image
                   resizeMode='contain'
                   source={HEART_ICON}
-                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', marginTop: hp(3.5), width: hp(4), height: hp(4) }}
+                  style={{ tintColor: focused ? '#6080A0' : '#AEBFCF', width: hp(4), height: hp(4) }}
                 />
               );
             }
@@ -116,7 +115,7 @@ const HomeScreen = (props: any) => {
         <Tab.Screen name="AddTab" component={AddTab} />
         <Tab.Screen name="WalletTab" component={WalletTab} />
         <Tab.Screen name="WishlistTab" component={WishlistTab} />
-      </Tab.Navigator>
+      </Tab.Navigator >
     </>
   );
 };

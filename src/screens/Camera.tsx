@@ -12,6 +12,7 @@ import {
   Platform,
   Alert,
 } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RECTANGLE from '../assets/icons/rectangle_image.png';
@@ -105,13 +106,14 @@ const BottomModal = ({ visible, setShowModal, onClose }: any) => {
             }}
             style={{
               width: '80%',
-              height: 47,
+              height: hp(6),
               backgroundColor: '#30C9AA',
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-end',
               alignItems: 'center',
-              borderRadius: 22,
+              borderRadius: hp(3),
+              marginBottom: hp(4)
             }}>
             <Text
               style={{
@@ -189,7 +191,7 @@ const CameraScreen = (props: any) => {
       <View
         style={{
           position: 'absolute',
-          top: 20,
+          top: 30,
           left: 20,
           zIndex: 1,
         }}>
@@ -222,7 +224,7 @@ const CameraScreen = (props: any) => {
                 Alert.alert("Info", "Skannet vellykket!");
               }
               setTimeout(() => {
-                props.navigation.navigate('ScanSuccessScreen', {
+                props.navigation.navigate('ManualAddCardScreen', {
                   code: event.data,
                 });
               }, 2000);
@@ -248,6 +250,28 @@ const CameraScreen = (props: any) => {
             <Image source={TORCH} />
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('ManualAddCardScreen')}
+          style={{
+            width: '80%',
+            height: hp(6),
+            backgroundColor: '#30C9AA',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: hp(3),
+            marginTop: hp(10),
+          }}>
+          <Text
+            style={{
+              fontSize: hp(2.5),
+              textAlignVertical: "center",
+              fontFamily: 'OpenSans-Regular',
+              color: 'white',
+              textAlign: 'center',
+            }}>
+            Manuelt
+          </Text>
+        </TouchableOpacity>
       </RNCamera>
       <BottomModal
         visible={showModal}
@@ -267,7 +291,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   preview: {
-    flex: 1,
+    marginTop: hp(30),
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -275,7 +299,6 @@ const styles = StyleSheet.create({
   overlayContainer: {
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

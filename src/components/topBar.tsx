@@ -30,10 +30,10 @@ const TopBar = (props: any) => {
       {props.backEnable ? (
         <TouchableOpacity
           onPress={() => props.navigation.navigate('HomeScreen')}>
-          <Image source={BACK} style={{ width: 70, height: 70 }} />
+          <Image source={BACK} style={{ width: hp(10), height: hp(10), marginTop: hp(2.5) }} />
         </TouchableOpacity>
       ) : (
-        <Image source={LOGO} resizeMode='cover' style={{ height: hp(18), width: hp(18), marginTop: hp(2) }} />
+        <Image source={LOGO} resizeMode='cover' style={{ height: hp(12), width: hp(12), marginTop: hp(2) }} />
       )}
 
       <TouchableOpacity
@@ -49,7 +49,7 @@ const TopBar = (props: any) => {
         }}>
         <Image
           source={LOCATION_ICON}
-          style={{ tintColor: route.name === 'MapScreen' ? '#6080A0' : '', marginTop: hp(3) }}
+          style={{ tintColor: route.name === 'MapScreen' ? '#6080A0' : '', marginTop: hp(3), width: hp(3.5), height: hp(4) }}
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -67,7 +67,7 @@ const TopBar = (props: any) => {
           source={NOTIFICATION_ICON}
           style={{
             tintColor: route.name === 'NotificationScreen' ? '#6080A0' : '',
-            marginTop: hp(3)
+            marginTop: hp(3), width: hp(3), height: hp(3)
           }}
         />
       </TouchableOpacity>
@@ -86,7 +86,7 @@ const TopBar = (props: any) => {
           source={CART_ICON}
           style={{
             tintColor: route.name === 'CartScreen' ? '#6080A0' : '',
-            marginTop: hp(3)
+            marginTop: hp(3), width: hp(3), height: hp(3)
           }}
         />
       </TouchableOpacity>
@@ -101,7 +101,7 @@ const TopBar = (props: any) => {
             ]);
           }
         }}>
-        <Image source={HAMBURGER_ICON} style={{ marginTop: hp(3) }} />
+        <Image source={HAMBURGER_ICON} style={{ marginTop: hp(3), width: hp(3), height: hp(3) }} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => props.navigation.navigate('ProfileScreen')}>
