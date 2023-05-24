@@ -22,6 +22,7 @@ const FImage = createImageProgress(FastImage);
 
 
 const WalletCard = ({ item, refetch }: any) => {
+  console.log("🚀 ~ file: walletCard.tsx:25 ~ WalletCard ~ item:", item?.photo)
   const authStore = useStores();
   const handleDeleteCard = () => {
     console.log("Yes")
@@ -111,7 +112,7 @@ const WalletCard = ({ item, refetch }: any) => {
       </View> :
         <View style={styles.circle}>
           <FImage
-            source={{ uri: item?.photo[0] }}
+            source={{ uri: item?.photo?.toString() }}
             style={styles.image}
             resizeMode='cover'
             indicator={Progress.CircleSnail}

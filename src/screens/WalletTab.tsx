@@ -54,16 +54,25 @@ const WalletTab = (props: any) => {
       .then((result: any) => {
         if (result.response.CODE === 200) {
 
-          const cards: any = result.data;
+          const cards: any = result?.data;
+          console.log("🚀 ~ file: WalletTab.tsx:58 ~ .then ~ result?.data:", result?.data)
           for (var i = 0; i < cards.length; i++) {
             if (cards[i].photo !== null && cards[i].photo !== "[, ]") {
-              const photosParsed: string[] = JSON.parse(cards[i].photo);
-              cards[i].photo = photosParsed;
+              let photosParsed;
+              try {
+                photosParsed = JSON.parse(cards[i].photo)
+                cards[i].photo = photosParsed;
+              } catch (error) {
+                cards[i].photo = cards[i].photo;
+                console.log("🚀 ~ file: WalletTab.tsx:66 ~ .then ~ error:", error)
+                // Parsing failed, store the value as it is
+                // Optionally, you can handle the error or log it
+              }
             }
           }
           setCards(cards);
           setLoading(false);
-          const sum = result.data.reduce(function (a: any, b: any) {
+          const sum = result?.data?.reduce(function (a: any, b: any) {
             return JSON.parse(a) + JSON.parse(b.balance);
           }, 0);
           setSumOfAllCards(sum);

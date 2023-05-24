@@ -97,6 +97,7 @@ const ManualAddCardScreen = (props: any) => {
         if (imageTwo !== "") {
           photos.push(imageTwo);
         }
+        console.log("🚀 ~ file: ManualAddCardScreen.tsx:111 ~ useEffect ~ cardData?.profileUrl:", selectedItem?.pictureUrl)
         var raw = JSON.stringify({
           serialNumber: serialNo,
           manufacturar: company,
@@ -107,7 +108,7 @@ const ManualAddCardScreen = (props: any) => {
           pin: pin,
           isListed: false,
           isActive: true,
-          photoUrl: cardData.profileUrl ? cardData.profileUrl : JSON.stringify(photos),
+          photoUrl: selectedItem?.pictureUrl ? selectedItem?.pictureUrl : JSON.stringify(photos),
         });
 
         console.log('====================================');
@@ -176,7 +177,7 @@ const ManualAddCardScreen = (props: any) => {
         }
       }
     }
-  }, [responseImage, imageOne, imageTwo]);
+  }, [responseImage, imageOne, imageTwo, selectedItem]);
 
   const addCard = async () => {
 
